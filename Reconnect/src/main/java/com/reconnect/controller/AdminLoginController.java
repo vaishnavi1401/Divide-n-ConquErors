@@ -51,14 +51,16 @@ public class AdminLoginController extends HttpServlet {
 				session = request.getSession(true);
 
 			}
+			
 			session.setAttribute("user", u);
 			System.out.println("in loginservlet " + u);
 			RequestDispatcher rd = request.getRequestDispatcher("Admin_front_page");
 			rd.forward(request, response);
 		}
 		else {
-			out.println("<h4>pls re enter credentials</h4>");
-			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
+			//out.println("<h4>pls re enter credentials</h4>");
+			request.setAttribute("message", "Wrong Credentials");
+			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.jsp");
 			rd.include(request, response);
 		}
 }
