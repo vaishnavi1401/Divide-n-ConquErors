@@ -4,9 +4,9 @@ body {
   background-size: cover;
 }
   
-  .signup-form {
+  .register-form {
     font-family: sans-serif;
-    width:650px;
+    width:670px;
     margin:30px auto;
     background:linear-gradient(to right, #ffffff 0%, #fafafa 50%, #ffffff 99%);
     border-radius: 10px;
@@ -56,11 +56,11 @@ body {
       background: white;
       outline: none;
   }
-  
+/*   
   .form-input:focus{
     border-color: red;
   }
-  
+   */
   .horizontal-group .left{
     float:left;
     width:49%;

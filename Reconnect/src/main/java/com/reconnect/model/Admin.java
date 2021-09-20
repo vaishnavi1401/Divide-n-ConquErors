@@ -12,7 +12,6 @@ public Admin(String name, String email, String phone_number, String pic_path,Str
 	this.name = name;
 	this.email = email;
 	this.phone_number = phone_number;
-	this.pic_path=pic_path;
 	this.username = username;
 	this.passward = passward;
 }
@@ -49,7 +48,7 @@ public void setPassward(String passward) {
 @Override
 public String toString() {
 	return "Admin [name=" + name + ", email=" + email + ", phone_number=" + phone_number + ", username=" + username
-			+ ", passward=" + passward + ", pic_path=" + pic_path + "]";
+			+ ", passward=" + passward+ "]";
 }
 
 }

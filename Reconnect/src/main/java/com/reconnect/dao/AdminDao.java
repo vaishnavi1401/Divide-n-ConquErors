@@ -8,11 +8,14 @@ import com.reconnect.model.Admin;
 
 public interface AdminDao {
 
-	Admin adminLogin(String nm, String pass);
 	Admin getAdminDetails();
-	void viewDisabledUser();
-	void viewDeletedUser();
+	Map<String, String> viewAllUserInfo();
+	void deleteUser(int pid);
+	Map<String, String> viewDisabledUser();
+	void adminLogout();
 	int numOfUser();
-	Map<Integer, String> viewAllUser();
+	Admin adminLogin(String nm, String pass);
+	Map<String, String> viewUserToDelete();
+
 
 }
