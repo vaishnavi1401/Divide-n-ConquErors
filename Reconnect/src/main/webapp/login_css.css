@@ -1,0 +1,171 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.main_page{
+    height:100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.2)),url(assets/form_background_image.png);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+
+.forms_view{
+    width: 120vh;
+    height: 76vh;
+    position: relative;
+    margin: 6% auto;
+    background-color: white;
+    padding: 5px;
+    background-image:url("assets/form_image_bg.jpg");
+    background-size: cover;
+    background-position:left;
+    position: relative;   
+}
+
+
+.form-box{
+    float: right;
+    width: 56vh;
+    height: 76vh;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle_btns{
+    margin:15% 0% 0% 26%;
+    float:left;
+    box-shadow: 0 0 20px 9px rgba(30, 28, 27, 0.24);
+    border-radius: 30px;
+    
+}
+
+.toggle_login{
+    padding: 10px 24px;
+    cursor: pointer;
+    background:transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+
+#btn{
+    position: absolute;
+    width: 94px;
+    height: 36px;
+    padding-left: 2px;
+    background:linear-gradient(to right, #28b4df, rgb(57, 97, 206));
+    border-radius: 30px;
+    transition: .5s;
+}
+.social_nw{
+    bottom: 5vh;
+    left: 10vh;
+    position: absolute;
+    opacity: 0.76;
+}
+
+.social_nw img{
+    width: 30px;
+    padding:12px;
+}
+
+#facebook:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+#twitter:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+} 
+#linkedin:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+#mail:hover{
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  .input_group_user{
+      top:20vh;
+      width: 45vh;
+      height: 40vh;
+      padding-left: 5vh;
+      transition: 0.8s;
+      position: absolute;
+      overflow: hidden;
+     
+  }
+  .user_input_field{
+      width: 30vh;
+      margin: 30px 0 0 5px;
+      padding-top: 20px;
+      padding-left: 15px;
+      padding-bottom: 5px;
+      border-left: 0;
+      border-top: 0;
+      border-right: 0;
+      border-radius: 10px;
+      border-bottom: 1px solid rgb(116, 107, 107);
+      outline: none;
+      background: transparent;
+  }
+
+  .user_login_btn{
+      width: 12vh;
+      height: 5vh;
+      margin-top: 6vh;
+      margin-left: 8vh;
+      padding-left: 5px;
+      cursor: pointer;
+      display: block;
+      background: linear-gradient(to right, #28b4df, rgb(57, 97, 206));
+      border: 0;
+      outline: none;
+      border-radius: 30px;
+      box-shadow: 0 0 20px 9px rgba(30, 28, 27, 0.3);
+    
+  }
+
+  .admin_login_btn{
+    width: 12vh;
+    height: 5vh;
+    margin: 30px 0 0 70px;
+    padding-left: 5px;
+    cursor: pointer;
+    display: block;
+    background: linear-gradient(to right, #28b4df, #73aed4);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    box-shadow: 0 0 20px 9px rgba(30, 28, 27, 0.3);
+ 
+  }
+#appUser{
+    left:50px;
+}
+#admin{
+    left: 450px;
+}
+
