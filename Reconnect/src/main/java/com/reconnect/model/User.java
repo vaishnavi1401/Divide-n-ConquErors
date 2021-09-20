@@ -4,19 +4,40 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class User {
+import com.reconnect.dao.UserDao;
 
+<<<<<<< Updated upstream
 	private String fname;
 	private String lname;
 	private String email;
+=======
+public class User {
+	
+	//private int userId;
+	private String fname; 
+	private String lname; 
+	private String email; 
+>>>>>>> Stashed changes
 	private String phone;
 	private String gender;
 	private Date dob;
 	private String address;
 	private String company;
 	private Timestamp creationDate; //initialize
+<<<<<<< Updated upstream
 	private File profileImage;
 
+=======
+	private File profileImage; 
+	
+	UserDao ud1 = new UserDao();
+	
+	
+	public int getUserId(String email) {
+		return ud1.getUserIdFromUserDao(email);
+	}
+	
+>>>>>>> Stashed changes
 	public String getFname() {
 		return fname;
 	}

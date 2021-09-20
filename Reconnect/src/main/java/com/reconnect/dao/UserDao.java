@@ -98,4 +98,29 @@ public class UserDao implements UserDaoInterface {
 		return false;
 	}
 
+<<<<<<< Updated upstream
 }
+=======
+	public int getUserIdFromUserDao(String email) {
+		PreparedStatement pstmt = null;
+		String sql = "select user_id from user_details where email = ?";
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+			}
+		}
+		catch(SQLException e)
+		{
+			
+		}
+		
+		return 0;
+	}
+
+}
+>>>>>>> Stashed changes

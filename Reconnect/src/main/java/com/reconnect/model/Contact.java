@@ -20,7 +20,11 @@ public class Contact {
 		this.city1=city;
 		this.gender = gender;
 	}
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	
 	
 	public String getGender() {
