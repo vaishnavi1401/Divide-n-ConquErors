@@ -2,15 +2,14 @@ package com.reconnect.model;
 
 public class Contact {
 
-	private String fname, lname, email, dob, address, company;
-	private int phone;
+	private String fname, lname, email, dob, address, company, phone, gender;
 	City city1=new City();
 
 	public Contact() {
 
 	}
 
-	public Contact(String fname, String lname, String email, String dob, String address, String company, int phone, City city) {
+	public Contact(String fname, String lname, String email, String dob, String address, String company, String phone, City city, String gender) {
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
@@ -19,6 +18,17 @@ public class Contact {
 		this.company = company;
 		this.phone = phone;
 		this.city1=city;
+		this.gender = gender;
+	}
+
+	
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public City getCity1() {
@@ -77,11 +87,11 @@ public class Contact {
 		this.company = company;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
