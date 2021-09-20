@@ -1,0 +1,10 @@
+Reconnect/target/*
+Reconnect/bin/*
+Reconnect/.settings/*
+Reconnect/.classpath
+
+
+Reconnect/.project
+Reconnect/src/main/java/com/reconnect/controller/.project
+Reconnect/target/classes/com/reconnect/controller/*.class
+Reconnect/.project

@@ -1,0 +1,91 @@
+package com.reconnect.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.reconnect.model.UserLogin;
+import com.reconnect.utility.DBUtils;
+
+public class LoginDao {
+	
+	Connection conn = null;
+	
+	public LoginDao() {
+		conn = DBUtils.getConnection();
+	}
+	
+	public int checkLoginCredentials(UserLogin userLogin){
+		PreparedStatement pstmt = null;
+		String sql = "select * from credentials where username=? and user_password=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userLogin.getUserName());
+			pstmt.setString(2, userLogin.getPassword());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getBoolean(5) && updateLastLogin(userLogin)) {
+					return rs.getInt(1); 
+				}else {
+					return 0; //Deactivated User
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1; //Wrong credentials
+	}
+
+	public int registerCredentials(UserLogin ul) {
+		PreparedStatement pstmt = null;
+		String sql = "insert into credentials(username, user_password) values(?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ul.getUserName());
+			pstmt.setString(2, ul.getPassword());
+			int rs = pstmt.executeUpdate();
+			if (rs > 0) {
+				return checkLoginCredentials(ul);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public boolean updateLastLogin(UserLogin ul) {
+		PreparedStatement pstmt = null;
+		String sql = "update person set last_login =? where username=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setTimestamp(1, new java.sql.Timestamp(new java.util.Date().getTime()));
+			pstmt.setString(2, ul.getUserName());
+			int rs = pstmt.executeUpdate();
+			if (rs > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+}

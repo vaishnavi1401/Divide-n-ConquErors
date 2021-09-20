@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LoginPage</title>
+        <link rel="stylesheet" href="login_css.css">
+        <script src="toggle_btn.js"></script>
+    </head>
+    <body>
+        <div class="main_page">
+            <div class="forms_view">
+            <div class="form-box">
+
+                <div class="toggle_btns">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle_login" onclick="toggleUser_to_Admin()">User</button>
+                    <button type="button" class="toggle_login" onclick="toggleAdmin_to_User()">Admin</button>
+                    
+                </div>
+
+                <div class="social_nw">
+                    <img src="assets/facebook.png" id="facebook">
+                    <img src="assets/twitter.png" id="twitter">
+                    <img src="assets/linkedin.png" id="linkedin">
+                    <img src="assets/email.png" id="mail">
+                </div>
+                <div class="input_group">
+                    <form class="input_group_user" action="UserLoginServlet?ac=login" id="appUser">
+                        <thead><b>User Login Credentials</b></thead>
+                        <input type="text" class="user_input_field" placeholder="Username" required>
+                        <input type="text" class="user_input_field" placeholder="Password" required>
+                        <button type="submit" class="user_login_btn">Log in</button>
+                    </form>
+                    <form class="input_group_user" id="admin">
+                        <thead ><b>Administrator Login Credentials</b></thead>
+                        <input type="text" class="user_input_field" placeholder="Admin username" required>
+                        <input type="text" class="user_input_field" placeholder="Password" required>
+                        <button type="submit" class="user_login_btn">Log in</button>
+                    </form>
+                </div>
+                
+
+            </div>    
+            </div>
+        </div>
+    </body>
+
+</html>
