@@ -15,14 +15,13 @@ import com.reconnect.utility.DBUtils;
 public class UserDao implements UserDaoInterface {
 
 	Connection conn = null;
-	CityDao cityDao = null;
-	LoginDao loginDao = null;
+	CityDao cityDao = new CityDao();
+	LoginDao loginDao = new LoginDao();
 
 	public UserDao() {
 		conn = DBUtils.getConnection();
 	}
 
-	@Override
 	public int loginValidation(UserLogin ul) {
 		int loginFlag = loginDao.checkLoginCredentials(ul);
 		if (loginFlag == 0 || loginFlag == -1)
@@ -31,17 +30,14 @@ public class UserDao implements UserDaoInterface {
 			return 1;
 	}
 
-	@Override
 	public int registerUserCity(City c) {
 		return cityDao.getCityId(c);
 	}
 
-	@Override
 	public int registerUserCred(UserLogin ul) {
 		return loginDao.registerCredentials(ul);
 	}
 
-	@Override
 	public boolean checkEmailUnique(String email) {
 		PreparedStatement pstmt = null;
 		String sql = "select 1 from user_details where email_id=?";
@@ -65,7 +61,6 @@ public class UserDao implements UserDaoInterface {
 	}
 
 
-	@Override
 	public boolean registerUserDetail(User userDetails, int city_id, int cred_id) throws FileNotFoundException {
 		PreparedStatement pstmt = null;
 		String sql = "insert into user_details(first_name, last_name, email_id, phone_no, gender, dob, address, city_id, profile_image, credential_id) values(?,?,?,?,?,?,?,?,?,?)";

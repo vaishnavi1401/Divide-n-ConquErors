@@ -23,15 +23,21 @@ public class AdminLoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		
 		response.setContentType("text/html");
+		
 		String nm = request.getParameter("adminuser");
 		String pass = request.getParameter("adminpassward");
+		
 		AdminService uservice = new AdminServiceImpl();
+		
 		System.out.println(nm+" "+pass);
 		// validate admin username and passward
 		Admin u = uservice.AdminLogin(nm, pass);
+		
 		System.out.println("ADMIN IN CONTROLLER"+u);
 		// creating session
+		
 		if (u != null)
 		{
 			HttpSession session = request.getSession();

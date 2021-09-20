@@ -9,24 +9,26 @@ import com.reconnect.model.UserLogin;
 import com.reconnect.utility.DBUtils;
 
 public class LoginDao {
-
+	
 	Connection conn = null;
-
+	
 	public LoginDao() {
 		conn = DBUtils.getConnection();
 	}
-
+	
 	public int checkLoginCredentials(UserLogin userLogin){
 		PreparedStatement pstmt = null;
 		String sql = "select * from credentials where username=? and user_password=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			System.out.println(userLogin.getUserName());
 			pstmt.setString(1, userLogin.getUserName());
 			pstmt.setString(2, userLogin.getPassword());
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getBoolean(5) && updateLastLogin(userLogin)) {
-					return rs.getInt(1);
+					System.out.println(rs.getInt(1));
+					return rs.getInt(1); 
 				}else {
 					return 0; //Deactivated User
 				}
@@ -65,10 +67,10 @@ public class LoginDao {
 		}
 		return 0;
 	}
-
+	
 	public boolean updateLastLogin(UserLogin ul) {
 		PreparedStatement pstmt = null;
-		String sql = "update person set last_login =? where username=?";
+		String sql = "update credentials set last_login =? where username=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setTimestamp(1, new java.sql.Timestamp(new java.util.Date().getTime()));

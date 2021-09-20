@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,10 +26,10 @@
                     <img src="assets/email.png" id="mail">
                 </div>
                 <div class="input_group">
-                    <form class="input_group_user" action="UserLoginServlet?ac=login" id="appUser">
+                    <form class="input_group_user" action="UserLoginServlet" id="appUser" method="post">
                         <thead><b>User Login Credentials</b></thead>
-                        <input type="text" class="user_input_field" placeholder="Username" required>
-                        <input type="text" class="user_input_field" placeholder="Password" required>
+                        <input type="text" class="user_input_field" placeholder="Username" name="username" required>
+                        <input type="text" class="user_input_field" placeholder="Password" name="password" required>
                         <button type="submit" class="user_login_btn">Log in</button>
                     </form>
                     <form class="input_group_user" action="validate" id="admin" method="post">
@@ -36,6 +38,8 @@
                         <input type="text" class="user_input_field" name="adminpassward" placeholder="Password" required>
                         <button type="submit" class="user_login_btn">Log in</button>
                     </form>
+                    
+                   <center>${ message }</center> 
                 </div>
                 
 

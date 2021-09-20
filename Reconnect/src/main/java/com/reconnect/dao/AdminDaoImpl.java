@@ -29,7 +29,8 @@ public class AdminDaoImpl implements AdminDao {
 	private static Connection con;
 	private static PreparedStatement count_users,uget,ugetloc;
 	static {
-		fXmlFile = new File("D:\\code_fury_hsbc\\Divide-n-ConquErors\\Reconnect\\src\\main\\java\\com\\reconnect\\dao\\admin.xml");
+		//D:\\code_fury_hsbc\\Divide-n-ConquErors\\Reconnect\\src\\main\\java\\com\\reconnect\\dao\\
+		fXmlFile = new File("C:\\Users\\Dell\\Documents\\HSBC_Clone\\Divide-n-ConquErors\\Reconnect\\admin.xml");
 		
 
 		try {
