@@ -7,7 +7,7 @@ public class UserDAOFactory {
 
 	private UserDAOFactory()
 	{
-		
+
 	}
 	public static UserDaoInterface createobject() {
 		// TODO Auto-generated method stub

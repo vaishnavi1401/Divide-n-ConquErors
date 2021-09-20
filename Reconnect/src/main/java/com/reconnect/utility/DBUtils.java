@@ -5,17 +5,31 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtils {
-
-	static String url = "jdbc:mysql://localhost:3306/codefury";
-	static Connection conn = null;
-
+	private static Connection con;
 	public static Connection getConnection() {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection(url, "root", "admin@123");
-		} catch (ClassNotFoundException | SQLException e) {
-			System.out.println(e.getMessage());
+		if(con==null) {
+			try {
+				DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+				//Class.forName("com.mysql.cj.jdbc.Driver");
+				String url="jdbc:mysql://localhost:3306/reconnect";
+				con=DriverManager.getConnection(url,"root","");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
-		return conn;
+		return con;
 	}
+
+	public static void closeConnection() {
+		try {
+			if(con!=null)
+			    con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

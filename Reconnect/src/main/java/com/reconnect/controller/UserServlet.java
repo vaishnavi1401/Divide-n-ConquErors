@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +20,7 @@ import com.reconnect.utility.UserServiceFactory;
 
 public class UserServlet extends HttpServlet {
 
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -46,7 +47,7 @@ public class UserServlet extends HttpServlet {
 			String company = request.getParameter("company");
 			String image=request.getParameter("image");
 			File picture =new File(image);
-            
+
 			User usr = new User();
 
 			usr.setFname(firstname);
@@ -57,7 +58,7 @@ public class UserServlet extends HttpServlet {
 				dob = (Date) new SimpleDateFormat("YYYY-MM-DD").parse(birthday);
 			} catch (ParseException e) {
 				e.printStackTrace();
-			}  
+			}
 			usr.setDob(dob);
 			usr.setAddress(address);
 			usr.setEmail(email);

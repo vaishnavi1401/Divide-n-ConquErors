@@ -6,17 +6,17 @@ import java.sql.Timestamp;
 
 public class User {
 
-	private String fname; 
-	private String lname; 
-	private String email; 
+	private String fname;
+	private String lname;
+	private String email;
 	private String phone;
 	private String gender;
-	private Date dob; 
-	private String address; 
-	private String company; 
+	private Date dob;
+	private String address;
+	private String company;
 	private Timestamp creationDate; //initialize
-	private File profileImage; 
-	
+	private File profileImage;
+
 	public String getFname() {
 		return fname;
 	}
@@ -65,7 +65,7 @@ public class User {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	
+
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}
@@ -78,5 +78,9 @@ public class User {
 	public void setProfileImage(File profileImage) {
 		this.profileImage = profileImage;
 	}
+
+
+
+
 
 }

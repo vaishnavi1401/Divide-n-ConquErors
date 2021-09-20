@@ -7,10 +7,10 @@ public class UserServiceFactory {
 
 	private UserServiceFactory()
 	{
-		
+
 	}
 	public static UserServiceInterface createObject() {
-		
+
 		return new UserService();
 	}
 

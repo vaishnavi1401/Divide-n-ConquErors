@@ -1,11 +1,11 @@
 package com.reconnect.model;
 
 public class City {
-	
+
 	private String city;
 	private String state;
-	private String country; 
-	
+	private String country;
+
 	public String getCity() {
 		return city;
 	}
@@ -24,6 +24,6 @@ public class City {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+
 
 }
