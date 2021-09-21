@@ -50,4 +50,9 @@ public class UserService implements UserServiceInterface {
 		return false;
 	}
 
+
+	public boolean checkUsernameUniq(String username) {
+		return ud.checkUsernameUniq(username);
+	}
+
 }

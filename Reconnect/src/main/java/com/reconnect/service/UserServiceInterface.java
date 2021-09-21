@@ -16,4 +16,6 @@ public interface UserServiceInterface {
 
 	boolean registerUserDetail(User usr, int city_id, int cred_id);
 
+	boolean checkUsernameUniq(String username);
+
 }

@@ -26,7 +26,6 @@ public class ContactDao implements ContactDaoInterface {
 		conn = DBUtils.getConnection();
 	}
 
-	@Override
 	public int addContact(Contact c1, User u1) throws FileNotFoundException {
 		
 		String sql = "insert into contact_details (user_id , first_name , last_name , email_id , phone_no , gender , dob , address , city_id , profileimage , creation_date , company) values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
@@ -140,7 +139,6 @@ public class ContactDao implements ContactDaoInterface {
 		return 0;
 	}
 
-	@Override
 	public List<Contact> viewAllContacts(User u1) {
 		
 		List<Contact> ll = new ArrayList<Contact>();
@@ -235,7 +233,6 @@ public class ContactDao implements ContactDaoInterface {
 		return null;
 	}
 
-	@Override
 	public int editContact(Contact c1, User u1) {
 		
 		String em = u1.getEmail();
@@ -282,7 +279,6 @@ public class ContactDao implements ContactDaoInterface {
 		return 0;
 	}
 
-	@Override
 	public int deleteContact(Contact c1, User u1) {
 		
 		String em = u1.getEmail();
@@ -319,7 +315,6 @@ public class ContactDao implements ContactDaoInterface {
 		return r;
 	}
 
-	@Override
 	public int getContactId(Contact c1 , User u1) {
 		String sql = "select contact_id from contact_details where first_name = ? and last_name = ? and email_id = ? and phone_no = ? and user_id = ?";
 		PreparedStatement pstmt = null;
@@ -357,7 +352,6 @@ public class ContactDao implements ContactDaoInterface {
 		return 0;
 	}
 
-	@Override
 	public Contact viewContact(Contact c1, User u1) {
 
 		Contact c2 = new Contact();
