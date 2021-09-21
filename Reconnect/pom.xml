@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com</groupId>
-  <artifactId>reconnect</artifactId>
+  <artifactId>Reconnect</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>reconnect Maven Webapp</name>
+  <name>Reconnect Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -20,9 +20,8 @@
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.20</version>
 </dependency>
-    
   </dependencies>
   <build>
-    <finalName>reconnect</finalName>
+    <finalName>Reconnect</finalName>
   </build>
 </project>
