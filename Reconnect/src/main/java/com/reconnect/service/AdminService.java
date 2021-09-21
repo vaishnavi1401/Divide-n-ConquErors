@@ -9,12 +9,12 @@ import com.reconnect.model.User;
 public interface AdminService {
 
 	Admin getAdminDetails();
-	Map<Integer,String> viewAllUserInfo();
-	List<User>lastLoginUSer();
-	void deleteUser();
-	void viewDisabledUser();
+	Map<String, String> viewAllUserInfo();
+	void deleteUser(int pid);
+	Map<String, String> viewDisabledUser();
+	Map<String, String> viewUserToDelete();
 	void adminLogout();
 	int numOfUser();
-	Admin AdminLogin(String nm, String pass);
+	Admin adminLogin(String nm, String pass);
 
 }

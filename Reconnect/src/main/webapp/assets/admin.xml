@@ -6,6 +6,6 @@
 		<phone_number>"9876543210"</phone_number>
 		<pic_path>D:\java_project\download.png</pic_path>
 		<username>admin</username>
-		<passward>admin</passward>
+		<passward>admin1234</passward>
 	</id>
 </admin>

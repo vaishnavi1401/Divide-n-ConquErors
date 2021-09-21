@@ -32,6 +32,9 @@ public class AdminFrontController extends HttpServlet {
 			String uname=request.getParameter("username");
 			AdminService admin_service=new AdminServiceImpl();
 			ad=admin_service.getAdminDetails();
+			request.setAttribute("ad", ad);
+			RequestDispatcher rd = request.getRequestDispatcher("statistics.html");
+			rd.forward(request, response);
 	}
 		else
 		{

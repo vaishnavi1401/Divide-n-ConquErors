@@ -24,12 +24,12 @@ public class AdminLoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String nm = request.getParameter("adminuser");
-		String pass = request.getParameter("adminpassward");
+		String nm = request.getParameter("admin_username");
+		String pass = request.getParameter("admin_pwd");
 		AdminService uservice = new AdminServiceImpl();
 		System.out.println(nm+" "+pass);
 		// validate admin username and passward
-		Admin u = uservice.AdminLogin(nm, pass);
+		Admin u = uservice.adminLogin(nm, pass);
 		System.out.println("ADMIN IN CONTROLLER"+u);
 		// creating session
 		if (u != null)
@@ -47,11 +47,13 @@ public class AdminLoginController extends HttpServlet {
 			}
 			session.setAttribute("user", u);
 			System.out.println("in loginservlet " + u);
-			RequestDispatcher rd = request.getRequestDispatcher("Admin_front_page");
+			u=uservice.getAdminDetails();
+			request.setAttribute("ad", u);
+			RequestDispatcher rd = request.getRequestDispatcher("AdminPortal.jsp");
 			rd.forward(request, response);
 		}
 		else {
-			out.println("<h4>pls re enter credentials</h4>");
+			out.println("pls re enter credentials");
 			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
 			rd.include(request, response);
 		}
