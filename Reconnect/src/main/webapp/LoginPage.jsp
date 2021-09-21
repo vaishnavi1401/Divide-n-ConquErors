@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +28,7 @@
                     <img src="assets/email.png" id="mail">
                 </div>
                 <div class="input_group">
-                    <form class="input_group_user" id="appUser" action="" method="" onclick="loginAsUser()">
+                    <form class="input_group_user" id="appUser" action="UserLoginServlet" method="post" onclick="loginAsUser()">
                         <thead><b>User Login Credentials</b></thead>
                         <input type="text" class="user_input_field" id="user_name" name="user_name" placeholder="Username" required onchange="validateUserName()">
                         <div id="usr_nm_check"></div>
@@ -43,9 +45,11 @@
                         <button type="submit" class="user_login_btn" id="admin_submit" name="admin_submit">Log in</button>
                         <div id="editresult"></div>
                     </form>
+                    
+                    <center>${ message }</center>
                 </div>
             </div>    
-           
+            
         </div>
     </body>
 

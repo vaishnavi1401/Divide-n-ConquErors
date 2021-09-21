@@ -20,6 +20,7 @@ public class UserDao implements UserDaoInterface {
 
 	public UserDao() {
 		conn = DBUtils.getConnection();
+		loginDao=new LoginDao();
 	}
 
 	public int loginValidation(UserLogin ul) {

@@ -13,7 +13,7 @@ public static void main(String args[])
 	switch(ch)
 	{
 	case 1: System.out.println("Admin login");
-	System.out.println(ad.AdminLogin("1", "admin"));
+	System.out.println(ad.adminLogin("1", "admin"));
 	break;
 	case 2:
 		System.out.println("admin details");
