@@ -23,15 +23,30 @@ public class AdminLoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		
 		response.setContentType("text/html");
+<<<<<<< HEAD
 		String nm = request.getParameter("admin_username");
 		String pass = request.getParameter("admin_pwd");
+=======
+		
+		String nm = request.getParameter("adminuser");
+		String pass = request.getParameter("adminpassward");
+		
+>>>>>>> cc174a9ec9a13a67307729cb0f865a2acaa732b9
 		AdminService uservice = new AdminServiceImpl();
+		
 		System.out.println(nm+" "+pass);
 		// validate admin username and passward
+<<<<<<< HEAD
 		Admin u = uservice.adminLogin(nm, pass);
+=======
+		Admin u = uservice.AdminLogin(nm, pass);
+		
+>>>>>>> cc174a9ec9a13a67307729cb0f865a2acaa732b9
 		System.out.println("ADMIN IN CONTROLLER"+u);
 		// creating session
+		
 		if (u != null)
 		{
 			HttpSession session = request.getSession();
@@ -45,6 +60,7 @@ public class AdminLoginController extends HttpServlet {
 				session = request.getSession(true);
 
 			}
+			
 			session.setAttribute("user", u);
 			System.out.println("in loginservlet " + u);
 			u=uservice.getAdminDetails();
@@ -53,8 +69,14 @@ public class AdminLoginController extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else {
+<<<<<<< HEAD
 			out.println("pls re enter credentials");
 			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.html");
+=======
+			//out.println("<h4>pls re enter credentials</h4>");
+			request.setAttribute("message", "Wrong Credentials");
+			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.jsp");
+>>>>>>> cc174a9ec9a13a67307729cb0f865a2acaa732b9
 			rd.include(request, response);
 		}
 }

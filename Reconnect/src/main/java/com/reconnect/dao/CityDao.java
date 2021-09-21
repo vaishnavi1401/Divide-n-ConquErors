@@ -9,21 +9,21 @@ import com.reconnect.model.City;
 import com.reconnect.utility.DBUtils;
 
 public class CityDao {
-
+	
 	Connection conn = null;
-
+	
 	public CityDao() {
 		conn = DBUtils.getConnection();
 	}
-
+	
 	public int getCityId(City c) {
 		int cityId = checkCity(c);
-		if(cityId == 0)
+		if(cityId == 0) 
 			return insertCity(c);
 		else
 			return cityId;
 	}
-
+	
 	public int insertCity(City c) {
 		PreparedStatement pstmt = null;
 		String sql = "insert into city_details(city, state, country) values(?,?,?)";
@@ -47,7 +47,7 @@ public class CityDao {
 		}
 		return 0;
 	}
-
+	
 	public int checkCity(City c) {
 		PreparedStatement pstmt = null;
 		String sql = "select city_id from city_details where city=? and state=? and country=?";
