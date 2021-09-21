@@ -1,0 +1,85 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.icon-bar {
+    width: 90px; /* Set a specific width */
+    height: 100vh;
+    background-color: #555; /* Dark-grey background */
+  }
+  
+  .icon-bar a {
+    display: block; /* Make the links appear below each other instead of side-by-side */
+    text-align: center; /* Center-align text */
+    padding: 16px; /* Add some padding */
+    transition: all 0.3s ease; /* Add transition for hover effects */
+    color: white; /* White text color */
+    font-size: 36px; /* Increased font-size */
+  }
+  
+  .icon-bar a:hover {
+    background-color: #000; /* Add a hover color */
+  }
+  
+  .active {
+    background-color: #04AA6D; /* Add an active/current color */
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+.left-container{
+    float:left;
+    width: 15vh;
+    display: inline;
+    position: fixed;
+}
+  
+.middle-container{
+  background-color: #04AA6D;
+  width:75vh;
+  height: 100vh;
+  /* border: 10px solid lightcoral; */
+  margin-left: 15vh;
+  position: fixed;
+  
+}
+
+.right-container {
+  background-color:#77776D;
+  margin-left: 90vh;
+  width: 58.75%;
+  float: right;
+  height: 100vh;
+  top:0;
+  
+}
+
+.search-bar{
+  border:none;
+  height:5vh;
+  width: 80%;
+
+}
+
+.search-box-container{
+  position: relative;
+  width: 100%;
+  /* border: 4px solid #ee3344; */
+  padding-left: 7vh;
+  padding-top: 3vh;
+  border-radius: 50px;
+}
+
+.same-line{
+  display: inline-block;
+}
+
+p{
+  color: aqua;
+}
