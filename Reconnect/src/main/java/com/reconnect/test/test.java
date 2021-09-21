@@ -1,6 +1,6 @@
 package com.reconnect.test;
 
-import java.util.Scanner;
+import java.util.Scanner; 
 
 import com.reconnect.service.AdminServiceImpl;
 
@@ -26,6 +26,8 @@ public static void main(String args[])
 	case 4:
 		System.out.println("user details");
 		System.out.println(ad.viewAllUserInfo());
+		break;
+	case 5 : //add user details to table first. Then take user ip for contact details to see if they're being added
 
 	}
 }

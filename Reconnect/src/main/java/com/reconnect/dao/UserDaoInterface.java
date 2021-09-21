@@ -19,5 +19,6 @@ public interface UserDaoInterface {
 	boolean checkEmailUnique(String email);
 
 	boolean registerUserDetail(User usr, int city_id, int cred_id) throws FileNotFoundException;
-
+	
+	
 }

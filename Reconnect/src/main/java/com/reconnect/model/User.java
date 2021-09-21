@@ -4,6 +4,8 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import com.reconnect.dao.UserDao;
+
 public class User {
 
 	private String fname;
@@ -17,6 +19,9 @@ public class User {
 	private Timestamp creationDate; //initialize
 	private File profileImage;
 
+	
+	
+	
 	public String getFname() {
 		return fname;
 	}
