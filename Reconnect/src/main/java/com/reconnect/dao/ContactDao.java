@@ -253,24 +253,27 @@ public class ContactDao implements ContactDaoInterface {
 		return 0;
 	}
 
-	public int deleteContact(Contact c1, User u1) {
+	public int deleteContact(String fName , String lName , String emailId , String phoneNo , User u1) {
 		
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		int contId = getContactId(c1 , u1);
-		PreparedStatement pstmt = null;
-		String sql = "delete from contact_details where user_id = ? and contact_id = ?";
-		int r = 0;
-		
-		try
+		int contId = 0;
+		String sqlToFetchContactId = "select contact_id from contact_details where first_name = ? and last_name = ? and email_id = ? and phone_no = ? and user_id = ?";
+		PreparedStatement pstmt = null;		
+		try 
 		{
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, uid);
-			pstmt.setInt(2, contId);
-			
-			r = pstmt.executeUpdate();
-		}
+			pstmt = conn.prepareStatement(sqlToFetchContactId);
+			pstmt.setString(1, fName);
+			pstmt.setString(2, lName);
+			pstmt.setString(3, emailId);
+			pstmt.setString(4, phoneNo);
+			pstmt.setInt(5, uid);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) 
+			{
+				contId = rs.getInt(1);
+			}
+		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
@@ -280,6 +283,35 @@ public class ContactDao implements ContactDaoInterface {
 			try 
 			{
 				pstmt.close();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		PreparedStatement pstmt1 = null;
+		String sqlToDeleteContact = "delete from contact_details where user_id = ? and contact_id = ?";
+		int r = 0;
+		
+		try
+		{
+			pstmt1 = conn.prepareStatement(sqlToDeleteContact);
+			
+			pstmt1.setInt(1, uid);
+			pstmt1.setInt(2, contId);
+			
+			r = pstmt1.executeUpdate();
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			try 
+			{
+				pstmt1.close();
 			} 
 			catch (Exception e)
 			{
