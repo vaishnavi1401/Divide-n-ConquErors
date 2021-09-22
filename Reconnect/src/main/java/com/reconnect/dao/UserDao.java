@@ -15,9 +15,12 @@ import java.util.List;
 import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
-import com.reconnect.utility.CityDAOFactory;
+import com.reconnect.dao.util.CityDaoInterface;
+import com.reconnect.dao.util.LoginDaoInterface;
+import com.reconnect.dao.util.UserDaoInterface;
+import com.reconnect.factory.CityDAOFactory;
 import com.reconnect.utility.DBUtils;
-import com.reconnect.utility.LoginDAOFactory;
+import com.reconnect.factory.LoginDAOFactory;
 
 public class UserDao implements UserDaoInterface {
 

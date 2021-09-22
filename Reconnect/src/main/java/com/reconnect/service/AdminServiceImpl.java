@@ -2,7 +2,7 @@ package com.reconnect.service;
 
 import java.util.Map;
 
-import com.reconnect.dao.AdminDao;
+import com.reconnect.dao.util.AdminDao;
 import com.reconnect.dao.AdminDaoImpl;
 import com.reconnect.model.Admin;
 

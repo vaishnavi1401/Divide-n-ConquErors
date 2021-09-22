@@ -9,7 +9,8 @@ import java.util.List;
 
 import com.reconnect.model.User;
 import com.reconnect.utility.DBUtils;
-import com.reconnect.utility.UserDAOFactory;
+import com.reconnect.dao.util.UserDaoInterface;
+import com.reconnect.factory.UserDAOFactory;
 
 public class BlockedUsersDao {
 	

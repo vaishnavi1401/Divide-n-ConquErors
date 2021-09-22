@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.reconnect.dao.util.CityDaoInterface;
 import com.reconnect.model.City;
 import com.reconnect.utility.DBUtils;
 

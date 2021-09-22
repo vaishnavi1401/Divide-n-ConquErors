@@ -21,7 +21,7 @@ import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
 import com.reconnect.service.UserServiceInterface;
-import com.reconnect.utility.UserServiceFactory;
+import com.reconnect.factory.UserServiceFactory;
 import com.reconnect.utility.CommonUtils;
 
 @WebServlet("/UserServlet")

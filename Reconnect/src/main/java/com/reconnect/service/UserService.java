@@ -4,11 +4,11 @@ package com.reconnect.service;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import com.reconnect.dao.UserDaoInterface;
+import com.reconnect.dao.util.UserDaoInterface;
 import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
-import com.reconnect.utility.UserDAOFactory;
+import com.reconnect.factory.UserDAOFactory;
 
 public class UserService implements UserServiceInterface {
 

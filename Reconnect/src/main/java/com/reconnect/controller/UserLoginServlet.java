@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.reconnect.model.UserLogin;
 import com.reconnect.service.UserServiceInterface;
-import com.reconnect.utility.UserServiceFactory;
+import com.reconnect.factory.UserServiceFactory;
 
 @WebServlet("/UserLoginServlet")
 public class UserLoginServlet extends HttpServlet {

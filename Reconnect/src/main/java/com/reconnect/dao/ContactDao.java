@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.reconnect.dao.util.CityDaoInterface;
+import com.reconnect.dao.util.ContactDaoInterface;
 import com.reconnect.model.City;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
