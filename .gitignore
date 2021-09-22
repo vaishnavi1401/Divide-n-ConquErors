@@ -8,3 +8,10 @@ Reconnect/.project
 Reconnect/src/main/java/com/reconnect/controller/.project
 Reconnect/target/classes/com/reconnect/controller/*.class
 Reconnect/.project
+reconnect/.classpath
+reconnect/.settings/org.eclipse.jdt.core.prefs
+reconnect/.settings/org.eclipse.jdt.core.prefs
+reconnect/.settings/org.eclipse.wst.common.component
+*.xml
+*.xml
+reconnect/.classpath
