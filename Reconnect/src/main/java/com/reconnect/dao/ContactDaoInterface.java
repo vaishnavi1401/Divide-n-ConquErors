@@ -13,7 +13,7 @@ public interface ContactDaoInterface {
 	
 	public int getUserId(String email);
 	
-	public int getCityId(City c);
+	//public int getCityId(City c);
 	
 	public List<Contact> viewAllContacts(User u1);
 	

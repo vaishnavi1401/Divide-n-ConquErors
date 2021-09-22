@@ -20,8 +20,8 @@ import com.reconnect.utility.DBUtils;
 public class UserDao implements UserDaoInterface {
 
 	Connection conn = null;
-	CityDao cityDao = new CityDao();
-	LoginDao loginDao = new LoginDao();
+	public CityDaoInterface cityDao;
+	public LoginDaoInterface loginDao;
 	
 	public UserDao() {
 		conn = DBUtils.getConnection();

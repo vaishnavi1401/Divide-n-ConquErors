@@ -25,7 +25,10 @@ public class ContactDao implements ContactDaoInterface {
 	{
 		conn = DBUtils.getConnection();
 	}
-
+	
+	public CityDaoInterface cd;
+	
+	
 	public int addContact(Contact c1, User u1) throws FileNotFoundException {
 		
 		String sql = "insert into contact_details (user_id , first_name , last_name , email_id , phone_no , gender , dob , address , city_id , profileimage , creation_date , company) values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
@@ -47,8 +50,8 @@ public class ContactDao implements ContactDaoInterface {
 			pstmt.setString(6 , c1.getGender());
 			pstmt.setDate(7, d1);
 			pstmt.setString(8, c1.getAddress());
-			pstmt.setInt(9, getCityId(c1.getCity1()));
-			pstmt.setBinaryStream(10 , picture,(int)u1.getProfileImage().length());    
+			pstmt.setInt(9, cd.getCityId(c1.getCity1()));
+			pstmt.setBinaryStream(10,picture,(int)u1.getProfileImage().length());
 			pstmt.setTimestamp(11, timestamp);
 			pstmt.setString(12, c1.getCompany());
 			
@@ -107,37 +110,6 @@ public class ContactDao implements ContactDaoInterface {
 		return 0;
 	}
 	
-	public int getCityId(City c) {
-		PreparedStatement pstmt = null;
-		String sql = "select city_id from city_details where city=? and state=? and country=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, c.getCity());
-			pstmt.setString(2, c.getState());
-			pstmt.setString(3, c.getCountry());
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) 
-			{
-				return rs.getInt(1);
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		} 
-		finally 
-		{
-			try 
-			{
-				pstmt.close();
-			} 
-			catch (Exception e) 
-			{
-				e.printStackTrace();
-			}
-		}
-		return 0;
-	}
 
 	public List<Contact> viewAllContacts(User u1) {
 		
@@ -253,7 +225,7 @@ public class ContactDao implements ContactDaoInterface {
 			pstmt.setString(5, c1.getGender());
 			pstmt.setDate(6, (Date) c1.getDob());
 			pstmt.setString(7, c1.getAddress());
-			pstmt.setInt(8, getCityId(c1.getCity1()));
+			pstmt.setInt(8, cd.getCityId(c1.getCity1()));
 			//for image
 			pstmt.setString(10, c1.getCompany());
 			pstmt.setInt(11, uid);
