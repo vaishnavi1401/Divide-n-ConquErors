@@ -16,11 +16,16 @@ public class BlockedUsersDao {
 	
 	Connection conn = null;
 	UserDaoInterface userDao = null;
+	int userId=0;
 	public BlockedUsersDao() {
 		userDao = UserDAOFactory.createobject();
 		conn = DBUtils.getConnection();
 	}
 
+	public BlockedUsersDao(String username) {
+		userId = userDao.getUserId(username);
+	}
+	
 	public List<Integer> getUserBlockedList(int userId) {
 		PreparedStatement pstmt = null;
 		List<Integer> blockedList = new ArrayList<Integer>();
@@ -44,14 +49,37 @@ public class BlockedUsersDao {
 		return blockedList;
 	}
 	
-	public List<User> viewBlockedUsers(String username){
-		int userId = userDao.getUserId(username);
+	public List<User> viewBlockedUsers(){
 		List<Integer> blockedList = getUserBlockedList(userId);
 		List<User> blockedUsersList = new ArrayList<User>();
 		for(int id: blockedList) {
 			blockedUsersList = userDao.getUserDetailsById(id);
 		}
 		return blockedUsersList;
+	}
+	
+	public boolean unblockUser(String blockedWho) {
+		PreparedStatement pstmt = null;
+		int userBlockedId = userDao.getUserId(blockedWho);
+		String sql = "delete from blocked_user where blocked_by = ? and blocked_by = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(1, userBlockedId);
+			int rs = pstmt.executeUpdate();
+			if (rs > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 	
 }
