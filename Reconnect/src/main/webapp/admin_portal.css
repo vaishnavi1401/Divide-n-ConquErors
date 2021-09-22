@@ -14,24 +14,17 @@ body {
 }
 
 .image_side{
-  width: 36vh;
+  width: 33vh;
   height: 200vh;
   background:linear-gradient( #0d57b8, rgb(206, 57, 181));
   float: left;
 }
 
-.body_side{
-  margin-left: 30vh;
-  width: 181vh;
-  height: 200vh;
-  background-color: rgb(21, 21, 21);
-  
-  
-}
+
 
 .container_left{
   top:25vh;
-  margin-left: 40vh;
+  margin-left: 36vh;
   width: 40vh;
   height: 70vh;
   position: fixed;
@@ -41,7 +34,7 @@ body {
 
 .container_right{
   top:25vh;
-  margin-left: 110vh;
+  margin-left: 100vh;
   float: right;
   width: 40vh;
   height: 70vh;
@@ -50,13 +43,14 @@ body {
 }
 
 img{
-  margin-top: 30vh;
+  width: 35vh;
+  margin-top: 35vh;
   margin-left: 10vh;
   border-radius: 200px;
   position: fixed;
 }
 
-#navbar {
+#navbar{
   overflow: hidden;
   background: rgb(20, 20, 20);
   padding: 20px 8px;
@@ -161,3 +155,55 @@ img{
   transform: rotateY(180deg);
 }
 
+
+.body_side{
+  margin-left: 20vh;
+  width: 204vh;
+  height: 200vh;
+  background:linear-gradient(rgb(58, 121, 202),rgb(255,34,22));
+   
+}
+
+.display_block{
+  width: 158vh;
+  height: 200vh;
+  padding: 10px auto;
+  background-color: rgb(255, 186, 57);
+}
+
+.tab {
+  width: 180vh;
+  height: 200vh;
+  position: fixed;
+  padding-left: 45vh;
+  
+}
+
+.tab button {
+  width: 30vh;
+  height:8vh;
+  position: relative;
+  margin-top: 18vh;
+  margin-left: 2vh;
+  transition: 0.8s;
+  font-size: 17px;
+}
+
+.tab button:hover {
+  border: 1px solid gold;
+  background: linear-gradient(rgb(68, 98, 197), rgb(116, 181, 235) );
+  transition: 0.5s ease-in-out;
+}
+
+.tab button.active {
+  background: linear-gradient(rgb(67, 233, 197), rgb(76, 233, 147) );
+}
+
+.tabcontent{
+  width: 100vh;
+  height: 60vh;
+  top:28vh;
+  left: 64vh;
+  position: fixed;
+  background-color: wheat;
+}

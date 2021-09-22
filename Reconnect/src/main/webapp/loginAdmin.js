@@ -35,21 +35,18 @@ function loginAsAdmin(){
     let form=document.getElementById('admin');
     let user_name=form.elements['admin_username'].value;
     let user_pwd=form.elements['admin_pwd'].value;
-/*
-     var xhr =new XMLHttpRequest();
-	 xhr.open("POST","validate",true);
-	 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	 var request = "username=" + user_name + "&password=" + user_pwd;
-   
-	 xhr.onreadystatechange=function(){
-         if(xhr.readyState===4 && xhr.status === 200)
-         {	
-			
-           //  login successful response and redirect to user portal
-             console.log(xhr.responseText);
-			Document.getElementById("editresult").innerHTML=xhr.responseText;
-         }  
-  xhr.send(request);
-     }*/
+
+    // var xhr =new XMLHttpRequest();
+	// xhr.open("POST","UserLoginServlet",true);
+	// xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	// //var request = "username=" + user_name + "&password=" + user_pwd;
+    // xhr.send(request);
+	// xhr.onreadystatechange=function(){
+    //     if(xhr.readyState===4 && xhr.status === 200)
+    //     {
+    //         login successful response and redirect to user portal
+    //         console.log(xhr.responseText);
+    //     }  
+    // }
 
 }

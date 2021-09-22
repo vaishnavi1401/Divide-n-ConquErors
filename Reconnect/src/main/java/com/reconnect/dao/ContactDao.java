@@ -409,6 +409,11 @@ public class ContactDao implements ContactDaoInterface {
 		return null;
 	}
 
+	public int deleteContact(Contact c1, User u1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 	
 	

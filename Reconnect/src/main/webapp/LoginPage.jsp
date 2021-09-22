@@ -32,7 +32,7 @@
                         <thead><b>User Login Credentials</b></thead>
                         <input type="text" class="user_input_field" id="user_name" name="user_name" placeholder="Username" required onchange="validateUserName()">
                         <div id="usr_nm_check"></div>
-                        <input type="text" class="user_input_field"id="user_pwd" name="user_pwd" placeholder="Password" required onchange="validateUserPwd()">
+                        <input type="password" class="user_input_field"id="user_pwd" name="user_pwd" placeholder="Password" required onchange="validateUserPwd()">
                         <div id="usr_pwd_check"></div>
                         <button type="submit" class="user_login_btn" id="user_submit" name="user_submit">Log in</button>
                     </form>
@@ -40,7 +40,7 @@
                         <thead ><b>Administrator Login Credentials</b></thead>
                         <input type="text" class="user_input_field" id="admin_username" name="admin_username" placeholder="Admin username" required onchange="validateAdminName()">
                         <div id="admin_nm_check"></div>
-                        <input type="text" class="user_input_field" id="admin_pwd" name="admin_pwd" placeholder="Password" required onchange="validateAdminPwd()">
+                        <input type="password" class="user_input_field" id="admin_pwd" name="admin_pwd" placeholder="Password" required onchange="validateAdminPwd()">
                         <div id="admin_pwd_check"></div>
                         <button type="submit" class="user_login_btn" id="admin_submit" name="admin_submit">Log in</button>
                         <div id="editresult"></div>

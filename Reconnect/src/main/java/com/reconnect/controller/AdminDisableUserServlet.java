@@ -2,6 +2,7 @@ package com.reconnect.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,26 +16,26 @@ import com.reconnect.model.Admin;
 import com.reconnect.service.AdminService;
 import com.reconnect.service.AdminServiceImpl;
 
-//servlet for admin main page 
-@WebServlet("/Admin_front_page")
-public class AdminFrontController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+//Disable A User
+@WebServlet("/Disable_User")
+public class AdminDisableUserServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
-		response.setContentType("text/html");
 		HttpSession sess=request.getSession();
+		
+		String[] pidarr=request.getParameterValues("username");
 		Admin ad=(Admin) sess.getAttribute("admin_session");
-		Admin admin;
 		if(ad!=null){
 			AdminService admin_service=new AdminServiceImpl();
-			admin=admin_service.getAdminDetails();
-			request.setAttribute("admin", admin);
-			RequestDispatcher rd = request.getRequestDispatcher("statistics.html");
-			rd.forward(request, response);
+			boolean admin_user=false;
+			if(pidarr!=null)
+				admin_user=admin_service.DisableUser(pidarr);
+			if(admin_user)
+				out.print("Disabled successfully");
+			else
+				out.print("Not Disabled");
 	}
 		else
 		{
@@ -42,6 +43,6 @@ public class AdminFrontController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("LoginPage.jsp");
 				rd.forward(request, response);
 		}
+	}
 
-}
 }

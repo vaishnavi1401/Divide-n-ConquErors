@@ -6,15 +6,23 @@ import java.util.Map;
 import com.reconnect.model.Admin;
 import com.reconnect.model.User;
 
+//Admin Service Functions
 public interface AdminService {
 
 	Admin getAdminDetails();
+
 	Map<String, String> viewAllUserInfo();
-	void deleteUser(int pid);
+
+	boolean deleteUser(String[] pidarr);
+
 	Map<String, String> viewDisabledUser();
+
 	Map<String, String> viewUserToDelete();
-	void adminLogout();
+
 	int numOfUser();
+
 	Admin adminLogin(String nm, String pass);
+
+	boolean DisableUser(String[] pidarr);
 
 }

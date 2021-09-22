@@ -10,11 +10,11 @@ import javax.servlet.annotation.WebListener;
 public class FileLocationContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-    	String rootPath = "F:\\HSBC Training";
+    	String rootPath = "D:\\HSBC Training";
     	ServletContext ctx = servletContextEvent.getServletContext();
     	File file = new File(rootPath);
     	if(!file.exists()) file.mkdirs();
-    	System.out.println("File Directory created to be used for storing files");
+    	System.out.println("File Directory created to be used for storing files"+rootPath);
     	ctx.setAttribute("FILES_DIR_FILE", file);
     	ctx.setAttribute("FILES_DIR", rootPath);
     }

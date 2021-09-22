@@ -1,6 +1,7 @@
 package com.reconnect.controller;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
@@ -14,12 +15,14 @@ import javax.servlet.http.HttpSession;
 import com.reconnect.model.Admin;
 import com.reconnect.service.AdminService;
 import com.reconnect.service.AdminServiceImpl;
+
+//Servlet For Admin Login 
 @WebServlet("/validate")
 public class AdminLoginController extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 
-
-	//servlet to connect login button and validate admins
+	//servlet to connect login button and validate admin
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -45,17 +48,18 @@ public class AdminLoginController extends HttpServlet {
 				session = request.getSession(true);
 
 			}
-			session.setAttribute("user", u);
-			System.out.println("in loginservlet " + u);
+			session.setAttribute("admin_session", u);
 			u=uservice.getAdminDetails();
 			request.setAttribute("ad", u);
 			RequestDispatcher rd = request.getRequestDispatcher("AdminPortal.jsp");
 			rd.forward(request, response);
 		}
 		else {
-			request.setAttribute("message", "Wrong Credentials");
+			
+			request.setAttribute("message", "Please re-enter credentials");
+	    //    request.getRequestDispatcher("yourjsppage").forward(request,response);
 			RequestDispatcher rd = request.getRequestDispatcher("LoginPage.jsp");
-			rd.include(request, response);
+			rd.forward(request, response);
 		}
 }
 }
