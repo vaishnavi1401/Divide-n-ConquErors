@@ -9,10 +9,11 @@ import java.util.List;
 
 import com.reconnect.model.User;
 import com.reconnect.utility.DBUtils;
+import com.reconnect.dao.util.BlockUserDaoInterface;
 import com.reconnect.dao.util.UserDaoInterface;
 import com.reconnect.factory.UserDAOFactory;
 
-public class BlockedUsersDao {
+public class BlockedUsersDao implements BlockUserDaoInterface {
 	
 	Connection conn = null;
 	UserDaoInterface userDao = null;
@@ -47,8 +48,10 @@ public class BlockedUsersDao {
 	public List<User> viewBlockedUsers(String username){
 		int userId = userDao.getUserId(username);
 		List<Integer> blockedList = getUserBlockedList(userId);
+		
 		List<User> blockedUsersList = new ArrayList<User>();
-		for(int id: blockedList) {
+		for(int id: blockedList) 
+		{
 			blockedUsersList = userDao.getUserDetailsById(id);
 		}
 		return blockedUsersList;
