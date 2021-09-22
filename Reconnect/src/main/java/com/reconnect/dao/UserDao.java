@@ -3,9 +3,7 @@ package com.reconnect.dao;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -177,14 +175,14 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByName(String firstName, String lastName) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select first_name, last_name, email_id, company from user_details where first_name=? or last_name=?";
+		String sql = "select ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct where ct.city_id=ud.city_id first_name=? or last_name=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, firstName);
 			pstmt.setString(2, lastName);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+				userList.add(new User(rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -201,13 +199,13 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByCity(String city) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city_details c where c.city=? and c.city_id=ud.city_id";
+		String sql = "select ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct where ct.city=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, city);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+				userList.add(new User(rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -224,13 +222,13 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByState(String state) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city_details c where c.state=? and c.city_id=ud.city_id";
+		String sql = "select ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct where ct.state=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, state);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+				userList.add(new User(rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -247,13 +245,13 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByCountry(String country) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city_details c where c.country=? and c.city_id=ud.city_id";
+		String sql = "select ud.first_name, ud.last_name, c.city, c.state, c.country from user_details ud, city_details c where c.country=? and c.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, country);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+				userList.add(new User(rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -267,39 +265,17 @@ public class UserDao implements UserDaoInterface {
 		return userList;
 	}
 	
-	public List<User> getUserDetailsByCompany(String company) {
-		PreparedStatement pstmt = null;
-		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details where comapny=?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, company);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return userList;
-	}
 	
 	public List<User> getUserDetailsById(int userId) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select first_name, last_name, email_id, company from user_details where user_id=?";
+		String sql = "select ud.first_name, ud.last_name, c.city, c.state, c.country from user_details ud, city_details c where ud.user_id=? and c.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+				userList.add(new User(rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -312,5 +288,4 @@ public class UserDao implements UserDaoInterface {
 		}
 		return userList;
 	}
-
 }

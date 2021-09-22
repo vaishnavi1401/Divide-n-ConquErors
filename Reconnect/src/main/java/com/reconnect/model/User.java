@@ -113,11 +113,10 @@ public class User {
 		this.profileImage = image;
 	}
 
-	public User(String fname, String lname, String email, String company) {
+	public User(String fname, String lname, City city) {
 		this.fname = fname;
 		this.lname = lname;
-		this.email = email;
-		this.company = company;
+		this.city = city;
 	}
 
 	public User(String fname, String lname, String email, String phone, String gender, Date dob, String address,

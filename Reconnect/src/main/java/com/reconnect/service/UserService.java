@@ -86,12 +86,6 @@ public class UserService implements UserServiceInterface {
 		return ud.getUserDetailsByCountry(country);
 	}
 
-
-	public List<User> getUserDetailsByCompany(String company) {
-		return ud.getUserDetailsByCompany(company);
-	}
-
-
 	public List<User> getUserDetailsById(int userId) {
 		return ud.getUserDetailsById(userId);
 	}
