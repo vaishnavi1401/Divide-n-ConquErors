@@ -1,4 +1,4 @@
-package com.reconnect.dao;
+package com.reconnect.dao.util;
 
 
 import com.reconnect.model.UserLogin;
