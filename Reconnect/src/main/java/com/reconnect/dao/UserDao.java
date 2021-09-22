@@ -23,7 +23,7 @@ public class UserDao implements UserDaoInterface {
 
 	Connection conn = null;
 	CityDaoInterface cityDao = null;
-	LoginDaoInterface loginDao =null;
+	LoginDaoInterface loginDao = null;
 	public UserDao() { 
 		conn = DBUtils.getConnection();
 		cityDao = CityDAOFactory.createCityDaoObject();

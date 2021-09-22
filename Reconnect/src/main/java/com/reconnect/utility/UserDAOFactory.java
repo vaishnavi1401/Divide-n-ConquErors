@@ -10,7 +10,6 @@ public class UserDAOFactory {
 
 	}
 	public static UserDaoInterface createobject() {
-		// TODO Auto-generated method stub
 		return new UserDao();
 	}
 
