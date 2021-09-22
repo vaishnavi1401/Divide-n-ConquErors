@@ -48,7 +48,7 @@ public class AdminDaoImpl implements AdminDao {
 			nm = doc.getElementsByTagName("name").item(0).getTextContent();
 			em = doc.getElementsByTagName("email").item(0).getTextContent();
 			p_no = doc.getElementsByTagName("phone_number").item(0).getTextContent();
-			// pic_path = doc.getElementsByTagName("pic_path").item(0).getTextContent();
+			pic_path = doc.getElementsByTagName("pic_path").item(0).getTextContent();
 			us_name = doc.getElementsByTagName("username").item(0).getTextContent();
 			pass = doc.getElementsByTagName("passward").item(0).getTextContent();
 			// System.out.println(nm);
