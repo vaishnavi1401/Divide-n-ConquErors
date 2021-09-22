@@ -11,7 +11,6 @@ public class BlockUserDAOFactory {
 	}
 	
 	public static BlockUserDaoInterface createobject() {
-		// TODO Auto-generated method stub
 		return new BlockedUsersDao();
 	}
 

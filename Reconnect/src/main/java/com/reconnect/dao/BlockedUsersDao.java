@@ -23,10 +23,6 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		conn = DBUtils.getConnection();
 	}
 
-	public BlockedUsersDao(String username) {
-		userId = userDao.getUserId(username);
-	}
-	
 	public List<Integer> getUserBlockedList(int userId) {
 		PreparedStatement pstmt = null;
 		List<Integer> blockedList = new ArrayList<Integer>();
@@ -50,9 +46,9 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		return blockedList;
 	}
 	
-	public List<User> viewBlockedUsers(){
+	public List<User> viewBlockedUsers(String username){
 		List<Integer> blockedList = getUserBlockedList(userId);
-		
+		userId = userDao.getUserId(username);
 		List<User> blockedUsersList = new ArrayList<User>();
 		for(int id: blockedList) 
 		{
@@ -61,8 +57,9 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		return blockedUsersList;
 	}
 	
-	public boolean unblockUser(String blockedWho) {
+	public boolean unblockUser(String blockedBy, String blockedWho) {
 		PreparedStatement pstmt = null;
+		userId = userDao.getUserId(blockedBy);
 		int userBlockedId = userDao.getUserId(blockedWho);
 		String sql = "delete from blocked_user where blocked_by = ? and blocked_by = ?";
 		try {
@@ -84,5 +81,5 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		}
 		return false;
 	}
-	
+
 }

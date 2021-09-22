@@ -20,4 +20,12 @@ public class UserBlockService implements UserBlockServiceInterface {
 		return bd.viewBlockedUsers(userName);
 	}
 
+	public List<Integer> getUserBlockedList(int userId) {
+		return bd.getUserBlockedList(userId);
+	}
+
+	public boolean unblockUser(String blockedBy, String blockedWho) {
+		return bd.unblockUser(blockedBy, blockedWho);
+	}
+
 }
