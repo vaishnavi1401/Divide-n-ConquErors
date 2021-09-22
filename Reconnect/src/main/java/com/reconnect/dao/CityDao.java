@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import com.reconnect.model.City;
 import com.reconnect.utility.DBUtils;
 
-public class CityDao {
+public class CityDao implements CityDaoInterface{
 
 	Connection conn = null;
 

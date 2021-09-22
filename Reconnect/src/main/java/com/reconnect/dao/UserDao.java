@@ -15,16 +15,20 @@ import java.util.List;
 import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
+import com.reconnect.utility.CityDaoFactory;
 import com.reconnect.utility.DBUtils;
+import com.reconnect.utility.LoginDaoFactory;
 
 public class UserDao implements UserDaoInterface {
 
 	Connection conn = null;
-	CityDao cityDao = new CityDao();
-	LoginDao loginDao = new LoginDao();
+	CityDaoInterface cityDao = null;
+	LoginDaoInterface loginDao = null;
 	
 	public UserDao() {
 		conn = DBUtils.getConnection();
+		cityDao = CityDaoFactory.createobject();
+		loginDao = LoginDaoFactory.createobject();
 	}
 
 	public int loginValidation(UserLogin ul) {
@@ -67,7 +71,7 @@ public class UserDao implements UserDaoInterface {
 	
 	public int getUserId(String username) {
 		PreparedStatement pstmt = null;
-		String sql = "select user_id from user_details ud, credentials c, city ct where c.username=? and c.credential_id=ud.credential_id and ct.city_id=ud.city_id";
+		String sql = "select user_id from user_details ud, credentials c, city_details ct where c.username=? and c.credential_id=ud.credential_id and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -147,7 +151,7 @@ public class UserDao implements UserDaoInterface {
 	public User getUserDetailsByUsername(String username) {
 		PreparedStatement pstmt = null;
 		User user = null;
-		String sql = "select * from user_details ud, credentials c, city ct where c.username=? and c.credential_id=ud.credential_id and ct.city_id=ud.city_id";
+		String sql = "select * from user_details ud, credentials c, city_details ct where c.username=? and c.credential_id=ud.credential_id and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -194,7 +198,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByCity(String city) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city c where c.city=? and c.city_id=ud.city_id";
+		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city_details c where c.city=? and c.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, city);
@@ -217,7 +221,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByState(String state) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city c where c.state=? and c.city_id=ud.city_id";
+		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city_details c where c.state=? and c.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, state);
@@ -240,7 +244,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByCountry(String country) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city c where c.country=? and c.city_id=ud.city_id";
+		String sql = "select ud.first_name, ud.last_name, ud.email_id, ud.company from user_details ud, city_details c where c.country=? and c.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, country);

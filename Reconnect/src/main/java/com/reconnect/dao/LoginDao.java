@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import com.reconnect.model.UserLogin;
 import com.reconnect.utility.DBUtils;
 
-public class LoginDao {
+public class LoginDao implements LoginDaoInterface{
 	
 	Connection conn = null;
 	

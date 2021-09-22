@@ -9,13 +9,14 @@ import java.util.List;
 
 import com.reconnect.model.User;
 import com.reconnect.utility.DBUtils;
+import com.reconnect.utility.UserDAOFactory;
 
 public class BlockedUsersDao {
 	
 	Connection conn = null;
-	UserDao userDao = null;
+	UserDaoInterface userDao = null;
 	public BlockedUsersDao() {
-		userDao = new UserDao();
+		userDao = UserDAOFactory.createobject();
 		conn = DBUtils.getConnection();
 	}
 

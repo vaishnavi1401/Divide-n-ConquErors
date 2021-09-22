@@ -1,6 +1,5 @@
 package com.reconnect.utility;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
@@ -19,6 +18,15 @@ public class CommonUtils {
 		}
 		//System.out.println(fieldName+" "+fieldValue);
 		return fieldValue;
-		
+	}
+	
+	public static FileItem getImage(List<FileItem> fileItemsList) {
+		FileItem image = null;
+		for (FileItem item : fileItemsList) {
+		    if (!item.isFormField() && item.getSize()!=0) {
+		    	image = item;
+		    }
+		}
+		return image;
 	}
 }
