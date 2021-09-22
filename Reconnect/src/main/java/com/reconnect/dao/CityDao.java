@@ -33,15 +33,23 @@ public class CityDao implements CityDaoInterface{
 			pstmt.setString(2, c.getState());
 			pstmt.setString(3, c.getCountry());
 			int rs = pstmt.executeUpdate();
-			if (rs > 0) {
+			if (rs > 0) 
+			{
 				return checkCity(c);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
-		} finally {
-			try {
+		} 
+		finally 
+		{
+			try 
+			{
 				pstmt.close();
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				e.printStackTrace();
 			}
 		}

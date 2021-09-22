@@ -15,20 +15,19 @@ import java.util.List;
 import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
-import com.reconnect.utility.CityDaoFactory;
+import com.reconnect.utility.CityDAOFactory;
 import com.reconnect.utility.DBUtils;
-import com.reconnect.utility.LoginDaoFactory;
+import com.reconnect.utility.LoginDAOFactory;
 
 public class UserDao implements UserDaoInterface {
 
 	Connection conn = null;
 	CityDaoInterface cityDao = null;
-	LoginDaoInterface loginDao = null;
-	
-	public UserDao() {
+	LoginDaoInterface loginDao =null;
+	public UserDao() { 
 		conn = DBUtils.getConnection();
-		cityDao = CityDaoFactory.createobject();
-		loginDao = LoginDaoFactory.createobject();
+		cityDao = CityDAOFactory.createCityDaoObject();
+		loginDao = LoginDAOFactory.createLoginDaoObject();
 	}
 
 	public int loginValidation(UserLogin ul) {
