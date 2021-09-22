@@ -96,9 +96,9 @@ public class UserDao implements UserDaoInterface {
 
 	public boolean registerUserDetail(User userDetails, int city_id, int cred_id) throws FileNotFoundException {
 		PreparedStatement pstmt = null;
-		String sql = "insert into user_details(first_name, last_name, email_id, phone_no, gender, dob, address, city_id, profile_image, credential_id) values(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into user_details(first_name, last_name, email_id, phone_no, gender, dob, address, city_id, profile_image, credential_id, company) values(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
-			System.out.println(userDetails.getProfileImage().getAbsolutePath());
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userDetails.getFname());
 			pstmt.setString(2, userDetails.getLname());
@@ -112,6 +112,7 @@ public class UserDao implements UserDaoInterface {
 			FileInputStream picture=new FileInputStream(userDetails.getProfileImage().getAbsolutePath());
 			pstmt.setBinaryStream(9,picture,(int)userDetails.getProfileImage().length());
 			pstmt.setInt(10, cred_id);
+			pstmt.setString(11, userDetails.getCompany());
 			int rs = pstmt.executeUpdate();
 			if (rs > 0) {
 				return true;
