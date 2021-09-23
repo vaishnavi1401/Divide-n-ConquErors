@@ -41,7 +41,7 @@ public class BlockUserServlet extends HttpServlet
 			//HttpSession ss = request.getSession();
 			//String userName = ss.getAttribute("message").toString();
 			
-			String userName="abc"; //initialize for testing
+			String userName="_sejalchoudhary"; //initialize for testing
 			
 			List<User> blockedUsersList = new ArrayList<User>();
 			
@@ -55,7 +55,7 @@ public class BlockUserServlet extends HttpServlet
 					System.out.println("Fname : "+u.getFname());
 					System.out.println("Lname : "+u.getLname());
 					
-					System.out.println("City : "+u.getCity());
+					System.out.println("City : "+u.getCity().getCity());
 					System.out.println("State : "+u.getCity().getState());
 					System.out.println("Country : "+u.getCity().getCountry());
 				}
@@ -75,7 +75,7 @@ public class BlockUserServlet extends HttpServlet
 			String userName2=request.getParameter("user_name");
 			
 			UserBlockServiceInterface us = BlockUserServiceFactory.createObject();
-			boolean b=us.unblockUser(userName1, userName2);
+			boolean b=us.unblockUser("_sejalchoudhary", "_sejalchoudhary123");
 			
 			if(b)
 			{

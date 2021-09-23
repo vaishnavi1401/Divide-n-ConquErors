@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebListener;
 public class FileLocationContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-    	String rootPath = "D:\\HSBC Training";
+    	String rootPath = "F:\\HSBC Training";
     	ServletContext ctx = servletContextEvent.getServletContext();
     	File file = new File(rootPath);
     	if(!file.exists()) file.mkdirs();
