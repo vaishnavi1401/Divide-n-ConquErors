@@ -182,7 +182,7 @@ public class UserDao implements UserDaoInterface {
 			pstmt.setString(2, lastName);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
+				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), new City(rs.getString(4), rs.getString(5), rs.getString(6))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public class UserDao implements UserDaoInterface {
 			pstmt.setString(1, city);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
+				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), new City(rs.getString(4), rs.getString(5), rs.getString(6))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -228,7 +228,7 @@ public class UserDao implements UserDaoInterface {
 			pstmt.setString(1, state);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
+				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), new City(rs.getString(4), rs.getString(5), rs.getString(6))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -251,7 +251,7 @@ public class UserDao implements UserDaoInterface {
 			pstmt.setString(1, country);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
+				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), new City(rs.getString(4), rs.getString(5), rs.getString(6))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -266,16 +266,16 @@ public class UserDao implements UserDaoInterface {
 	}
 	
 	
-	public List<User> getUserDetailsById(int userId) {
+	public User getUserDetailsById(int userId) {
 		PreparedStatement pstmt = null;
-		List<User> userList = new ArrayList<User>();
+		User user = null;
 		String sql = "select c.username,ud.first_name, ud.last_name, c.city, c.state, c.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id ud.user_id=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				userList.add(new User(rs.getString(1), rs.getString(1), rs.getString(2), new City(rs.getString(3), rs.getString(4), rs.getString(5))));
+			if(rs.next()) {
+				user = new User(rs.getString(1), rs.getString(2), rs.getString(3), new City(rs.getString(4), rs.getString(5), rs.getString(6)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -286,6 +286,6 @@ public class UserDao implements UserDaoInterface {
 				e.printStackTrace();
 			}
 		}
-		return userList;
+		return user;
 	}
 }

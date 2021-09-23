@@ -45,7 +45,6 @@ public class UserService implements UserServiceInterface {
 		try {
 			return ud.registerUserDetail(usr, city_id,cred_id);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -86,7 +85,7 @@ public class UserService implements UserServiceInterface {
 		return ud.getUserDetailsByCountry(country);
 	}
 
-	public List<User> getUserDetailsById(int userId) {
+	public User getUserDetailsById(int userId) {
 		return ud.getUserDetailsById(userId);
 	}
 }

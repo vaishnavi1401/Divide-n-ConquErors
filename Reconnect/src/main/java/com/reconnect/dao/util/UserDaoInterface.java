@@ -34,5 +34,5 @@ public interface UserDaoInterface {
 	
 	List<User> getUserDetailsByCountry(String country);
 	
-	List<User> getUserDetailsById(int userId);
+	User getUserDetailsById(int userId);
 }
