@@ -20,3 +20,7 @@ reconnect/.project
 reconnect/.settings/org.eclipse.wst.common.component
 reconnect/.settings/org.eclipse.wst.common.project.facet.core.xml
 reconnect/.settings/*
+Reconnect/.classpath
+*.prefs
+*.component
+*.xml
