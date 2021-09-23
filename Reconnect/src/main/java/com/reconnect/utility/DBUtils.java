@@ -12,7 +12,7 @@ public class DBUtils {
 				DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 				//Class.forName("com.mysql.cj.jdbc.Driver");
 				String url="jdbc:mysql://localhost:3306/codefury";
-				con = DriverManager.getConnection(url, "root", "admin@123");
+				con = DriverManager.getConnection(url, "root", "Harshita");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

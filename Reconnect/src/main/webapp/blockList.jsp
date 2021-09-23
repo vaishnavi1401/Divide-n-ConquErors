@@ -16,7 +16,7 @@
              <br>
              <br>
              <br>
-             <form  action="BlockUserServlet?ac=UnBlockUser" method="post" ">
+             <form  action="BlockUserServlet?ac=UnBlockUser" method="post">
                         
                  <input type="text" name="user_name" placeholder="Username" required onchange="validateUserName()">
                  

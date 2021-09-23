@@ -51,7 +51,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	public List<Integer> getUserBlockedList(int userId) {
 		PreparedStatement pstmt = null;
 		List<Integer> blockedList = new ArrayList<Integer>();
-		String sql = "select bu.blocked_who from blocked_user bu, user_details ud where ud.user_id=? and bu.blocked_by=ud.user_id";
+		String sql = "select blocked_who from blocked_user where blocked_by=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
@@ -72,13 +72,16 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	}
 	
 	public List<User> viewBlockedUsers(String username){
-		List<Integer> blockedList = getUserBlockedList(userId);
 		userId = userDao.getUserId(username);
+		List<Integer> blockedList = getUserBlockedList(userId);
+		//System.out.println("Blocked Id list: "+blockedList);
+		//System.out.println("Blocked By: "+ userId);
 		List<User> blockedUsersList = new ArrayList<User>();
 		for(int id: blockedList) 
 		{
 			blockedUsersList.add(userDao.getUserDetailsById(id));
 		}
+		//System.out.println(blockedUsersList);
 		return blockedUsersList;
 	}
 	
@@ -90,7 +93,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);
-			pstmt.setInt(1, userBlockedId);
+			pstmt.setInt(2, userBlockedId);
 			int rs = pstmt.executeUpdate();
 			if (rs > 0) {
 				return true;

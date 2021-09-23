@@ -26,6 +26,19 @@ public interface UserServiceInterface {
 	
 	User getUserDetailsByUsername(String username);
 	
+	int addFriendRequest(UserLogin friend1, UserLogin friend2);
+	
+	int acceptFriendRequest(UserLogin friend1, UserLogin friend2);
+	
+	int removeFriend(UserLogin friend1, UserLogin friend2);
+
+	int ignoreRequest(UserLogin friend1, UserLogin friend2);
+	
+	List<User> getPendingRequest(UserLogin self);
+
+	List<User> getFriends(UserLogin self);
+
+	
 	List<User> getUserDetailsByName(String firstName, String lastName);
 	
 	List<User> getUserDetailsByCity(String city);

@@ -71,7 +71,7 @@ public class UserDao implements UserDaoInterface {
 	
 	public int getUserId(String username) {
 		PreparedStatement pstmt = null;
-		String sql = "select user_id from user_details ud, credentials c, city_details ct where c.username=? and c.credential_id=ud.credential_id and ct.city_id=ud.city_id";
+		String sql = "select user_id from user_details ud, credentials c where c.username=? and c.credential_id=ud.credential_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -175,7 +175,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByName(String firstName, String lastName) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select c.username, ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.city_id=ud.city_id first_name=? or last_name=?";
+		String sql = "select c.username, ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.city_id=ud.city_id and first_name=? or last_name=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, firstName);
@@ -199,7 +199,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByCity(String city) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select c.username,ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id ct.city=? and ct.city_id=ud.city_id";
+		String sql = "select c.username,ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.city=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, city);
@@ -222,7 +222,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByState(String state) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select c.username,ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id ct.state=? and ct.city_id=ud.city_id";
+		String sql = "select c.username, ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.state=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, state);
@@ -245,7 +245,7 @@ public class UserDao implements UserDaoInterface {
 	public List<User> getUserDetailsByCountry(String country) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
-		String sql = "select c.username,ud.first_name, ud.last_name, c.city, c.state, c.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id ct.country=? and ct.city_id=ud.city_id";
+		String sql = "select c.username,ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.country=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, country);
@@ -269,7 +269,7 @@ public class UserDao implements UserDaoInterface {
 	public User getUserDetailsById(int userId) {
 		PreparedStatement pstmt = null;
 		User user = null;
-		String sql = "select c.username,ud.first_name, ud.last_name, c.city, c.state, c.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id ud.user_id=? and ct.city_id=ud.city_id";
+		String sql = "select c.username,ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ud.user_id=? and ct.city_id=ud.city_id";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);

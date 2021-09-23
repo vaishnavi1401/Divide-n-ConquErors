@@ -14,4 +14,9 @@ reconnect/.settings/org.eclipse.jdt.core.prefs
 reconnect/.settings/org.eclipse.wst.common.component
 *.xml
 *.xml
+
 reconnect/.classpath
+reconnect/.project
+reconnect/.settings/org.eclipse.wst.common.component
+reconnect/.settings/org.eclipse.wst.common.project.facet.core.xml
+reconnect/.settings/*
