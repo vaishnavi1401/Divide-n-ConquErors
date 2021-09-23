@@ -4,10 +4,12 @@ package com.reconnect.service;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import com.reconnect.dao.util.FriendDaoInterface;
 import com.reconnect.dao.util.UserDaoInterface;
 import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
+import com.reconnect.factory.FriendDaoFactory;
 import com.reconnect.factory.UserDAOFactory;
 
 public class UserService implements UserServiceInterface {
@@ -88,4 +90,40 @@ public class UserService implements UserServiceInterface {
 	public User getUserDetailsById(int userId) {
 		return ud.getUserDetailsById(userId);
 	}
+	
+	//functions for friends module
+	public int addFriendRequest(UserLogin friend1, UserLogin friend2) {
+		
+		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
+		return friendDao.sendFriendRequest(friend1, friend2);
+	}
+
+	public int acceptFriendRequest(UserLogin friend1, UserLogin friend2) {
+		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
+		return friendDao.acceptFriendRequest(friend1, friend2);
+	}
+	
+	public int removeFriend(UserLogin friend1, UserLogin friend2) {
+		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
+		return friendDao.removeFriend(friend1, friend2);
+	}
+
+	public int ignoreRequest(UserLogin friend1, UserLogin friend2) {
+		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
+		return friendDao.ignoreRequest(friend1, friend2);
+	}
+
+
+	public List<User> getPendingRequest(UserLogin self) {
+		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
+		return friendDao.getPendingRequests(self);
+	}
+
+	public List<User> getFriends(UserLogin self) {
+		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
+		return friendDao.getFriends(self);
+	}
+
+	
+	
 }
