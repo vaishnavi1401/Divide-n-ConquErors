@@ -11,8 +11,8 @@ public class DBUtils {
 			try {
 				DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 				//Class.forName("com.mysql.cj.jdbc.Driver");
-				String url="jdbc:mysql://localhost:3306/codefury";
-				con = DriverManager.getConnection(url, "root", "Harshita");
+				String url="jdbc:mysql://localhost:3306/reconnect";
+				con = DriverManager.getConnection(url, "root", "");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

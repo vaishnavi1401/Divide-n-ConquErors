@@ -7,7 +7,7 @@ private String phone_number;
 private String username;
 private String passward;
 private String pic_path;
-public Admin(String name, String email, String phone_number, String pic_path,String username, String passward) {
+public Admin(String name, String email, String phone_number, String username, String passward) {
 	super();
 	this.name = name;
 	this.email = email;

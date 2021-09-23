@@ -36,6 +36,9 @@ public class AdminDisableUserServlet extends HttpServlet {
 				out.print("Disabled successfully");
 			else
 				out.print("Not Disabled");
+			RequestDispatcher rd = request.getRequestDispatcher("statistics.html");
+			rd.forward(request, response);
+		
 	}
 		else
 		{

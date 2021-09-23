@@ -1,21 +1,18 @@
      function display(list,button_name)
         {
-        	
         	var user_list= JSON.parse(list);
-			str = "<table border='10'><tr><td><th>USERNAME</th><th>LOCATION</th></tr></td>"
+			str = "<tr><td><th>USERNAME</th><th>LOCATION</th></tr></td>"
 		for(var key in user_list)
 			  {
 				str += "<tr>";
 				str += "<td>" + "<input type='checkbox' name='username' id='"+key+"' value='" + key+ "'>" + "</td><td>" + key + "</td><td>"+user_list[key]+"</td>";
 				str += "</tr>";
 			}
-			str += "</table><br>";
 			
 			str += "  <button class= 'button'  onclick='deleteDisable(id)'  id='"+button_name+"' >"+button_name+"</button>";
 			console.log(str);
-			document.getElementById("restab").innerHTML = str;
-			
-        		}
+			document.getElementById("myTable").innerHTML = str;
+			}
         
         
       function openView(val){
@@ -23,7 +20,6 @@
         console.log(val);
         if(val=="viewAll")
         {
-        	
         	   var xhr =new XMLHttpRequest();
         		 xhr.open("POST","Admin_user_details",true);
         	     xhr.send();
@@ -34,7 +30,7 @@
         	            // login successful response and redirect to user portal
         	             console.log(xhr.responseText);
         	             list=xhr.responseText
-        	            displayAll(list);
+        	             displayAll(list);
         	         }  
         	     }
    		 }
@@ -70,22 +66,21 @@
      	         }  
      	     }
         }
-        document.getElementById("restab").innerHTML=tab;
+        document.getElementById("myTable").innerHTML=tab;
       }
 function displayAll(list)
 {
 	
         	var user_list= JSON.parse(list);
-			str = "<table border='10'><tr><th>USERNAME</th><th>LOCATION</th></tr>"
+			str = "<tr><th>USERNAME</th><th>LOCATION</th></tr>"
 		for(var key in user_list)
 			  {
 				str += "<tr>";
 				str += "<td>"+ key + "</td><td>"+user_list[key]+"</td>";
 				str += "</tr>";
 			}
-			str += "</table><br>";
 			console.log(str);
-			document.getElementById("restab").innerHTML = str;
+			document.getElementById("myTable").innerHTML = str;
 }   
         
         function deleteDisable(val)

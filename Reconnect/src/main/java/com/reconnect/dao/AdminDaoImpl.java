@@ -48,11 +48,10 @@ public class AdminDaoImpl implements AdminDao {
 			nm = doc.getElementsByTagName("name").item(0).getTextContent();
 			em = doc.getElementsByTagName("email").item(0).getTextContent();
 			p_no = doc.getElementsByTagName("phone_number").item(0).getTextContent();
-			pic_path = doc.getElementsByTagName("pic_path").item(0).getTextContent();
 			us_name = doc.getElementsByTagName("username").item(0).getTextContent();
 			pass = doc.getElementsByTagName("passward").item(0).getTextContent();
 			// System.out.println(nm);
-			admin = new Admin(nm, em, p_no, pic_path, us_name, pass);
+			admin = new Admin(nm, em, p_no, us_name, pass);
 			// System.out.println("STATIC ADMIN" + admin);
 			con = DBUtils.getConnection();
 			count_users = con.prepareStatement("SELECT COUNT(*) AS rowcount FROM user_details");
