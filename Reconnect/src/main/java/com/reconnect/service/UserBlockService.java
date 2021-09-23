@@ -15,6 +15,10 @@ public class UserBlockService implements UserBlockServiceInterface {
 		bd=BlockUserDAOFactory.createobject();
 	}
 	
+	public boolean blockUser(String blockedBy, String blockedWho) {
+		return bd.blockUser(blockedBy, blockedWho);
+	}
+	
 	public List<User> viewBlockedUsers(String userName) {
 		
 		return bd.viewBlockedUsers(userName);
