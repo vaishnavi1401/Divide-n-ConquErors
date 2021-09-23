@@ -19,7 +19,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	UserDaoInterface userDao = null;
 	int userId=0;
 	public BlockedUsersDao() {
-		userDao = UserDAOFactory.createobject();
+		userDao = UserDAOFactory.createUserDaoObject();
 		conn = DBUtils.getConnection();
 	}
 
@@ -74,8 +74,6 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	public List<User> viewBlockedUsers(String username){
 		userId = userDao.getUserId(username);
 		List<Integer> blockedList = getUserBlockedList(userId);
-		//System.out.println("Blocked Id list: "+blockedList);
-		//System.out.println("Blocked By: "+ userId);
 		List<User> blockedUsersList = new ArrayList<User>();
 		for(int id: blockedList) 
 		{
