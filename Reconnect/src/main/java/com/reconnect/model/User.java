@@ -115,7 +115,7 @@ public class User {
 	}
 
 	public User(String username, String fname, String lname, City city) {
-		this.username = username;
+		this.setUsername(username);
 		this.fname = fname;
 		this.lname = lname;
 		this.city = city;
@@ -135,6 +135,14 @@ public class User {
 	}
 
 	public User() {
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
