@@ -74,8 +74,6 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	public List<User> viewBlockedUsers(String username){
 		userId = userDao.getUserId(username);
 		List<Integer> blockedList = getUserBlockedList(userId);
-		//System.out.println("Blocked Id list: "+blockedList);
-		//System.out.println("Blocked By: "+ userId);
 		List<User> blockedUsersList = new ArrayList<User>();
 		for(int id: blockedList) 
 		{

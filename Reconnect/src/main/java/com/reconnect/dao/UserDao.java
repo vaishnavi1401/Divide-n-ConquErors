@@ -288,4 +288,30 @@ public class UserDao implements UserDaoInterface {
 		}
 		return user;
 	}
+	
+	public List<User> getNonFriendsList(String username) {
+		PreparedStatement pstmt = null;
+		int userId = getUserId(username);
+		List<User> userList = new ArrayList<User>();
+		String sql = "select c.username, ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.city_id=ud.city_id and user_id!=? and user_id!=(select friend_two from friend_details where (friend_one=? or friend_two=?) and status=1)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, userId);
+			pstmt.setInt(3, userId);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				userList.add(new User(rs.getString(1), rs.getString(2), rs.getString(3), new City(rs.getString(4), rs.getString(5), rs.getString(6))));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return userList;
+	}
 }

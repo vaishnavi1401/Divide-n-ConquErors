@@ -29,7 +29,7 @@ public class ContactDao implements ContactDaoInterface {
 		conn = DBUtils.getConnection();
 	}
 	
-	public CityDaoInterface cd = CityDAOFactory.createCityDaoObject();
+	public CityDaoInterface cd =  CityDAOFactory.createCityDaoObject();
 	public UserDaoInterface ud = UserDAOFactory.createUserDaoObject();
 	
 	
