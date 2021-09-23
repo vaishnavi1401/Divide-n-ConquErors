@@ -14,6 +14,8 @@ import java.util.List;
 import com.reconnect.dao.util.CityDaoInterface;
 import com.reconnect.dao.util.ContactDaoInterface;
 import com.reconnect.dao.util.UserDaoInterface;
+import com.reconnect.factory.CityDAOFactory;
+import com.reconnect.factory.UserDAOFactory;
 import com.reconnect.model.City;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
@@ -27,8 +29,8 @@ public class ContactDao implements ContactDaoInterface {
 		conn = DBUtils.getConnection();
 	}
 	
-	public CityDaoInterface cd;
-	public UserDaoInterface ud;
+	public CityDaoInterface cd = CityDAOFactory.createCityDaoObject();
+	public UserDaoInterface ud = UserDAOFactory.createUserDaoObject();
 	
 	
 	public int addContact(Contact c1, String username) throws FileNotFoundException {

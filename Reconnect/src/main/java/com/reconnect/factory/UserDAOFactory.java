@@ -9,7 +9,7 @@ public class UserDAOFactory {
 	{
 
 	}
-	public static UserDaoInterface createobject() {
+	public static UserDaoInterface createUserDaoObject() {
 		return new UserDao();
 	}
 
