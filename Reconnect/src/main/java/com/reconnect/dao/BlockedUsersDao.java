@@ -23,6 +23,31 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		conn = DBUtils.getConnection();
 	}
 
+	public boolean blockUser(String blockedBy, String blockedWho) {
+		PreparedStatement pstmt = null;
+		userId = userDao.getUserId(blockedBy);
+		int userBlockedId = userDao.getUserId(blockedWho);
+		String sql = "insert into blocked_user(blocked_by, blocked_who) values(?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(1, userBlockedId);
+			int rs = pstmt.executeUpdate();
+			if (rs > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	public List<Integer> getUserBlockedList(int userId) {
 		PreparedStatement pstmt = null;
 		List<Integer> blockedList = new ArrayList<Integer>();
@@ -52,7 +77,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		List<User> blockedUsersList = new ArrayList<User>();
 		for(int id: blockedList) 
 		{
-			blockedUsersList = userDao.getUserDetailsById(id);
+			blockedUsersList.add(userDao.getUserDetailsById(id));
 		}
 		return blockedUsersList;
 	}
@@ -61,7 +86,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		PreparedStatement pstmt = null;
 		userId = userDao.getUserId(blockedBy);
 		int userBlockedId = userDao.getUserId(blockedWho);
-		String sql = "delete from blocked_user where blocked_by = ? and blocked_by = ?";
+		String sql = "delete from blocked_user where blocked_by = ? and blocked_who = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);

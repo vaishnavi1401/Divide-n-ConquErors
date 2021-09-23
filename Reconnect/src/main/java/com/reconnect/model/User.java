@@ -20,6 +20,7 @@ public class User {
 	private File profileImage;
 	private int userId;
 	private City city;
+	private String username;
 
 	public City getCity() {
 		return city;
@@ -113,7 +114,8 @@ public class User {
 		this.profileImage = image;
 	}
 
-	public User(String fname, String lname, City city) {
+	public User(String username, String fname, String lname, City city) {
+		this.setUsername(username);
 		this.fname = fname;
 		this.lname = lname;
 		this.city = city;
@@ -133,6 +135,14 @@ public class User {
 	}
 
 	public User() {
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
