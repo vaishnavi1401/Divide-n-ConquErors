@@ -19,7 +19,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	UserDaoInterface userDao = null;
 	int userId=0;
 	public BlockedUsersDao() {
-		userDao = UserDAOFactory.createobject();
+		userDao = UserDAOFactory.createUserDaoObject();
 		conn = DBUtils.getConnection();
 	}
 

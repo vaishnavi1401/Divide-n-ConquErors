@@ -216,11 +216,8 @@ public class ContactDao implements ContactDaoInterface {
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		String fName = c1.getFname();
-		String lName = c1.getLname();
-		String phoneNo = c1.getPhone();
 		String email = c1.getEmail();
-		int contId = getContactId(username , fName , lName , phoneNo , email);
+		int contId = getContactId(username , email);
 		int r = 0;
 		String sql = "update contact_details set first_name = ? , last_name = ? , email_id = ? , phone_no = ? ,  gender = ? , dob = ? , address = ? , city_id = ? , profile_image = ? , company = ? where user_id = ? and contact_id = ?";
 		PreparedStatement pstmt = null;
@@ -262,12 +259,12 @@ public class ContactDao implements ContactDaoInterface {
 		return r;
 	}
 
-	public int deleteContact(String username , String fName , String lName , String phoneNo , String email) {
+	public int deleteContact(String username , String email) {
 		
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		int contId = getContactId(username , fName , lName , phoneNo , email);
+		int contId = getContactId(username , email);
 		
 		
 		PreparedStatement pstmt1 = null;
@@ -301,8 +298,8 @@ public class ContactDao implements ContactDaoInterface {
 		return r;
 	}
 
-	public int getContactId(String username , String fName , String lName , String phoneNo , String email) {
-		String sqlToFetchContactId = "select contact_id from contact_details where first_name = ? and last_name = ? and email_id = ? and phone_no = ? and user_id = ?";
+	public int getContactId(String username , String email) {
+		String sqlToFetchContactId = "select contact_id from contact_details where email_id = ? and user_id = ?";
 		PreparedStatement pstmt = null;		
 		int contId = 0;
 		User u1 = ud.getUserDetailsByUsername(username);
@@ -311,11 +308,9 @@ public class ContactDao implements ContactDaoInterface {
 		try 
 		{
 			pstmt = conn.prepareStatement(sqlToFetchContactId);
-			pstmt.setString(1, fName);
-			pstmt.setString(2, lName);
-			pstmt.setString(3, email);
-			pstmt.setString(4, phoneNo);
-			pstmt.setInt(5, uid);
+			pstmt.setString(1, email);
+			pstmt.setInt(2, uid);
+
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) 
 			{
@@ -340,7 +335,7 @@ public class ContactDao implements ContactDaoInterface {
 		return contId;
 	}
 
-	public Contact viewContact(String username , String fName , String lName , String phoneNo , String email) {
+	public Contact viewContact(String username , String email) {
 
 		Contact c2 = new Contact();
 		String sql = "select * from contact_details where user_id = ? and contact_id = ?";
@@ -348,7 +343,7 @@ public class ContactDao implements ContactDaoInterface {
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		int contId = getContactId(username , fName , lName , phoneNo , email);
+		int contId = getContactId(username , email);
 		
 		
 		

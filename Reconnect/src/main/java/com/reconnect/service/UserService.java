@@ -18,7 +18,7 @@ public class UserService implements UserServiceInterface {
 
 	public UserService(){
 
-		ud=UserDAOFactory.createobject();
+		ud=UserDAOFactory.createUserDaoObject();
 	}
 
 	
