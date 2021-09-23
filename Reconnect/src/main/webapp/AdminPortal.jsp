@@ -8,6 +8,9 @@
         <link rel="stylesheet"  href="admin_portal.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="navigate_admin.js"></script>
+
+        
+           
         </script>
 
     </head>
@@ -25,33 +28,30 @@
                 </div>
             </div>
             <div class="image_side">
-                <img id="vector" src="assets/admin_vector_side.jpg">
+                <img src="assets/admin_vector_side.jpg">
             </div>
             <div class="body_side">
                 <div class="display_block">
-                    <img id="mid" src="assets/form_background_image.png">
-                        <div class="container_left">
-                            <div class="flip-card">
-                                <div class="flip-card-inner">
-                                    <div class="flip-card-back">
-                                      <% Admin ad=(Admin)request.getAttribute("ad");
-                            
-                                %>
-                                <h1>Personal Details</h1>
-                                <p><%=ad.getName() %></p>
-                                <p><%=ad.getUsername() %></p>
-                                    </div>
-                                    <div class="flip-card-front">
-                                        <h1>Location</h1> 
-                                        <p>Pune</p> 
-                                        <p>India</p>
-                                       <img id="cards" src="assets/contacts_flip.png"><img>
-                                    </div>
+                    <div class="container_left">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-back">
+                                  <% Admin ad=(Admin)request.getAttribute("ad");
+						
+							%>
+							<h1>Personal Details</h1>
+							<p><%=ad.getName() %></p>
+							<p><%=ad.getUsername() %></p>
+                                </div>
+                                <div class="flip-card-front">
+                                    <h1>Location</h1> 
+                                    <p>Pune</p> 
+                                    <p>India</p>
+                                   <img src="assets/contacts_flip.png"><img>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="container_right">
                         <div class="flip-card">
                             
@@ -66,7 +66,7 @@
 							<h1>Contact</h1>
 							<p>Phone</p>
 							<p><%=ad.getPhone_number()%></p>
-							<img id="cards" src="assets/contacts_flip.png"><img>
+							<img src="assets/contacts_flip.png"><img>
                                 </div>
                             </div>
                         </div>
