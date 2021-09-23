@@ -9,19 +9,19 @@ import com.reconnect.model.User;
 
 public interface ContactDaoInterface {
 	
-	public int addContact(Contact c1 , User u1) throws FileNotFoundException;
+	public int addContact(Contact c1 , String username) throws FileNotFoundException;  //done
 	
-	public int getUserId(String email);
+	public int getUserId(String email);  //done
+		
+	public List<Contact> viewAllContacts(String username);  //done
 	
-	//public int getCityId(City c);
+	public int editContact(Contact c1 , String username);  //done
 	
-	public List<Contact> viewAllContacts(User u1);
+	int deleteContact(String username , String fName , String lName , String phoneNo , String email);  //done
 	
-	public int editContact(Contact c1 , User u1);
+	public int getContactId(String username , String fName , String lName , String phoneNo , String email);  //done
 	
-	public int deleteContact(Contact c1 , User u1);
+	public Contact viewContact(String username , String fName , String lName , String phoneNo , String email);  //done
 	
-	public int getContactId(Contact c1 , User u1);
-	
-	public Contact viewContact(Contact c1 ,User u1);
+	public City fetchCityObj(int cid);  //done
 }

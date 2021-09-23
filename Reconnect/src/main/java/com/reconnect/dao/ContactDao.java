@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.reconnect.dao.util.CityDaoInterface;
 import com.reconnect.dao.util.ContactDaoInterface;
+import com.reconnect.dao.util.UserDaoInterface;
 import com.reconnect.model.City;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
@@ -27,13 +28,15 @@ public class ContactDao implements ContactDaoInterface {
 	}
 	
 	public CityDaoInterface cd;
+	public UserDaoInterface ud;
 	
 	
-	public int addContact(Contact c1, User u1) throws FileNotFoundException {
+	public int addContact(Contact c1, String username) throws FileNotFoundException {
 		
 		String sql = "insert into contact_details (user_id , first_name , last_name , email_id , phone_no , gender , dob , address , city_id , profileimage , creation_date , company) values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
 		PreparedStatement pstmt = null;
 		int i1 = 0;
+		User u1 = ud.getUserDetailsByUsername(username);
 		try
 		{
 			String em = u1.getEmail();
@@ -111,11 +114,12 @@ public class ContactDao implements ContactDaoInterface {
 	}
 	
 
-	public List<Contact> viewAllContacts(User u1) {
+	public List<Contact> viewAllContacts(String username) {
 		
 		List<Contact> ll = new ArrayList<Contact>();
 		String sql = "select * from contact_details where user_id = ?";
 		PreparedStatement pstmt = null;
+		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 
 		try
@@ -205,11 +209,16 @@ public class ContactDao implements ContactDaoInterface {
 		return null;
 	}
 
-	public int editContact(Contact c1, User u1) {
+	public int editContact(Contact c1 , String username) {
 		
+		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		int contId = getContactId(c1 , u1);
+		String fName = c1.getFname();
+		String lName = c1.getLname();
+		String phoneNo = c1.getPhone();
+		String email = c1.getEmail();
+		int contId = getContactId(username , fName , lName , phoneNo , email);
 		int r = 0;
 		String sql = "update contact_details set first_name = ? , last_name = ? , email_id = ? , phone_no = ? ,  gender = ? , dob = ? , address = ? , city_id = ? , profile_image = ? , company = ? where user_id = ? and contact_id = ?";
 		PreparedStatement pstmt = null;
@@ -248,45 +257,16 @@ public class ContactDao implements ContactDaoInterface {
 				e.printStackTrace();
 			}
 		}
-		return 0;
+		return r;
 	}
 
-	public int deleteContact(String fName , String lName , String emailId , String phoneNo , User u1) {
+	public int deleteContact(String username , String fName , String lName , String phoneNo , String email) {
 		
+		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		int contId = 0;
-		String sqlToFetchContactId = "select contact_id from contact_details where first_name = ? and last_name = ? and email_id = ? and phone_no = ? and user_id = ?";
-		PreparedStatement pstmt = null;		
-		try 
-		{
-			pstmt = conn.prepareStatement(sqlToFetchContactId);
-			pstmt.setString(1, fName);
-			pstmt.setString(2, lName);
-			pstmt.setString(3, emailId);
-			pstmt.setString(4, phoneNo);
-			pstmt.setInt(5, uid);
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) 
-			{
-				contId = rs.getInt(1);
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		} 
-		finally 
-		{
-			try 
-			{
-				pstmt.close();
-			} 
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
+		int contId = getContactId(username , fName , lName , phoneNo , email);
+		
 		
 		PreparedStatement pstmt1 = null;
 		String sqlToDeleteContact = "delete from contact_details where user_id = ? and contact_id = ?";
@@ -319,23 +299,25 @@ public class ContactDao implements ContactDaoInterface {
 		return r;
 	}
 
-	public int getContactId(Contact c1 , User u1) {
-		String sql = "select contact_id from contact_details where first_name = ? and last_name = ? and email_id = ? and phone_no = ? and user_id = ?";
-		PreparedStatement pstmt = null;
+	public int getContactId(String username , String fName , String lName , String phoneNo , String email) {
+		String sqlToFetchContactId = "select contact_id from contact_details where first_name = ? and last_name = ? and email_id = ? and phone_no = ? and user_id = ?";
+		PreparedStatement pstmt = null;		
+		int contId = 0;
+		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
-		int uid = getUserId(em);		
+		int uid = getUserId(em);
 		try 
 		{
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, c1.getFname());
-			pstmt.setString(2, c1.getLname());
-			pstmt.setString(3, c1.getEmail());
-			pstmt.setString(4, c1.getPhone());
+			pstmt = conn.prepareStatement(sqlToFetchContactId);
+			pstmt.setString(1, fName);
+			pstmt.setString(2, lName);
+			pstmt.setString(3, email);
+			pstmt.setString(4, phoneNo);
 			pstmt.setInt(5, uid);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) 
 			{
-				return rs.getInt(1);
+				contId = rs.getInt(1);
 			}
 		} 
 		catch (SQLException e) 
@@ -353,17 +335,20 @@ public class ContactDao implements ContactDaoInterface {
 				e.printStackTrace();
 			}
 		}
-		return 0;
+		return contId;
 	}
 
-	public Contact viewContact(Contact c1, User u1) {
+	public Contact viewContact(String username , String fName , String lName , String phoneNo , String email) {
 
 		Contact c2 = new Contact();
 		String sql = "select * from contact_details where user_id = ? and contact_id = ?";
 		PreparedStatement pstmt = null;
+		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
-		int contId = getContactId(c1 , u1);
+		int contId = getContactId(username , fName , lName , phoneNo , email);
+		
+		
 		
 		try
 		{
@@ -373,8 +358,8 @@ public class ContactDao implements ContactDaoInterface {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())
 			{
-				String fName = rs.getString(3);
-				String lName = rs.getString(4);
+				String FName = rs.getString(3);
+				String LName = rs.getString(4);
 				String emailId = rs.getString(5);
 				String phNo = rs.getString(6);
 				String gender = rs.getString(7);
@@ -386,8 +371,8 @@ public class ContactDao implements ContactDaoInterface {
 				
 				City c = fetchCityObj(cid);
 				
-				c2.setFname(fName);
-				c2.setLname(lName);
+				c2.setFname(FName);
+				c2.setLname(LName);
 				c2.setEmail(emailId);
 				c2.setPhone(phNo);
 				c2.setGender(gender);
@@ -406,17 +391,4 @@ public class ContactDao implements ContactDaoInterface {
 		}		
 		return null;
 	}
-
-	public int deleteContact(Contact c1, User u1) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	
-	
-
-	
-	
-
 }
