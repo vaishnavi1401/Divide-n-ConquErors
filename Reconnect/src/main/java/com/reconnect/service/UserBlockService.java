@@ -32,4 +32,8 @@ public class UserBlockService implements UserBlockServiceInterface {
 		return bd.unblockUser(blockedBy, blockedWho);
 	}
 
+	public boolean removeFromFriend(int userId, int userBlockedId) {
+		return bd.removeFromFriend(userId, userBlockedId);
+	}
+
 }
