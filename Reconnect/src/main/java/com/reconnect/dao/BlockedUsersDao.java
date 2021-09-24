@@ -22,31 +22,6 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		userDao = UserDAOFactory.createUserDaoObject();
 		conn = DBUtils.getConnection();
 	}
-	
-	public boolean removeFromFriend(int userId, int userBlockedId) {
-		PreparedStatement pstmt = null;
-		String sql = "delete from friend_details where (friend_one=? and friend_two=? and status=1) or (friend_one=?  and friend_two=? and status=1)";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userId);
-			pstmt.setInt(2, userBlockedId);
-			pstmt.setInt(3, userBlockedId);
-			pstmt.setInt(4, userId);
-			int rs = pstmt.executeUpdate();
-			if (rs > 0) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
-	}
 
 	public boolean blockUser(String blockedBy, String blockedWho) {
 		PreparedStatement pstmt = null;
@@ -58,7 +33,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 			pstmt.setInt(1, userId);
 			pstmt.setInt(1, userBlockedId);
 			int rs = pstmt.executeUpdate();
-			if (rs > 0 && removeFromFriend(userId, userBlockedId)) {
+			if (rs > 0) {
 				return true;
 			}
 		} catch (SQLException e) {

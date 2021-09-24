@@ -35,6 +35,4 @@ public interface UserDaoInterface {
 	List<User> getUserDetailsByCountry(String country);
 	
 	User getUserDetailsById(int userId);
-	
-	List<User> getNonFriendsList(String username);
 }

@@ -293,7 +293,7 @@ public class UserDao implements UserDaoInterface {
 		PreparedStatement pstmt = null;
 		int userId = getUserId(username);
 		List<User> userList = new ArrayList<User>();
-		String sql = "select c.username, ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.city_id=ud.city_id and user_id!=? and user_id not in (select friend_two from friend_details where (friend_one=? or friend_two=?) and status=1)";
+		String sql = "select c.username, ud.first_name, ud.last_name, ct.city, ct.state, ct.country from user_details ud, city_details ct, credentials c where c.credential_id=ud.credential_id and ct.city_id=ud.city_id and user_id!=? and user_id!=(select friend_two from friend_details where (friend_one=? or friend_two=?) and status=1)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, userId);

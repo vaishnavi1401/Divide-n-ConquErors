@@ -91,13 +91,10 @@ public class UserService implements UserServiceInterface {
 		return ud.getUserDetailsById(userId);
 	}
 	
-	public List<User> getNonFriendsList(String username){
-		return ud.getNonFriendsList(username);
-	}
 	//Friend Module Methods 
 	
-	public int addFriendRequest(UserLogin friend1, UserLogin friend2) {
-			
+public int addFriendRequest(UserLogin friend1, UserLogin friend2) {
+		
 		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
 		return friendDao.sendFriendRequest(friend1, friend2);
 	}
@@ -128,4 +125,5 @@ public class UserService implements UserServiceInterface {
 		return friendDao.getFriends(self);
 	}
 
+	
 }
