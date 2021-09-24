@@ -3,20 +3,21 @@
 body { 
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  
-
+  background:linear-gradient(rgb(58, 121, 202),rgb(255,34,22));
+  background-color: white;
 }
 
 .main_page{
   width: 210.5vh;
-  height: 120vh;  
+  height: 96vh;  
   
 }
 
 .image_side{
-  width: 33vh;
-  height: 200vh;
-  background:linear-gradient( #0d57b8, rgb(206, 57, 181));
+  width: 28vh;
+  height: 100vh;
+  background:linear-gradient(rgb(58, 121, 202),rgb(255,34,22));
+  background-color: white;
   float: left;
 }
 
@@ -42,7 +43,7 @@ body {
   border-radius: 20px;
 }
 
-img{
+vector{
   width: 35vh;
   margin-top: 35vh;
   margin-left: 10vh;
@@ -110,7 +111,8 @@ img{
   background-color: transparent;
   width: 40vh;
   height: 55vh;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+   margin-left: 20vh;
+  perspective: 1000px;
   border: 1px solid black;
   border-radius: 15px;
   background-color: #bbb;
@@ -145,37 +147,40 @@ img{
 
 }
 
-.flip-card-front img{
+.flip-card-front #cards{
   width: 20vh;
 }
 
 .flip-card-back {
-  background:linear-gradient(rgb(197, 68, 176), rgb(44, 23, 236) );
+  background:linear-gradient(to top,rgb(222, 236, 23),rgb(219, 103, 36) );
   color: white;
   transform: rotateY(180deg);
 }
 
 
-.body_side{
-  margin-left: 20vh;
-  width: 204vh;
-  height: 200vh;
-  background:linear-gradient(rgb(58, 121, 202),rgb(255,34,22));
-   
-}
+
 
 .display_block{
-  width: 158vh;
-  height: 200vh;
+  width: 182vh;
+  height: 100vh;
   padding: 10px auto;
-  background-color: rgb(255, 186, 57);
+  background-position: center;
+  background-size: cover;
+  position: initial;
+  background-color: rgb(208, 221, 221);
+}
+
+#mid{
+  width: 154vh;
+  height: inherit;
+  position:inherit;
 }
 
 .tab {
   width: 180vh;
   height: 200vh;
   position: fixed;
-  padding-left: 45vh;
+  padding-left: 63vh;
   
 }
 
@@ -184,7 +189,6 @@ img{
   height:8vh;
   position: relative;
   margin-top: 18vh;
-  margin-left: 2vh;
   transition: 0.8s;
   font-size: 17px;
 }
@@ -203,7 +207,28 @@ img{
   width: 100vh;
   height: 60vh;
   top:28vh;
-  left: 64vh;
+  left: 58vh;
   position: fixed;
-  background-color: wheat;
+  background-color: rgb(159, 213, 211);
+}
+
+#myTable {
+  
+  width: 100%;
+  font-size: 18px; 
+}
+
+#myTable th, #myTable td {
+  text-align: center; 
+  padding: 12px;
+  border: 1px solid black;	
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background:white;
+}
+
+input[type='checkbox']{
+	margin-left: 5vh;
+	
 }
