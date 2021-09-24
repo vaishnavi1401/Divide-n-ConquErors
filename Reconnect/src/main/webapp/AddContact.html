@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Add New Contact
+		</title>
+		<!-- <link rel="stylesheet" href="new_contact.css"> -->
+		
+	</head>
+	<body>
+		<div>
+			<h3>Add New Contact</h3>
+            <form action="ContactController/addContact">
+			<table >
+				<tr> 
+					<td>
+						<input type="text" name="contactFname" id="contactFname" placeholder="First Name" required/>  
+					</td>
+					<td>		
+						<input type="text" name="contactLname" id="contactLname" placeholder="Last Name" required/>  
+					</td>
+				</tr>	
+                <tr>	 
+					<td>
+						<input type="email" id="contactEamil" name="contactEamil" placeholder="Email" required/>   
+					</td>
+				</tr>
+				<tr>	 
+					<td>
+						<select type="text" id="contactGender" name="contactGender" placeholder="Gender" required>   
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+						<option value="Others">Others</option>
+						</select>
+					</td>
+				</tr>
+				<tr> 
+					<td>
+						<input type="text" name="contactPhone" id="contactPhone" placeholder="Phone Number" required/>  
+					</td> 
+				</tr>
+                <tr> 
+					<td>
+						<input type="date" name="contactDob" id="contactDob" placeholder="Date of Birth" required/>  
+					</td> 
+				</tr>
+                <tr>	 
+					<td>
+						<input type="text" id="contactAddress" name="contactAddress" placeholder="Address" required/>   
+					</td>
+                    <td>
+						<input type="text" id="contactCity" name="contactCity" placeholder="City" required/>   
+					</td>
+				</tr>
+                <tr>	 
+					<td>
+						<input type="text" id="contactState" name="contactState" placeholder="State" required/>   
+					</td>
+                    <td>
+						<input type="text" id="contactCountry" name="contactCountry" placeholder="Country" required/>   
+					</td>
+				</tr>
+                <tr>	 
+					<td>
+						<input type="text" id="contactCompany" name="contactCompany" placeholder="Company Name" required/>   
+					</td>
+				</tr>
+                <tr>	 
+					<td>
+						<input type="file" id="profilePic" name="profilePic"  required/>   
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input id = "submit" type="submit" value="Submit" class="submit" />  
+					</td>
+				</tr>
+			</table>
+        </form>
+		</div>
+	</body>
+</html>

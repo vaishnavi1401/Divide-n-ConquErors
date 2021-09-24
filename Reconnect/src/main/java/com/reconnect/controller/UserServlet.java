@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -103,8 +104,19 @@ public class UserServlet extends HttpServlet {
 			boolean emailCheck = us.checkEmailUnique(email);
 			boolean usernameUniqCheck = us.checkUsernameUniq(username);
 			if (emailCheck && usernameUniqCheck) {
-				if(us.registerUserDetail(usr, city_id, cred_id))
-					out.println("Registration Success");
+				if(us.registerUserDetail(usr, city_id, cred_id)) {
+					
+					//out.println("Registration Success");
+					request.setAttribute("message", "profile created <a href=LoginPage.jsp>Sign In</a>");
+					RequestDispatcher rd=getServletContext().getRequestDispatcher("/RegistrationPage.jsp");
+					rd.forward(request, response);
+				}
+			}
+			else 
+			{
+				request.setAttribute("message", "<font color=red>Registration Failed</font>");
+				RequestDispatcher rd=getServletContext().getRequestDispatcher("/RegistrationPage.jsp");
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

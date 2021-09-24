@@ -1,7 +1,11 @@
+
 package com.reconnect.factory;
 
 import com.reconnect.dao.FriendDao;
 import com.reconnect.dao.util.FriendDaoInterface;
+
+
+
 
 public class FriendDaoFactory {
 
@@ -11,3 +15,4 @@ public class FriendDaoFactory {
 	}
 
 }
+

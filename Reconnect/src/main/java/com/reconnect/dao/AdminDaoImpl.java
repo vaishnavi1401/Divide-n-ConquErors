@@ -33,7 +33,11 @@ public class AdminDaoImpl implements AdminDao {
 	private static PreparedStatement count_users, uget, ugetloc, ugetcr, ugetlastlogin, ugetdel, ugetdelloc, udel,
 			ugetblock, ugetid, ugetcredid, ugetuserid, insertdisablestat;
 	static {
-		fXmlFile = new File("D:\\code_fury_hsbc\\Divide-n-ConquErors\\Reconnect\\src\\main\\webapp\\assets\\admin.xml");
+
+		fXmlFile = new File("F:\\Codefury Java\\Divide-n-ConquErors\\Reconnect\\src\\main\\webapp\\assets\\admin.xml");
+
+	
+
 
 		try {
 			DocumentBuilderFactory dbFactory;
@@ -48,6 +52,8 @@ public class AdminDaoImpl implements AdminDao {
 			nm = doc.getElementsByTagName("name").item(0).getTextContent();
 			em = doc.getElementsByTagName("email").item(0).getTextContent();
 			p_no = doc.getElementsByTagName("phone_number").item(0).getTextContent();
+
+			//pic_path = doc.getElementsByTagName("pic_path").item(0).getTextContent();>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 			us_name = doc.getElementsByTagName("username").item(0).getTextContent();
 			pass = doc.getElementsByTagName("passward").item(0).getTextContent();
 			// System.out.println(nm);

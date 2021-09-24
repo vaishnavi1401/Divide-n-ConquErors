@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,50 +9,134 @@
         </title>
         <link rel="stylesheet" href="user_portal.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   		
+   		<script type="text/javascript">
+   		
+   			function friends()
+   			{
+   				console.log("hello");
+   				var xhr;
+   				xhr = new XMLHttpRequest();
+   				
+   				xhr.open("GET", "FriendServlet?ac=sendRequest", true);
+   				xhr.send();
+   				xhr.onreadystatechange = function() {
+   					if (xhr.readyState == 4 && xhr.status == 200) {
+   						console.out("hi");
+   						console.log(xhr.responseText);
+   					}
+   				}
+   				
+   			}
+   		</script>
+   
     </head>
     <body>
-        <div class="icon-bar left-container">
-                <!-- <a class="active" href="#"><i class="fa fa-home"></i></a>
-                <a href="#" ><i class="fa fa-search"></i></a>
-                <a href="http://127.0.0.1:5500/JS/HTML/CSS/ViewContacts.html" target="_blank"><i class="fa fa-address-book" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-users"></i></a>
-                <a href="#"><i class="fa fa-ban" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-power-off"></i></a> -->
-                <a class="active" href="http://127.0.0.1:5500/JS/HTML/CSS/UserPortal.html" target="_blank"><i class="fa fa-home"></i></a>
-                <a href="http://127.0.0.1:5500/JS/HTML/CSS/SearchContact.html" target="_blank"><i class="fa fa-search"></i></a>
-                <a href="http://127.0.0.1:5500/JS/HTML/CSS/ViewContacts.html" target="_blank"><i class="fa fa-address-book" aria-hidden="true"></i></a>
-                <a href="http://127.0.0.1:5500/JS/HTML/CSS/Friends.html" target="_blank"><i class="fa fa-users"></i></a>
-                <a href="http://127.0.0.1:5500/JS/HTML/CSS/BlockedUser.html" target="_blank"><i class="fa fa-ban" aria-hidden="true"></i></a>
-                <a href="http://127.0.0.1:5500/JS/HTML/CSS/LoginPage.html" ><i class="fa fa-power-off"></i></a>
-        </div>
-        <div class="middle-container">
-            <div class="search-box-container">
-                <input type="search" class = "search-bar"> 
-                <a href="#"><i class="fa fa-search"></i></a>
+    	<input type="text" id="info" value="<%= session.getAttribute("message") %>">
+        <div class="main_container">
+          
+            <div class="icon-bar">
+                <a class="active" href="#"><i class="fa fa-home"></i></a>
+                <a href="FriendsPortal.jsp"><i class="fa fa-users" aria-hidden="true"></i></a>
+                <a href="blockList.jsp"><i class="fa fa-ban" aria-hidden="true"></i></a>
+                
+                <a href="LandingPage.jsp" target="_blank" onchange="navigate_to_login()"><i class="fa fa-power-off"></i></a>
             </div>
-        </div>
-        </div>
-        <div class="right-container">
-        </div>
-        
-<div>
-<form action="DisplayUserDetailServlet" method="post">
-<button type="submit" name="block_user">Show My Details</button>
-</form>
-
-<%@ taglib prefix="jstlcore" uri="http://java.sun.com/jsp/jstl/core" %>
-	
-	<table>
-	<tr><td><img src="F:/HSBCTraining/${mydata.username}" alt="My Photo"></td></tr>							
-	<tr><td><jstlcore:out value="${mydata.username}"></jstlcore:out></td></tr>
-	<tr><td><jstlcore:out value="${mydata.fname}"></jstlcore:out></td></tr>
-	<tr><td><jstlcore:out value="${mydata.lname}"></jstlcore:out></td></tr>
-	<tr><td><jstlcore:out value="${mydata.city.city}"></jstlcore:out></td></tr>
-	<tr><td><jstlcore:out value="${mydata.city.state}"></jstlcore:out></td></tr>
-	<tr><td><jstlcore:out value="${mydata.city.country}"></jstlcore:out></td></tr>
-	       
-    </table>
-</div>
-
-</body>
+            </div>
+    </body>
 </html>
+
+<!-- function navigate_to_login(){
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }  
+    setTimeout(noBack(), 0);
+}
+
+window.history.forward();
+function noBack() {
+    window.history.forward();
+    window.onunload = function () { null }; 
+} 
+
+function openSearch(serach_option) {  
+var x=document.getElementById("info").value;
+console.log(typeof(x));
+console.log("hello");
+
+document.getElementById("myOverlay").style.display = "block";
+var xhr;
+	xhr = new XMLHttpRequest();
+	var str;
+	
+	//alert("after xhr");
+	var baseurl = "ContactController/viewContact";
+
+	xhr.open("GET", baseurl, true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			console.log("hello me");
+			console.log(xhr.responseText);
+			var obj = JSON.parse(xhr.responseText);
+			var displaytext = "";
+			displaytext += "<table id=myTable border=1><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>City</th><th>State</th><th>Country</th></tr>";
+		
+			for(i=0;i<obj.Contactlist.length;i++){
+					console.log(obj.Contactlist[i].fname);
+					displaytext +="<tr>"+
+								"<td> "+obj.Contactlist[i].fname+ "</td>"+
+								"<td> "+obj.Contactlist[i].lname+ "</td>"+
+								"<td> "+obj.Contactlist[i].email+ "</td>"+
+								"<td> "+obj.Contactlist[i].city1[0]+ "</td>"+
+								"<td> "+obj.Contactlist[i].city1.state+ "</td>"+
+								"<td> "+obj.Contactlist[i].city1.country+ "</td>"+
+								+"</tr>";
+			}
+			displaytext +="</table>";
+			document.getElementById("table_area").innerHTML = displaytext;
+			document.getElementById("myOverlay").style.display = "block";
+        //document.getElementById("overlay-content-data").innerHTML=myFunction(displaytext);
+		}
+	}
+  
+}
+
+function closeSearch() {
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+	function myFunction() {
+		var input, filter, table, tr, td, i, txtValue;
+		input = document.getElementById("myInput");
+		table= document.getElementById("table_area");
+		  filter = input.value.toUpperCase();
+		  table = displaytext;
+		tr = table.getElementsByTagName("tr");
+		  for (var i=0;i<displaytext.length;i++)
+		  {
+			td = tr[i].getElementsByTagName("td")[0];
+		    if (td) {
+		      txtValue = td.textContent || td.innerText;
+		      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		        tr[i].style.display = "";
+		      } else {
+		        tr[i].style.display = "none";
+		      }
+		    }
+		  }
+}
+
+</script>
+
+ <div id="myOverlay" class="overlay">
+                <span class="closebtn" onclick="closeSearch()" title="Close Overlay">X</span>
+                <div class="overlay-content">
+                   <input type="text" id="myInput" onclick="myFunction()" placeholder="Search here" name="search">
+                </div>
+                <div id="table_area" ></div>
+                <div id="overlay-content-data">
+                </div>
+-->

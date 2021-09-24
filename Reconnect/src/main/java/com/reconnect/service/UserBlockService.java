@@ -35,5 +35,6 @@ public class UserBlockService implements UserBlockServiceInterface {
 	public boolean removeFromFriend(int userId, int userBlockedId) {
 		return bd.removeFromFriend(userId, userBlockedId);
 	}
-
 }
+
+

@@ -6,8 +6,10 @@ private String email;
 private String phone_number;
 private String username;
 private String passward;
+
 private String pic_path;
 public Admin(String name, String email, String phone_number, String username, String passward) {
+
 	super();
 	this.name = name;
 	this.email = email;

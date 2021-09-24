@@ -34,6 +34,10 @@
 }
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 .openBtn {
   background: #f1f1f1;
   border: none;
@@ -52,19 +56,31 @@
   display: none;
   position: fixed;
   z-index: 1;
+<<<<<<< HEAD
+  background-color: rgb(0,0,0);
+  
+=======
   top: 0;
   left: 0;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0, 0.9);
+>>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 }
 
 .overlay-content {
   position: relative;
   top: 15%;
+<<<<<<< HEAD
+  width: 58vh;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 50vh;
+=======
   width: 68%;
   text-align: center;
   margin-top: 30px;
   margin-left: 55vh;
+>>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 }
 
 .overlay .closebtn {
@@ -111,9 +127,15 @@
 {
   width: 120vh;
   height: 50vh;
+<<<<<<< HEAD
+  margin-left:50vh;
+  margin-top:30vh;
+  background-color: white;
+=======
   margin-left: 58vh;
   margin-top: 30vh;
   background-color: rgb(199, 189, 189);
+>>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 }
 
 #myTable {
@@ -133,5 +155,9 @@
 }
 
 #myTable tr.header, #myTable tr:hover {
+<<<<<<< HEAD
+  background:whitesmoke;
+=======
   background:white;
+>>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 }

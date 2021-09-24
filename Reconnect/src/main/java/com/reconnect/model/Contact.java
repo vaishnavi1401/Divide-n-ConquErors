@@ -25,12 +25,6 @@ public class Contact {
 		
 	}
 
-	
-	
-	
-	
-	
-
 	public String getGender() {
 		return gender;
 	}

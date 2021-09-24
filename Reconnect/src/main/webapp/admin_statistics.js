@@ -117,6 +117,7 @@ function displayAll(list)
      	     }
      		 xhr.send(null);
     		}
+        	window.location.reload();
         }
         
         

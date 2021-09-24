@@ -10,5 +10,7 @@ public interface UserBlockServiceInterface {
 	List<User> viewBlockedUsers(String userName);
 	public List<Integer> getUserBlockedList(int userId);
 	public boolean unblockUser(String blockedBy, String blockedWho);
+
 	public boolean removeFromFriend(int userId, int userBlockedId);
+
 }

@@ -2,6 +2,9 @@ package com.reconnect.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
 import com.reconnect.service.UserServiceInterface;
 import com.reconnect.factory.UserServiceFactory;
@@ -28,7 +32,7 @@ public class UserLoginServlet extends HttpServlet {
 
 		String userName = request.getParameter("user_name");
 		String password = request.getParameter("user_pwd");
-		
+	
 		UserLogin ul = new UserLogin();
 		ul.setUserName(userName);
 		ul.setPassword(password);
@@ -39,29 +43,31 @@ public class UserLoginServlet extends HttpServlet {
 
 		if (loginFlag == 1) 
 		{
-			//out.println("Login Success");
+
+		
 			HttpSession ss = request.getSession();
 			ss.setAttribute("message", userName);
 			
+
+			
 			request.setAttribute("message", "Login Success");
+
 			RequestDispatcher rd=getServletContext().getRequestDispatcher("/UserPortal.jsp");
 			rd.forward(request, response);
 		} 
 		else if (loginFlag == 0) 
 		{
-			//out.println("Deactivated User");
-			request.setAttribute("message", "Deactivated User");
+				
 			RequestDispatcher rd=getServletContext().getRequestDispatcher("/LoginPage.jsp");
 			rd.forward(request, response);
 		} 
 		else 
 		{
 			//out.println("Wrong Credentials");
-			request.setAttribute("message", "Wrong Credentials");
+			request.setAttribute("status", "Wrong Credentials");
 			RequestDispatcher rd=getServletContext().getRequestDispatcher("/LoginPage.jsp");
 			rd.forward(request, response);
 		}
-
 
 		out.println("</body></html>");
 	}

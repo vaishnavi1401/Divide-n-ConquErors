@@ -9,6 +9,7 @@ import com.reconnect.model.User;
 
 public interface ContactDaoInterface {
 	
+
 	public int addContact(Contact c1 , String username) throws FileNotFoundException;  //image implementation remaining
 	
 	public int getUserId(String email);  
@@ -25,3 +26,4 @@ public interface ContactDaoInterface {
 	
 	public City fetchCityObj(int cid);  
 }
+
