@@ -1,0 +1,137 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.main_container {
+  width: 240vh;
+  height: 200vh;
+  position:fixed;
+}
+
+.icon-bar {
+  width: 90px;
+  height: 100vh;
+  background-color: #555; 
+}
+  
+.icon-bar a {
+  display: block; 
+  text-align: center; 
+  padding: 16px; 
+  transition: all 0.3s ease; 
+  color: white; 
+  font-size: 36px; 
+}
+  
+.icon-bar a:hover {
+  background-color: #000; 
+}
+  
+.active {
+  background-color: #04AA6D; 
+}
+
+
+.openBtn {
+  background: #f1f1f1;
+  border: none;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.openBtn:hover {
+  background: #bbb;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+}
+
+.overlay-content {
+  position: relative;
+  top: 15%;
+  width: 68%;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 55vh;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+.overlay input[type=text] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+.overlay input[type=text]:hover {
+  background: #f1f1f1;
+}
+
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
+}
+
+#overlay-content-data
+{
+  width: 120vh;
+  height: 50vh;
+  margin-left: 58vh;
+  margin-top: 30vh;
+  background-color: rgb(199, 189, 189);
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px; 
+}
+
+#myTable th, #myTable td {
+  text-align: left; 
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background:white;
+}

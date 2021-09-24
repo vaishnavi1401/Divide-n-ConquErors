@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.reconnect.model.UserLogin;
 import com.reconnect.service.UserServiceInterface;
@@ -39,8 +40,11 @@ public class UserLoginServlet extends HttpServlet {
 		if (loginFlag == 1) 
 		{
 			//out.println("Login Success");
+			HttpSession ss = request.getSession();
+			ss.setAttribute("message", userName);
+			
 			request.setAttribute("message", "Login Success");
-			RequestDispatcher rd=getServletContext().getRequestDispatcher("/LoginPage.jsp");
+			RequestDispatcher rd=getServletContext().getRequestDispatcher("/UserPortal.jsp");
 			rd.forward(request, response);
 		} 
 		else if (loginFlag == 0) 
