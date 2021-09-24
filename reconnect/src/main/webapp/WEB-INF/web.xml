@@ -4,7 +4,7 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-   <servlet>
+  <servlet>
   	<servlet-name>AdminLogoutController</servlet-name>
   	<display-name>AdminLogoutController</display-name>
   	<description></description>
@@ -20,4 +20,5 @@
   	<servlet-name>AdminLogoutController</servlet-name>
   	<url-pattern>/AdminLogoutController</url-pattern>
   </servlet-mapping>
+ 
 </web-app>
