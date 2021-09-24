@@ -50,4 +50,5 @@ public interface UserServiceInterface {
 	User getUserDetailsById(int userId);
 
 	List<User> getNonFriendsList(String username);
+
 }
