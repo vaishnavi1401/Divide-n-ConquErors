@@ -1,4 +1,4 @@
-package com.reconnect.utility;
+package com.reconnect.factory;
 
 import com.reconnect.service.ContactService;
 import com.reconnect.service.ContactServiceInterface;
