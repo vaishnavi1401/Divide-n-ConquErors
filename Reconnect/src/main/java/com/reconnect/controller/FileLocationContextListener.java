@@ -10,13 +10,14 @@ import javax.servlet.annotation.WebListener;
 public class FileLocationContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-    	String rootPath = "C:\\Reconnect";
+		String rootPath = System.getProperty("catalina.home");
     	ServletContext ctx = servletContextEvent.getServletContext();
-    	File file = new File(rootPath);
+    	String relativePath = "Reconnect";
+    	File file = new File(rootPath + File.separator + relativePath);
     	if(!file.exists()) file.mkdirs();
-    	System.out.println("File Directory created to be used for storing files"+rootPath);
+    	System.out.println("File Directory created to be used for storing files");
     	ctx.setAttribute("FILES_DIR_FILE", file);
-    	ctx.setAttribute("FILES_DIR", rootPath);
+    	ctx.setAttribute("FILES_DIR", rootPath + File.separator + relativePath);
     }
 
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
