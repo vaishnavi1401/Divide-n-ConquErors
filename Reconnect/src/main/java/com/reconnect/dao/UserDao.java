@@ -27,13 +27,13 @@ public class UserDao implements UserDaoInterface {
 	Connection conn = null;
 	CityDaoInterface cityDao = null;
 	LoginDaoInterface loginDao = null;
-	ContactDaoInterface contactDao = null;
+	
 	
 	public UserDao() { 
 		conn = DBUtils.getConnection();
 		cityDao = CityDAOFactory.createCityDaoObject(); //Gets the instance of cityDao interface
 		loginDao = LoginDAOFactory.createLoginDaoObject(); //Gets the instance of loginDao interface
-		contactDao = ContactDAOFactory.createObject(); //Gets instance of contactDao interface
+		
 	}
 
 	//Method checks the login credentials of the user 
