@@ -18,17 +18,20 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 	Connection conn = null;
 	UserDaoInterface userDao = null;
 	int userId=0;
+	
 	public BlockedUsersDao() {
 		userDao = UserDAOFactory.createUserDaoObject();
 		conn = DBUtils.getConnection();
 	}
 	
+	//Deletes the entry from friends table when the user is blocked.
 	public boolean removeFromFriend(int userId, int userBlockedId) {
 		PreparedStatement pstmt = null;
 		String sql = "delete from friend_details where (friend_one=? and friend_two=? and status=1) or (friend_one=?  and friend_two=? and status=1)";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userId);
+			//Since the blocked user can be friend one or two(user who sent the request or accepted).
+			pstmt.setInt(1, userId);    
 			pstmt.setInt(2, userBlockedId);
 			pstmt.setInt(3, userBlockedId);
 			pstmt.setInt(4, userId);
@@ -48,6 +51,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		return false;
 	}
 
+	//Blocks a user. Check the entry of blocked by user and blocked who user in the table
 	public boolean blockUser(String blockedBy, String blockedWho) {
 		PreparedStatement pstmt = null;
 		userId = userDao.getUserId(blockedBy);
@@ -73,6 +77,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		return false;
 	}
 	
+	//Returns the list(user_id) of blocked users
 	public List<Integer> getUserBlockedList(int userId) {
 		PreparedStatement pstmt = null;
 		List<Integer> blockedList = new ArrayList<Integer>();
@@ -96,6 +101,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		return blockedList;
 	}
 	
+	//Returns the details of blocked users according to the user_id.
 	public List<User> viewBlockedUsers(String username){
 		userId = userDao.getUserId(username);
 		List<Integer> blockedList = getUserBlockedList(userId);
@@ -108,6 +114,7 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		return blockedUsersList;
 	}
 	
+	//Unblocks a user (deletes the row from the blocked user table)
 	public boolean unblockUser(String blockedBy, String blockedWho) {
 		PreparedStatement pstmt = null;
 		userId = userDao.getUserId(blockedBy);

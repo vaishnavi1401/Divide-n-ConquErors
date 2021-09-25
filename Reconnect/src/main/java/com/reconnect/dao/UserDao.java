@@ -25,12 +25,14 @@ public class UserDao implements UserDaoInterface {
 	Connection conn = null;
 	CityDaoInterface cityDao = null;
 	LoginDaoInterface loginDao = null;
+	
 	public UserDao() { 
 		conn = DBUtils.getConnection();
-		cityDao = CityDAOFactory.createCityDaoObject();
-		loginDao = LoginDAOFactory.createLoginDaoObject();
+		cityDao = CityDAOFactory.createCityDaoObject(); //Gets the instance of cityDao interface
+		loginDao = LoginDAOFactory.createLoginDaoObject(); //Gets the instance of loginDao interface
 	}
 
+	//Method checks the login credentials of the user 
 	public int loginValidation(UserLogin ul) {
 		int loginFlag = loginDao.checkLoginCredentials(ul);
 		if (loginFlag == 0 || loginFlag == -1)
@@ -38,15 +40,18 @@ public class UserDao implements UserDaoInterface {
 		else
 			return 1;
 	}
-
+	
+	//Checks whether the city exists or not. If not, creates a new city row and returns the city_id
 	public int registerUserCity(City c) {
 		return cityDao.getCityId(c);
 	}
 
+	//Checks the login credentials of the user.
 	public int registerUserCred(UserLogin ul) {
 		return loginDao.registerCredentials(ul);
 	}
-
+	
+	//Checks whether the email is unique or not in the user_details table
 	public boolean checkEmailUnique(String email) {
 		PreparedStatement pstmt = null;
 		String sql = "select 1 from user_details where email_id=?";
@@ -69,6 +74,7 @@ public class UserDao implements UserDaoInterface {
 		return true;
 	}
 	
+	//Returns user_id of the user according to username
 	public int getUserId(String username) {
 		PreparedStatement pstmt = null;
 		String sql = "select user_id from user_details ud, credentials c where c.username=? and c.credential_id=ud.credential_id";
@@ -92,6 +98,7 @@ public class UserDao implements UserDaoInterface {
 	}
 
 
+	// Register the user into the system.
 	public boolean registerUserDetail(User userDetails, int city_id, int cred_id) throws FileNotFoundException {
 		PreparedStatement pstmt = null;
 		String sql = "insert into user_details(first_name, last_name, email_id, phone_no, gender, dob, address, city_id, profile_image, credential_id, company) values(?,?,?,?,?,?,?,?,?,?,?)";
@@ -127,6 +134,8 @@ public class UserDao implements UserDaoInterface {
 		return false;
 	}
 
+	
+	//Check whether the username is unique or not in the credentials table. 
 	public boolean checkUsernameUniq(String username) {
 		PreparedStatement pstmt = null;
 		String sql = "select 1 from user_details ud, credentials c where c.username=? and c.credential_id=ud.credential_id";
@@ -149,6 +158,8 @@ public class UserDao implements UserDaoInterface {
 		return true;
 	}
 	
+	
+	//Returns user details according to username.
 	public User getUserDetailsByUsername(String username) {
 		PreparedStatement pstmt = null;
 		User user = null;
@@ -172,6 +183,7 @@ public class UserDao implements UserDaoInterface {
 		return user;
 	}
 	
+	//Returns user details according to first name and last name
 	public List<User> getUserDetailsByName(String firstName, String lastName) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
@@ -196,6 +208,7 @@ public class UserDao implements UserDaoInterface {
 		return userList;
 	}
 	
+	//Returns user details(Username, first name, last name, city, state, country) according to city
 	public List<User> getUserDetailsByCity(String city) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
@@ -219,6 +232,7 @@ public class UserDao implements UserDaoInterface {
 		return userList;
 	}
 	
+	//Returns user details(Username, first name, last name, city, state, country) according to state
 	public List<User> getUserDetailsByState(String state) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
@@ -242,6 +256,7 @@ public class UserDao implements UserDaoInterface {
 		return userList;
 	}
 	
+	//Returns user details(Username, first name, last name, city, state, country) according to country
 	public List<User> getUserDetailsByCountry(String country) {
 		PreparedStatement pstmt = null;
 		List<User> userList = new ArrayList<User>();
@@ -265,7 +280,7 @@ public class UserDao implements UserDaoInterface {
 		return userList;
 	}
 	
-	
+	//Returns user details(Username, first name, last name, city, state, country) according to user id
 	public User getUserDetailsById(int userId) {
 		PreparedStatement pstmt = null;
 		User user = null;
@@ -289,6 +304,8 @@ public class UserDao implements UserDaoInterface {
 		return user;
 	}
 	
+	
+	//Returns user details(Username, first name, last name, city, state, country) who aren't friends of the user
 	public List<User> getNonFriendsList(String username) {
 		PreparedStatement pstmt = null;
 		int userId = getUserId(username);

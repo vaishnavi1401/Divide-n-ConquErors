@@ -17,6 +17,7 @@ public class CityDao implements CityDaoInterface{
 		conn = DBUtils.getConnection();
 	}
 
+	//Returns the city Id according to (city, state, country) else details will be inserted into the table.
 	public int getCityId(City c) {
 		int cityId = checkCity(c);
 		if(cityId == 0)
@@ -25,6 +26,7 @@ public class CityDao implements CityDaoInterface{
 			return cityId;
 	}
 
+	//Insert the city details (city, state, country) into the table
 	public int insertCity(City c) {
 		PreparedStatement pstmt = null;
 		String sql = "insert into city_details(city, state, country) values(?,?,?)";
@@ -57,6 +59,7 @@ public class CityDao implements CityDaoInterface{
 		return 0;
 	}
 
+	//Checks whether the combination of (city, state, country) already exists into the table.
 	public int checkCity(City c) {
 		PreparedStatement pstmt = null;
 		String sql = "select city_id from city_details where city=? and state=? and country=?";
