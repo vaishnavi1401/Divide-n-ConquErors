@@ -24,6 +24,10 @@ public interface ContactDaoInterface {
 	
 	public Contact viewContact(String username , String email);    //image implementation remaining
 	
-	public City fetchCityObj(int cid);  
+	public City fetchCityObj(int cid);
+	
+	public int ifContactExists(String username , String email);
+	
+	public Contact ifContactIsUser(String username , String email);
 }
 

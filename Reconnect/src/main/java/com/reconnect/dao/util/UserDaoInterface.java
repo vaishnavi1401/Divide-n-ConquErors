@@ -37,4 +37,6 @@ public interface UserDaoInterface {
 	User getUserDetailsById(int userId);
 	
 	List<User> getNonFriendsList(String username);
+	
+	public User getUserDetailsByEmail(String email);
 }

@@ -14,9 +14,11 @@ import com.reconnect.model.City;
 import com.reconnect.model.User;
 import com.reconnect.model.UserLogin;
 import com.reconnect.dao.util.CityDaoInterface;
+import com.reconnect.dao.util.ContactDaoInterface;
 import com.reconnect.dao.util.LoginDaoInterface;
 import com.reconnect.dao.util.UserDaoInterface;
 import com.reconnect.factory.CityDAOFactory;
+import com.reconnect.factory.ContactDAOFactory;
 import com.reconnect.utility.DBUtils;
 import com.reconnect.factory.LoginDAOFactory;
 
@@ -25,11 +27,13 @@ public class UserDao implements UserDaoInterface {
 	Connection conn = null;
 	CityDaoInterface cityDao = null;
 	LoginDaoInterface loginDao = null;
+	ContactDaoInterface contactDao = null;
 	
 	public UserDao() { 
 		conn = DBUtils.getConnection();
 		cityDao = CityDAOFactory.createCityDaoObject(); //Gets the instance of cityDao interface
 		loginDao = LoginDAOFactory.createLoginDaoObject(); //Gets the instance of loginDao interface
+		contactDao = ContactDAOFactory.createObject(); //Gets instance of contactDao interface
 	}
 
 	//Method checks the login credentials of the user 
@@ -330,5 +334,40 @@ public class UserDao implements UserDaoInterface {
 			}
 		}
 		return userList;
+	}
+
+	@Override
+	public User getUserDetailsByEmail(String email) {
+
+		User u1 = null;
+		PreparedStatement pstmt = null;
+		String sql = "select fist_name , last_name , email_id , phone_no , gender , company , dob , address , cityid , profile_image from user_details where email_id = ?";
+		
+		try
+		{
+			pstmt.getConnection().prepareStatement(sql);
+			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) 
+			{
+				u1.setFname(rs.getString(1));
+				u1.setLname(rs.getString(2));
+				u1.setEmail(rs.getString(3));
+				u1.setPhone(rs.getString(4));
+				u1.setGender(rs.getString(5));
+				u1.setCompany(rs.getString(6));
+				u1.setDob(rs.getDate(7));
+				u1.setAddress(rs.getString(8));
+				
+				int cid = rs.getInt(9);
+				City city = contactDao.fetchCityObj(cid);
+				
+				u1.setCity(city);
+				
+				
+			}
+		}
+		return u1;
+		
 	}
 }

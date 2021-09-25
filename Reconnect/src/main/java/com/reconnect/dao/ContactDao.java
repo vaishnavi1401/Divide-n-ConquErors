@@ -388,4 +388,59 @@ public class ContactDao implements ContactDaoInterface {
 		}		
 		return null;
 	}
+
+	@Override
+	public int ifContactExists(String username, String email) {
+		
+		int i1 = 0;
+		User u1 = ud.getUserDetailsByUsername(username);
+		String em = u1.getEmail();
+		int uid = getUserId(em);
+		
+		PreparedStatement pstmt = null;
+		String sql = "select 1 from contact_details where user_id = ? and email_id=?";
+		
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			pstmt.setString(2, email);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				i1 = 1;
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			try 
+			{
+				pstmt.close();
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return i1;
+	}
+
+	@Override
+	public Contact ifContactIsUser(String username, String email) {
+
+		
+		
+		PreparedStatement pstmt = null;
+		String sql = "select 1 from  user_details where user_id = ?";
+		
+		return null;
+	}
+	
+	
+	
 }

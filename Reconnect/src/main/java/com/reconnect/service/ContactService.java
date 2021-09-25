@@ -1,20 +1,20 @@
 package com.reconnect.service;
 
-import java.io.FileNotFoundException;
+import java.io.FileNotFoundException; 
 import java.util.List;
 
 import com.reconnect.utility.JsonConverter;
 import com.reconnect.dao.util.ContactDaoInterface;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
-import com.reconnect.factory.ContactDaoFactory;
+import com.reconnect.factory.ContactDAOFactory;
 
 public class ContactService implements ContactServiceInterface {
 	ContactDaoInterface contactDaoObj = null;
 
 	public ContactService() {
 		// Object for ContactDao
-		contactDaoObj = ContactDaoFactory.createObject();
+		contactDaoObj = ContactDAOFactory.createObject();
 
 	}
 
