@@ -427,11 +427,7 @@ public class ContactDao implements ContactDaoInterface {
 
 	//function to check if contact already exists in user's phonebook
 	@Override
-	public int ifContactExists(String username, String email) {
-		
-		int i1 = 0;
-		
-		//fetching userId of current user in session by username 
+	public boolean ifContactExists(String username, String email) {
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
@@ -447,7 +443,7 @@ public class ContactDao implements ContactDaoInterface {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())
 			{
-				i1 = 1;
+				return true;
 			}
 		}
 		catch (SQLException e) 
@@ -466,7 +462,7 @@ public class ContactDao implements ContactDaoInterface {
 			}
 		}
 		
-		return i1;
+		return false;
 	}
 
 	

@@ -26,7 +26,7 @@ public interface ContactDaoInterface {
 	
 	public City fetchCityObj(int cid);
 	
-	public int ifContactExists(String username , String email);
+	public boolean ifContactExists(String username , String email);
 	
 	public Contact ifContactIsUser(String username , String email);
 }
