@@ -30,7 +30,8 @@ public class BlockedUsersDao implements BlockUserDaoInterface {
 		String sql = "delete from friend_details where (friend_one=? and friend_two=? and status=1) or (friend_one=?  and friend_two=? and status=1)";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userId);
+			//Since the blocked user can be friend one or two(user who sent the request or accepted).
+			pstmt.setInt(1, userId);    
 			pstmt.setInt(2, userBlockedId);
 			pstmt.setInt(3, userBlockedId);
 			pstmt.setInt(4, userId);
