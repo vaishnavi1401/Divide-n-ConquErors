@@ -17,7 +17,7 @@ public class User {
 	private String address;
 	private String company;
 	private Timestamp creationDate; // initialize
-	private File profileImage;
+	private String profileImagePath;
 	private int userId;
 	private City city;
 	private String username;
@@ -106,12 +106,12 @@ public class User {
 		this.creationDate = creationDate; // work
 	}
 
-	public File getProfileImage() {
-		return profileImage;
+	public String getProfileImagePath() {
+		return profileImagePath;
 	}
 
-	public void setProfileImage(File image) {
-		this.profileImage = image;
+	public void setProfileImagePath(String profileImagePath) {
+		this.profileImagePath = profileImagePath;
 	}
 
 	public User(String username, String fname, String lname, City city) {
@@ -134,6 +134,21 @@ public class User {
 		this.city = city;
 	}
 
+	public User(String fname, String lname, String email, String phone, String gender, Date dob, String address,
+			String company, String profileImagePath, City city) {
+		this.fname = fname;
+		this.lname = lname;
+		this.email = email;
+		this.phone = phone;
+		this.gender = gender;
+		this.dob = dob;
+		this.address = address;
+		this.company = company;
+		this.profileImagePath = profileImagePath;
+		this.city = city;
+	}
+
+	
 	public User() {
 	}
 
@@ -144,5 +159,4 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 }

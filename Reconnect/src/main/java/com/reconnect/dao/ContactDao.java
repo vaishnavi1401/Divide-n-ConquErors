@@ -35,7 +35,7 @@ public class ContactDao implements ContactDaoInterface {
 	
 	public int addContact(Contact c1, String username) throws FileNotFoundException {
 		
-		String sql = "insert into contact_details (user_id , first_name , last_name , email_id , phone_no , gender , dob , address , city_id , profileimage , creation_date , company) values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
+		String sql = "insert into contact_details (user_id , first_name , last_name , email_id , phone_no , gender , dob , address , city_id , profile_image_path , creation_date , company) values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
 		PreparedStatement pstmt = null;
 		int i1 = 0;
 		User u1 = ud.getUserDetailsByUsername(username);
@@ -44,7 +44,7 @@ public class ContactDao implements ContactDaoInterface {
 			String em = u1.getEmail();
 			Date d1 = (Date) c1.getDob();
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());	
-			FileInputStream picture=new FileInputStream(u1.getProfileImage().getAbsolutePath());
+			//FileInputStream picture=new FileInputStream(u1.getProfileImage().getAbsolutePath());
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, getUserId(em));
@@ -56,7 +56,8 @@ public class ContactDao implements ContactDaoInterface {
 			pstmt.setDate(7, d1);
 			pstmt.setString(8, c1.getAddress());
 			pstmt.setInt(9, cd.getCityId(c1.getCity1()));
-			pstmt.setBinaryStream(10,picture,(int)u1.getProfileImage().length());
+			pstmt.setString(10, u1.getProfileImagePath());
+			//pstmt.setBinaryStream(10,picture,(int)u1.getProfileImage().length());
 			pstmt.setTimestamp(11, timestamp);
 			pstmt.setString(12, c1.getCompany());
 			
