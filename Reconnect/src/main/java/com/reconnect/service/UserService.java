@@ -94,6 +94,11 @@ public class UserService implements UserServiceInterface {
 	public List<User> getNonFriendsList(String username){
 		return ud.getNonFriendsList(username);
 	}
+	
+	public User getUserDetailsByEmail(String email) {
+		return ud.getUserDetailsByEmail(email);
+	}
+	
 	//Friend Module Methods 
 	
 	public int addFriendRequest(UserLogin friend1, UserLogin friend2) {
@@ -127,5 +132,8 @@ public class UserService implements UserServiceInterface {
 		FriendDaoInterface friendDao=FriendDaoFactory.createObj();
 		return friendDao.getFriends(self);
 	}
+
+
+	
 
 }
