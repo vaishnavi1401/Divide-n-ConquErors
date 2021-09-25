@@ -1,0 +1,8 @@
+create table friend_details(
+	friend_one int not null,
+    friend_two int not null,
+	status boolean default '0',
+	foreign key(friend_one) references user_details(user_id),
+	foreign key(friend_two) references user_details(user_id)
+);
+
