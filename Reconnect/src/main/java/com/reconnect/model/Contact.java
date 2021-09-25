@@ -1,11 +1,11 @@
 package com.reconnect.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Contact {
 
-	private String fname, lname, email, address, company, phone, gender; 
-	Date dob;
+	private String fname, lname, email, address, company, gender, phone;
+	private Date dob;
 	City city1;
 
 	public Contact() {
@@ -20,11 +20,12 @@ public class Contact {
 		this.address = address;
 		this.company = company;
 		this.phone = phone;
-		this.gender=gender;
 		this.city1=city1;
-		
+		this.gender=gender;
 	}
 
+	
+	
 	public String getGender() {
 		return gender;
 	}

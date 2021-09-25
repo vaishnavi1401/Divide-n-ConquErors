@@ -7,8 +7,11 @@ import com.reconnect.model.User;
 
 public interface ContactServiceInterface {
 
-	public int addContactService(Contact contact1,String userName);
+	public int addContactService(Contact contact1, String userName);
+
 	public List<Contact> viewAllContactService(String userName);
+
 	public int editContactService(Contact c1, String userName);
-	public int deleteContactService(String username,String fname, String lname, String phone, String email);
+
+	public int deleteContactService(String username, String email);
 }
