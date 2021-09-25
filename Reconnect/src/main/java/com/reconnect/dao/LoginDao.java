@@ -80,7 +80,7 @@ public class LoginDao implements LoginDaoInterface{
 		String sql = "update credentials set last_login =? where username=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setTimestamp(1, new java.sql.Timestamp(new java.util.Date().getTime()));
+			pstmt.setTimestamp(1, new java.sql.Timestamp(new java.util.Date().getTime())); //Get timestamp when user logged in into the system
 			pstmt.setString(2, ul.getUserName());
 			int rs = pstmt.executeUpdate();
 			if (rs > 0) {
