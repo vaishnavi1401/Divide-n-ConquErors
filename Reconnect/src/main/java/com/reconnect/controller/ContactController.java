@@ -85,10 +85,11 @@ public class ContactController extends HttpServlet {
 		cityObject.setCity(contactCity);
 		cityObject.setCountry(contactCountry);
 		cityObject.setState(contactState);
+		String profileImagePath = "";
 
 		// creating contact object after fetching data from html page
 		Contact contactObject = new Contact(contactFname, contactLname, contactEmail, date1, contactAddress,
-				contactCompany, contactPhone, contactGender, cityObject);
+				contactCompany, contactPhone, contactGender, cityObject , profileImagePath);
 
 		// calling service method to add contact
 		int i = contactService.addContactService(contactObject, userName);
@@ -144,10 +145,11 @@ public class ContactController extends HttpServlet {
 		cityObject.setCity(contactCity);
 		cityObject.setCountry(contactCountry);
 		cityObject.setState(contactState);
+		String profileImagePath = "";
 
 		// creating contact object after fetching edited data from html page
 		Contact contactObject = new Contact(contactFname, contactLname, emailEdit, date1, contactAddress,
-				contactCompany, contactPhone, contactGender, cityObject);
+				contactCompany, contactPhone, contactGender, cityObject, profileImagePath);
 
 		// calling service method to edit contact
 		int i = contactService.editContactService(contactObject, userName);
