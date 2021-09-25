@@ -31,7 +31,7 @@ public class ContactDao implements ContactDaoInterface {
 	
 	public CityDaoInterface cd =  CityDAOFactory.createCityDaoObject();
 	public UserDaoInterface ud = UserDAOFactory.createUserDaoObject();
-	
+
 	
 	public int addContact(Contact c1, String username) throws FileNotFoundException {
 		
@@ -438,6 +438,47 @@ public class ContactDao implements ContactDaoInterface {
 		
 		PreparedStatement pstmt = null;
 		String sql = "select 1 from  user_details where user_id = ?";
+		User u1 = ud.getUserDetailsByEmail(email);
+		String em = u1.getEmail();
+		int uid = getUserId(em);
+		
+		try
+		{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, uid);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				Contact c1 = new Contact();
+				c1.setFname(u1.getFname());
+				c1.setLname(u1.getLname());
+				c1.setEmail(u1.getEmail());
+				c1.setPhone(u1.getPhone());
+				c1.setGender(u1.getGender());
+				c1.setCompany(u1.getCompany());
+				c1.setDob(u1.getDob());
+				c1.setAddress(u1.getAddress());
+				c1.setCity1(u1.getCity());
+				c1.setProfileImagePath(u1.getProfileImagePath());
+				
+				return c1;
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			try 
+			{
+				pstmt.close();
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			}
+		}
 		
 		return null;
 	}

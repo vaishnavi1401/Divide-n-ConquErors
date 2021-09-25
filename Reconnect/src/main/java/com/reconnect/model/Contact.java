@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Contact {
 
-	private String fname, lname, email, address, company, gender, phone;
+	private String fname, lname, email, address, company, gender, phone, profileImagePath;
 	private Date dob;
 	City city1;
 
@@ -12,7 +12,7 @@ public class Contact {
 
 	}
 
-	public Contact(String fname, String lname, String email, Date dob, String address, String company, String phone, String gender, City city1) {
+	public Contact(String fname, String lname, String email, Date dob, String address, String company, String phone, String gender, City city1, String profileImagePath) {
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
@@ -22,10 +22,19 @@ public class Contact {
 		this.phone = phone;
 		this.city1=city1;
 		this.gender=gender;
+		this.profileImagePath = profileImagePath;
 	}
 
 	
 	
+	public String getProfileImagePath() {
+		return profileImagePath;
+	}
+
+	public void setProfileImagePath(String profileImagePath) {
+		this.profileImagePath = profileImagePath;
+	}
+
 	public String getGender() {
 		return gender;
 	}

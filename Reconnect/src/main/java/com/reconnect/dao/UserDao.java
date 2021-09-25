@@ -346,7 +346,7 @@ public class UserDao implements UserDaoInterface {
 		
 		try
 		{
-			pstmt.getConnection().prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) 
@@ -364,8 +364,25 @@ public class UserDao implements UserDaoInterface {
 				City city = contactDao.fetchCityObj(cid);
 				
 				u1.setCity(city);
+				u1.setProfileImagePath(rs.getString(10));
 				
+				return u1;
 				
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		} 
+		finally 
+		{
+			try 
+			{
+				pstmt.close();
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
 			}
 		}
 		return u1;
