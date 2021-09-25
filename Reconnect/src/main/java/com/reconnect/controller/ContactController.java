@@ -17,7 +17,8 @@ import com.reconnect.model.City;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
 import com.reconnect.service.ContactServiceInterface;
-import com.reconnect.utility.ContactServiceFactory;
+import com.reconnect.utility.JsonConverter;
+import com.reconnect.factory.ContactServiceFactory;
 
 @WebServlet("/ContactController/*")
 public class ContactController extends HttpServlet {

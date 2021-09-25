@@ -13,24 +13,26 @@ public class LoginDao implements LoginDaoInterface{
 	
 	Connection conn = null;
 	
+	//Intializes the connection class
 	public LoginDao() {
 		conn = DBUtils.getConnection();
 	}
 	
+	//Checks the login credential of he user
 	public int checkLoginCredentials(UserLogin userLogin){
 		PreparedStatement pstmt = null;
 		String sql = "select * from credentials where username=? and user_password=?";
 		try {
 			System.out.println("In Login dao");
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(userLogin.getUserName());
+			//System.out.println(userLogin.getUserName());
 			pstmt.setString(1, userLogin.getUserName());
 			pstmt.setString(2, userLogin.getPassword());
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getBoolean(5) && updateLastLogin(userLogin)) {
-					System.out.println(rs.getInt(1));
-					return rs.getInt(1); 
+					//System.out.println(rs.getInt(1));
+					return rs.getInt(1); // Returns the username of logged in user.
 				}else {
 					return 0; //Deactivated User
 				}
@@ -46,7 +48,8 @@ public class LoginDao implements LoginDaoInterface{
 		}
 		return -1; //Wrong credentials
 	}
-
+	
+	//Register the user (Insert the credential details[username, password]  in credential table)
 	public int registerCredentials(UserLogin ul) {
 		PreparedStatement pstmt = null;
 		String sql = "insert into credentials(username, user_password) values(?,?)";
@@ -70,6 +73,8 @@ public class LoginDao implements LoginDaoInterface{
 		return 0;
 	}
 	
+	
+	//Updates the last login of the user according to username
 	public boolean updateLastLogin(UserLogin ul) {
 		PreparedStatement pstmt = null;
 		String sql = "update credentials set last_login =? where username=?";
