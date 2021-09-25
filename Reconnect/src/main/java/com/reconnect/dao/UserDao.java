@@ -101,9 +101,10 @@ public class UserDao implements UserDaoInterface {
 	// Register the user into the system.
 	public boolean registerUserDetail(User userDetails, int city_id, int cred_id) throws FileNotFoundException {
 		PreparedStatement pstmt = null;
-		String sql = "insert into user_details(first_name, last_name, email_id, phone_no, gender, dob, address, city_id, profile_image, credential_id, company) values(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into user_details(first_name, last_name, email_id, phone_no, gender, dob, address, city_id, profile_image_path, credential_id, company) values(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			
+			System.out.println(userDetails.getProfileImagePath());
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userDetails.getFname());
 			pstmt.setString(2, userDetails.getLname());
@@ -114,8 +115,8 @@ public class UserDao implements UserDaoInterface {
 			pstmt.setString(7, userDetails.getAddress());
 			pstmt.setInt(8, city_id);
 			//pstmt.setBlob(9, userDetails.getProfileImage());
-			FileInputStream picture=new FileInputStream(userDetails.getProfileImage().getAbsolutePath());
-			pstmt.setBinaryStream(9,picture,(int)userDetails.getProfileImage().length());
+			//FileInputStream picture=new FileInputStream(userDetails.getProfileImage().getAbsolutePath());
+			pstmt.setString(9,userDetails.getProfileImagePath());
 			pstmt.setInt(10, cred_id);
 			pstmt.setString(11, userDetails.getCompany());
 			int rs = pstmt.executeUpdate();
@@ -169,7 +170,7 @@ public class UserDao implements UserDaoInterface {
 			pstmt.setString(1, username);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
-				user = new User(rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_id"),rs.getString("phone_no"), rs.getString("gender"),rs.getDate("dob"),rs.getString("address"), rs.getString("company"), new City(rs.getString("city"), rs.getString("state"), rs.getString("country")));
+				user = new User(rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_id"),rs.getString("phone_no"), rs.getString("gender"),rs.getDate("dob"),rs.getString("address"), rs.getString("company"), rs.getString("profile_image_path"), new City(rs.getString("city"), rs.getString("state"), rs.getString("country")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

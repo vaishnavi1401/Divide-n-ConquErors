@@ -74,12 +74,14 @@ public class UserServlet extends HttpServlet {
 			if(!file.exists()) 
 				file.mkdirs();
 			
-			//System.out.println(documentPath+File.separator+image.getName());
-			File picture = new File(documentPath+File.separator+image.getName());
+			System.out.println(documentPath);
+			String imagePath = documentPath+File.separator+image.getName();
+			System.out.println(imagePath);
+			File picture = new File(imagePath);
 			image.write(picture);
 			
 			User usr = new User();
-			usr.setProfileImage(picture);
+			usr.setProfileImagePath(imagePath);
 			usr.setFname(firstname);
 			usr.setLname(lastname);
 			usr.setGender(gender);
