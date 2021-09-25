@@ -25,11 +25,13 @@ public class UserLoginServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		System.out.println("In Login service");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<html><body>");
 
+		//Get parameter values from Login form
 		String userName = request.getParameter("user_name");
 		String password = request.getParameter("user_pwd");
 	
@@ -43,12 +45,9 @@ public class UserLoginServlet extends HttpServlet {
 
 		if (loginFlag == 1) 
 		{
-
-		
+			//making username of logged in user available throughout the session
 			HttpSession ss = request.getSession();
 			ss.setAttribute("message", userName);
-			
-
 			
 			request.setAttribute("message", "Login Success");
 
@@ -57,13 +56,12 @@ public class UserLoginServlet extends HttpServlet {
 		} 
 		else if (loginFlag == 0) 
 		{
-				
+			request.setAttribute("status", "Deactivated User");	
 			RequestDispatcher rd=getServletContext().getRequestDispatcher("/LoginPage.jsp");
 			rd.forward(request, response);
 		} 
 		else 
 		{
-			//out.println("Wrong Credentials");
 			request.setAttribute("status", "Wrong Credentials");
 			RequestDispatcher rd=getServletContext().getRequestDispatcher("/LoginPage.jsp");
 			rd.forward(request, response);

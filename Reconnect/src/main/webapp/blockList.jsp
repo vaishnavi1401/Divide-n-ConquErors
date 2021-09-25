@@ -1,30 +1,4 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>BlockList</title>
-</head>
-<body>
-			<form action="BlockUserServlet?ac=showBlockUsers" method="post">
-         
-                 
-                 <button type="submit" name="block_user">Show Blocked Users</button>
-             </form>
-             
-             <br>
-             <br>
-             <br>
-             <form  action="BlockUserServlet?ac=UnBlockUser" method="post" ">
-                        
-                 <input type="text" name="user_name" placeholder="Username" required onchange="validateUserName()">
-                 
-                 <button type="submit" name="unblock_submit">UnBlock</button>
-             </form>
-=======
-+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -34,6 +8,7 @@
 <title>BlockList</title>
 
 <style>
+
 input[type=text]:focus {
   border: 3px solid #555;
   padding: 12px 20px;
@@ -80,7 +55,7 @@ button {
 
 <center >
 			<form action="BlockUserServlet?ac=showBlockUsers" method="post">
-			    		<button type="submit" name="block_user">Show Blocked Users</button>
+			 <button type="submit" name="block_user">Show Blocked Users</button>
              </form>
         
       
@@ -112,7 +87,7 @@ button {
 	
 	</jstlcore:forEach>
              
-             +</table>
+</table>
             
 <br>
 <br>
@@ -124,6 +99,5 @@ button {
 </form>
 </center> 
 
->>>>>>> e1585f11a1ada8c9d4b773e935447e0819f20cba
 </body>
 </html>

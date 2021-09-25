@@ -13,6 +13,9 @@ import com.reconnect.factory.UserServiceFactory;
 import com.reconnect.model.User;
 import com.reconnect.service.UserServiceInterface;
 
+/*
+Here Username is fetched from session and his details are displayed on UserPostal
+ */
 public class DisplayUserDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

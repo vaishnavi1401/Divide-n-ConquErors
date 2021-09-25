@@ -42,28 +42,16 @@ public class BlockUserServlet extends HttpServlet
 		if(a.equals("showBlockUsers"))
 		{
 
-			System.out.println("In Block Servlet ");
-
-			System.out.println("In showBlockUsers ");
-
-			
 			UserBlockServiceInterface us = BlockUserServiceFactory.createObject();
 			
-			//get username from session after agrima's code is merged
-
-			//HttpSession ss = request.getSession();
-			//String userName = ss.getAttribute("message").toString();
-			
-			String userName="_sejalchoudhary"; //initialize for testing
+			//get username from session
 
 			HttpSession ss = request.getSession();
-			String userName1 = ss.getAttribute("message").toString();
-			
-			//String userName="_sejalchoudhary"; //initialize for testing
-
+			String userName1 = ss.getAttribute("message").toString(); //String userName1="_sejalchoudhary"; //initialize for testing
 			
 			List<User> blockedUsersList = new ArrayList<User>();
 			
+			//get all blocked users blocked by user who is logged in
 			blockedUsersList=us.viewBlockedUsers(userName1);
 			
 
@@ -112,21 +100,17 @@ public class BlockUserServlet extends HttpServlet
 		
 		if(a.equals("UnBlockUser"))
 		{
-			//get username from session after agrima's code is merged
-			//HttpSession ss = request.getSession();
-			//String userName1 = ss.getAttribute("message").toString();
-			
 			System.out.println("In UnblockBlock");
 			
-			String userName1 ="abc";
+			//get username from session
+			HttpSession ss = request.getSession();
+			String userName1 = ss.getAttribute("message").toString();
+			
 			String userName2=request.getParameter("user_name");
 			
 			UserBlockServiceInterface us = BlockUserServiceFactory.createObject();
-
-			boolean b=us.unblockUser("_sejalchoudhary", "_sejalchoudhary123");			
-			boolean b1=us.unblockUser(userName1, userName2);
-			//boolean b=us.unblockUser("_sejalchoudhary", "_sejalchoudhary1234");
-
+		
+			boolean b1=us.unblockUser(userName1, userName2); //boolean b=us.unblockUser("_sejalchoudhary", "_sejalchoudhary1234");
 			
 			if(b1)
 			{

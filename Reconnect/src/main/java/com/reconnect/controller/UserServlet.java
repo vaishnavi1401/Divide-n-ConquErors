@@ -47,6 +47,7 @@ public class UserServlet extends HttpServlet {
 		out.println("<html><body>");
 		List<FileItem> userDetails = null;
 		try {
+			//getting registration details from register form
 			userDetails = uploader.parseRequest(request);
 			System.out.println(userDetails);
 			String firstname = CommonUtils.getFieldValue(userDetails, "firstname");
@@ -103,6 +104,8 @@ public class UserServlet extends HttpServlet {
 			System.out.println(cred_id);
 			boolean emailCheck = us.checkEmailUnique(email);
 			boolean usernameUniqCheck = us.checkUsernameUniq(username);
+			
+			//if email and username is choosen unique then only registration is successfull
 			if (emailCheck && usernameUniqCheck) {
 				if(us.registerUserDetail(usr, city_id, cred_id)) {
 					
