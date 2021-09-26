@@ -1,0 +1,10 @@
+
+<admin>
+		<id>
+		<name>ADMIN</name>
+		<email>admin@hsbc.co,in</email>
+		<phone_number>"9876543210"</phone_number>
+		<username>admin</username>
+		<passward>admin1234</passward>
+	</id>
+</admin>

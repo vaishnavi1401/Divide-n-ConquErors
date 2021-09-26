@@ -4,4 +4,20 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+   <servlet>
+  	<servlet-name>AdminLogoutController</servlet-name>
+  	<display-name>AdminLogoutController</display-name>
+  	<description></description>
+  	<servlet-class>com.reconnect.controller.AdminLogoutController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminViewUser</servlet-name>
+  	<display-name>AdminViewUser</display-name>
+  	<description></description>
+  	<servlet-class>com.reconnect.controller.AdminViewUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminLogoutController</servlet-name>
+  	<url-pattern>/AdminLogoutController</url-pattern>
+  </servlet-mapping>
 </web-app>

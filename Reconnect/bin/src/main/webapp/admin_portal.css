@@ -1,0 +1,232 @@
+* {box-sizing: border-box;}
+
+body { 
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:linear-gradient(rgb(58, 121, 202),rgb(255,34,22));
+  background-color: white;
+}
+
+.main_page{
+  width: 210.5vh;
+  height: 96vh;  
+}
+
+.image_side{
+  width: 28vh;
+  height: 100vh;
+  background:linear-gradient(rgb(58, 121, 202),rgb(255,34,22));
+  background-color: white;
+  float: left;
+}
+
+
+
+.container_left{
+  top:25vh;
+  margin-left: 36vh;
+  width: 40vh;
+  height: 70vh;
+  position: fixed;
+  border-radius: 20px;
+  
+}
+
+.container_right{
+  top:25vh;
+  margin-left: 100vh;
+  float: right;
+  width: 40vh;
+  height: 70vh;
+  position: fixed;
+  border-radius: 20px;
+}
+
+#vector{
+  width: 35vh;
+  margin-top: 35vh;
+  margin-left: 10vh;
+  border-radius: 200px;
+  position: fixed;
+}
+
+#navbar{
+  overflow: hidden;
+  background: rgb(20, 20, 20);
+  padding: 20px 8px;
+  transition: 0.4s;
+  position: fixed;
+  width: 100%;
+  top: 0;
+ 
+}
+
+#navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+#navbar #logo {
+  margin-left: 5vh;  
+  padding: 5px auto;
+  font-size: 35px;
+  font-weight: bold;
+  transition: 0.8s ease-in;
+}
+
+#navbar a:hover {
+  border: 1px solid gold;
+  background: linear-gradient(rgb(68, 98, 197), rgb(116, 181, 235) );
+  color: black;
+  transition: 0.5s ease-in-out;
+}
+
+#navbar-right {
+  float: right;
+}
+
+@media screen and (max-width: 580px) {
+  #navbar {
+    padding: 20px 10px !important;
+  }
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+    transition: 0.8s ease-in-out;
+  }
+  #navbar-right {
+    float: none;
+  }
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 40vh;
+  height: 55vh;
+  margin-left: 20vh;
+  perspective: 1000px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: #bbb;
+  position:fixed;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;  
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background:linear-gradient(rgb(68, 178, 197), rgb(59, 197, 94) );
+  color: black;
+
+}
+
+.flip-card-front #cards{
+  width: 20vh;
+}
+
+.flip-card-back {
+  background:linear-gradient(to top,rgb(222, 236, 23),rgb(219, 103, 36) );
+  color: white;
+  transform: rotateY(180deg);
+}
+
+
+
+.display_block{
+  width: 182vh;
+  height: 100vh;
+  padding: 10px auto;
+  background-position: center;
+  background-size: cover;
+  position: initial;
+  background-color: rgb(208, 221, 221);
+}
+
+#mid{
+  width: 154vh;
+  height: inherit;
+  position:inherit;
+}
+
+.tab {
+  width: 180vh;
+  height: 200vh;
+  position: fixed;
+  padding-left: 63vh;
+  
+}
+
+.tab button {
+  width: 30vh;
+  height:8vh;
+  position: relative;
+  margin-top: 18vh;
+  transition: 0.8s;
+  font-size: 17px;
+}
+
+.tab button:hover {
+  border: 1px solid gold;
+  background: linear-gradient(rgb(68, 98, 197), rgb(116, 181, 235) );
+  transition: 0.5s ease-in-out;
+}
+
+.tab button.active {
+  background: linear-gradient(rgb(67, 233, 197), rgb(76, 233, 147) );
+}
+
+.tabcontent{
+  width: 100vh;
+  height: 60vh;
+  top:28vh;
+  left: 58vh;
+  position: fixed;
+  background-color: rgb(192, 187, 179);
+}
+
+#myTable {
+  
+  width: 100%;
+  font-size: 18px; 
+}
+
+#myTable th, #myTable td {
+  text-align: center; 
+  padding: 12px;
+  border: 1px solid black;	
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background:white;
+}
+
+input[type='checkbox']{
+	margin-left: 5vh;
+	
+}
