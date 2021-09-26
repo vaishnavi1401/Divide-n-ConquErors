@@ -1,0 +1,6 @@
+create table blocked_user(
+	blocked_by int not null,
+    blocked_who int not null,
+    foreign key(blocked_by) references user_details(user_id),
+    foreign key(blocked_who) references user_details(user_id)
+);

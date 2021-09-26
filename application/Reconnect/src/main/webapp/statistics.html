@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Portal</title>
+        <link rel="stylesheet" href="admin_portal.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="navigate_admin.js"></script>
+        <script src="admin_statistics.js"></script>
+    </head>
+    <script>
+      window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }  
+   
+    </script>
+    <body>
+        <div class="main_page">
+            <div id="navbar">
+                <a href="#default" id="logo">ReConnect</a>
+                
+                <div id="navbar-right">
+                
+                  <a href="LoginPage.jsp"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a>
+                </div>
+            </div>
+            <div class="image_side">
+                <img id="vector" src="assets/admin_vector_side.jpg">
+            </div>
+            <div class="body_side">
+            
+                <div class="display_block">
+                        <div class="tab">
+                            <button class="tablinks" onclick="openView(id)" id="viewAll">View All</button>
+                            <button class="tablinks" onclick="openView(id)" id="view User To Disable">View Disable</button>
+                            <button class="tablinks" onclick="openView(id)" id="view User to Delete">View Blocked</button>
+                        </div>
+                         <img id="mid" src="assets/form_background_image.png">
+                         
+                        <div class="tabcontent">
+                         <table id="myTable"></table>
+                        
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </body>
+</html>
