@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+	
 		<title>
             User Portal
         </title>
@@ -38,8 +39,6 @@
 		  }
 		
 		  .form-body {
-		  
-		  	width:80vh;
 		    padding:10px 40px;
 		    color:#666;
 		  }
@@ -228,19 +227,14 @@
 			}
 		</script>
 		
+		<%@page import="java.util.*,com.reconnect.model.*" %>
+		<%
+			    Contact cont = (Contact)request.getAttribute("Contactobj");
+			    pageContext.setAttribute("ContactDetails", cont); 
+		%>
 	</head>
 
 	<body>
-			<% String val = request.getParameter("email"); %>
-			<% String fname = request.getParameter("fname"); %>
-			<% String phone = request.getParameter("phone"); %>
-			<% String address = request.getParameter("address"); %>
-			<% String city = request.getParameter("city"); %>
-			<% String lname = request.getParameter("lname"); %>
-			<% String state = request.getParameter("state"); %>
-			<% String country = request.getParameter("country"); %>
-			<% String company = request.getParameter("company"); %>
-			<%session.setAttribute("emailEdit", val);%>
 			
 			<div class="main-container">
 				<div class="nav-side">
@@ -253,7 +247,7 @@
 			</div>
 			<div class="center-container">
 				
-					<form class="register-form" id="register-form" action="ContactController/editContact">  
+					<form class="register-form" id="register-form" action="../ContactController/editContact">  
 				        
 				        <div id="checkform"></div>
 						<div class="form-body">
@@ -263,18 +257,18 @@
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label for="firstname" class="label-title">First Name *</label>
-			                    <input type="text" id="contactEditFname" value="<%=fname%>" name="contactEditFname" class="form-input" placeholder="Enter your first name"/>
+			                    <input type="text" id="contactEditFname" value="<%=cont.getFname()%>" name="contactEditFname" class="form-input" placeholder="Enter your first name"/>
 			                </div>
 			                <div class="form-group right">
 			                    <label for="lastname" class="label-title">Last Name *</label>
-			                    <input type="text" id="contactEditLname" value="<%=lname%>" name="contactEditLname" class="form-input" placeholder="Enter your last name" />
+			                    <input type="text" id="contactEditLname" value="<%=cont.getLname()%>" name="contactEditLname" class="form-input" placeholder="Enter your last name" />
 			                </div>
 			            </div>
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label class="label-title">Gender *</label>
 			                    <div class="input-group">
-			                    	<select type="text" id="contactEditGender" name="contactEditGender" placeholder="Gender" >   
+			                    	<select type="text" id="contactEditGender" value="<%=cont.getGender()%>" name="contactEditGender" placeholder="Gender" >   
 										<option value="Female">Female</option>
 										<option value="Male">Male</option>
 										<option value="Others">Others</option>
@@ -284,53 +278,53 @@
 			            
 			                <div class="form-group right">
 			                    <label for="birthday" class="label-title">Date Of Birth *</label>
-			                    <input type="date" class="form-input" id="contactEditDob" name="contactEditDob" required="required" onchange="validateBirthday()">
+			                    <input type="date" class="form-input" id="contactEditDob" value="<%=cont.getDob()%>" name="contactEditDob" required="required" onchange="validateBirthday()">
 			                    <div id="birthday_check"></div>
 			                </div>
 			            </div>  
 			
 			            <div class="form-group right">
 			                <label for="address" class="label-title">Address *</label>
-			               <input type="text" class="form-input" id="contactEditAddress" value="<%=address%>" name="contactEditAddress" placeholder="Enter your address" >
+			               <input type="text" class="form-input" id="contactEditAddress" value="<%=cont.getAddress()%>" name="contactEditAddress" placeholder="Enter your address" >
 			           </div>  
 			
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label for="city" class="label-title">City *</label>
-			                    <input type="text" id="contactEditCity" value="<%=city%>" name="contactEditCity" class="form-input" placeholder="Enter city name" >
+			                    <input type="text" id="contactEditCity" value="<%=cont.getCity1().getCity()%>" name="contactEditCity" class="form-input" placeholder="Enter city name" >
 			                </div>
 			            
 			                <div class="form-group right">
 			                    <label for="state" class="label-title">State *</label>
-			                    <input type="text" class="form-input" id="contactEditState" value="<%=state%>" name="contactEditState" placeholder="Enter state">
+			                    <input type="text" class="form-input" id="contactEditState" value="<%=cont.getCity1().getState()%>" name="contactEditState" placeholder="Enter state">
 			                </div> 
 			            </div>
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label for="country" class="label-title">Country *</label>
-			                    <input type="text" class="form-input" id="contactEditCountry" value="<%=country%>" name="contactEditCountry" placeholder="Enter country">
+			                    <input type="text" class="form-input" id="contactEditCountry" value="<%=cont.getCity1().getCountry()%>" name="contactEditCountry" placeholder="Enter country">
 			                </div>  
 			                <div class="form-group right">
 			                    <label for="phone" class="label-title">Phone *</label>
-			                    <input type="number" id="contactEditPhone" value="<%=phone%>" name="contactEditPhone" class="form-input" placeholder="Enter your phone number" onchange="validatePhone()">
+			                    <input type="number" id="contactEditPhone" name="contactEditPhone"  value="<%=cont.getPhone()%>" class="form-input" placeholder="Enter your phone number" onchange="validatePhone()">
 			                    <div id="phone_check"></div>
 			                </div>
 			            
 			            </div>
 			            <div class="form-group">
 			                <label for="email" class="label-title">Email *</label>
-			                <input type="email"  value="<%=val%>" id="contactEditEamil" name="contactEditEamil" class="form-input" placeholder="Enter your email" disabled>
+			                <input type="email" id="contactEditEamil" name="contactEditEamil" value="<%=cont.getEmail()%>" class="form-input" placeholder="Enter your email">
 			                <div id="email_check"></div>
 			            </div>
 			            
 			            <div class="horizontal-group">
 			                <div class="form-group left" >
 			                    <label for="company" class="label-title">Company *</label>
-			                    <input type="text" class="form-input" id="contactEditCompany" value="<%=company%>" name="contactEditCompany" placeholder="Enter Company Name">
+			                    <input type="text" class="form-input" id="contactEditCompany" value="<%=cont.getCompany()%>" name="contactEditCompany" placeholder="Enter Company Name">
 			                </div>
 			                <div class="form-group right" >
 			                      <label for="choose-file" class="label-title">Upload Profile Picture *</label>
-			                      <input type="file" id="profileEditPic" name="profileEditPic" size="20" required="required" accept="image/gif, image/jpeg, image/png">
+			                      <input type="file" id="profileEditPic" name="profileEditPic" size="20" accept="image/gif, image/jpeg, image/png">
 			                </div>
 			                    
 			            </div>

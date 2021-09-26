@@ -1,23 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-		<title>
-            User Portal
-        </title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-   		
-		<style>
-			body{
+	<head>
+		<%@page import="java.util.*,com.reconnect.model.*" %>
+	<%
+	    User user = (User)request.getAttribute("UserObj");
+	    pageContext.setAttribute("userDetails", user); 
+	%>
+	
+	<style>
+		body{
 				background: whitesmoke;
 				font-family: Arial, Helvetica, sans-serif;
 			}
 			 
 		  .register-form {
 		    font-family: sans-serif;
-		    width:670px;
-		    margin:30px auto;
+		    width:50vh;
+		    margin-left:50vh;
 		    background:linear-gradient(to right, #ffffff 0%, #fafafa 50%, #ffffff 99%);
 		    border: 2px solid black;
 		    border-radius: 10px;
@@ -38,8 +39,9 @@
 		  }
 		
 		  .form-body {
-		  
-		  	width:80vh;
+		  	margin-top:20vh;
+		  	width:80%;
+		  	
 		    padding:10px 40px;
 		    color:#666;
 		  }
@@ -56,6 +58,7 @@
 		  }
 		  
 		  .form-body .form-input {
+		  	   
 		      font-size: 17px;
 		      box-sizing: border-box;
 		      width: 100%;
@@ -211,70 +214,42 @@
 			.center-container{
 			
 				margin-top:20vh;
-			}	  
-		</style>
-		
-		<script>
-			function viewTable() {
-			    var lTable = document.getElementById("contactsTable");
-			    lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
-			    document.getElementById("addNew").style.display="none";
-			}
-			
-			function newContactForm(){
-				 var lTable = document.getElementById("addNew");
-				 lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
-				 document.getElementById("contactsTable").style.display="none";
-			}
-		</script>
+			}	  	
+	
+	</style>
 		
 	</head>
-
 	<body>
-			<% String val = request.getParameter("email"); %>
-			<% String fname = request.getParameter("fname"); %>
-			<% String phone = request.getParameter("phone"); %>
-			<% String address = request.getParameter("address"); %>
-			<% String city = request.getParameter("city"); %>
-			<% String lname = request.getParameter("lname"); %>
-			<% String state = request.getParameter("state"); %>
-			<% String country = request.getParameter("country"); %>
-			<% String company = request.getParameter("company"); %>
-			<%session.setAttribute("emailEdit", val);%>
+		<div class="main-container">
+		<div class="nav-side">
 			
-			<div class="main-container">
-				<div class="nav-side">
-					<div class="icon-bar"> 
-						<div id="right-container">
-							<a id="logo">ReConnect</a>
-						</div> 
-	            	</div>
-				</div>
+			<div class="icon-bar"> 
+				<div id="right-container">
+					<a id="logo">ReConnect</a>
+				</div> 
+            </div>
 			</div>
-			<div class="center-container">
-				
-					<form class="register-form" id="register-form" action="ContactController/editContact">  
-				        
-				        <div id="checkform"></div>
-						<div class="form-body">
-						<div class="form-header">
-	          		  			<h1>Contact Details</h1>
+            <form action="../ContactController/addContact">
+            <div class="form-body">
+            			<div class="form-header">
+	          		  			<h1>Add New Contact</h1>
 	       				</div>
+	       				<h4><font color="red">This Contact is an Existing User With same email Id</font></h4>
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label for="firstname" class="label-title">First Name *</label>
-			                    <input type="text" id="contactEditFname" value="<%=fname%>" name="contactEditFname" class="form-input" placeholder="Enter your first name"/>
+			                    <input type="text" id="contactEditFname" name="contactEditFname"  value=<%= user.getFname() %> class="form-input" placeholder="Enter your first name" required="required" />
 			                </div>
 			                <div class="form-group right">
 			                    <label for="lastname" class="label-title">Last Name *</label>
-			                    <input type="text" id="contactEditLname" value="<%=lname%>" name="contactEditLname" class="form-input" placeholder="Enter your last name" />
+			                    <input type="text" id="contactEditLname" name="contactEditLname" value=<%= user.getLname() %> class="form-input" placeholder="Enter your last name" />
 			                </div>
 			            </div>
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label class="label-title">Gender *</label>
 			                    <div class="input-group">
-			                    	<select type="text" id="contactEditGender" name="contactEditGender" placeholder="Gender" >   
+			                    	<select type="text" id="contactEditGender" name="contactEditGender" value=<%= user.getGender() %> placeholder="Gender" >   
 										<option value="Female">Female</option>
 										<option value="Male">Male</option>
 										<option value="Others">Others</option>
@@ -284,53 +259,53 @@
 			            
 			                <div class="form-group right">
 			                    <label for="birthday" class="label-title">Date Of Birth *</label>
-			                    <input type="date" class="form-input" id="contactEditDob" name="contactEditDob" required="required" onchange="validateBirthday()">
+			                    <input type="date" class="form-input" id="contactEditDob" name="contactEditDob" value=<%= user.getDob() %> onchange="validateBirthday()">
 			                    <div id="birthday_check"></div>
 			                </div>
 			            </div>  
 			
 			            <div class="form-group right">
 			                <label for="address" class="label-title">Address *</label>
-			               <input type="text" class="form-input" id="contactEditAddress" value="<%=address%>" name="contactEditAddress" placeholder="Enter your address" >
+			               <input type="text" class="form-input" id="contactEditAddress" name="contactEditAddress" value=<%= user.getAddress() %> placeholder="Enter your address">
 			           </div>  
 			
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label for="city" class="label-title">City *</label>
-			                    <input type="text" id="contactEditCity" value="<%=city%>" name="contactEditCity" class="form-input" placeholder="Enter city name" >
+			                    <input type="text" id="contactEditCity" name="contactEditCity" value=<%= user.getCity().getCity() %> class="form-input" placeholder="Enter city name">
 			                </div>
 			            
 			                <div class="form-group right">
 			                    <label for="state" class="label-title">State *</label>
-			                    <input type="text" class="form-input" id="contactEditState" value="<%=state%>" name="contactEditState" placeholder="Enter state">
+			                    <input type="text" class="form-input" id="contactEditState" name="contactEditState" value=<%= user.getCity().getState() %> placeholder="Enter state" >
 			                </div> 
 			            </div>
 			            <div class="horizontal-group">
 			                <div class="form-group left">
 			                    <label for="country" class="label-title">Country *</label>
-			                    <input type="text" class="form-input" id="contactEditCountry" value="<%=country%>" name="contactEditCountry" placeholder="Enter country">
+			                    <input type="text" class="form-input" id="contactEditCountry" name="contactEditCountry" value=<%= user.getCity().getCountry() %> placeholder="Enter country" >
 			                </div>  
 			                <div class="form-group right">
 			                    <label for="phone" class="label-title">Phone *</label>
-			                    <input type="number" id="contactEditPhone" value="<%=phone%>" name="contactEditPhone" class="form-input" placeholder="Enter your phone number" onchange="validatePhone()">
+			                    <input type="number" id="contactEditPhone" name="contactEditPhone" value=<%= user.getPhone() %> class="form-input" placeholder="Enter your phone number" onchange="validatePhone()">
 			                    <div id="phone_check"></div>
 			                </div>
 			            
 			            </div>
 			            <div class="form-group">
 			                <label for="email" class="label-title">Email *</label>
-			                <input type="email"  value="<%=val%>" id="contactEditEamil" name="contactEditEamil" class="form-input" placeholder="Enter your email" disabled>
+			                <input type="email" id="contactEditEamil" name="contactEditEamil" value=<%= user.getEmail() %> class="form-input" placeholder="Enter your email" required="required">
 			                <div id="email_check"></div>
 			            </div>
 			            
 			            <div class="horizontal-group">
 			                <div class="form-group left" >
 			                    <label for="company" class="label-title">Company *</label>
-			                    <input type="text" class="form-input" id="contactEditCompany" value="<%=company%>" name="contactEditCompany" placeholder="Enter Company Name">
+			                    <input type="text" class="form-input" id="contactEditCompany" name="contactEditCompany" value=<%= user.getCompany() %> placeholder="Enter Company Name">
 			                </div>
 			                <div class="form-group right" >
 			                      <label for="choose-file" class="label-title">Upload Profile Picture *</label>
-			                      <input type="file" id="profileEditPic" name="profileEditPic" size="20" required="required" accept="image/gif, image/jpeg, image/png">
+			                      <input type="file" id="profileEditPic" name="profileEditPic"  size="20" accept="image/gif, image/jpeg, image/png">
 			                </div>
 			                    
 			            </div>
@@ -338,9 +313,79 @@
 			        </div>
 			         <div class="form-footer">
 			            <input id = "submit" type="submit" value="Submit" class="submit" style="margin-left: 40vh; margin-bottom: 2vh"/>
-			        </div>	
-		    	</form>
-			</div>		
-
-</body>
+			        </div>
+			
+        </form>
+		</div>
+	</body>
 </html>
+
+<!-- <table >
+				<tr> 
+					<td>
+						<input type="text" name="contactEditFname" id="contactEditFname" placeholder="First Name" value=<%= user.getFname() %> required/>  
+					</td>
+					<td>		
+						<input type="text" name="contactEditLname" id="contactEditLname" placeholder="Last Name" value=<%= user.getLname() %> required/>  
+					</td>
+				</tr>	
+                <tr>
+                	<td>
+						<input type="email" id="contactEditEamil" name="contactEditEamil" placeholder="Email" value=<%= user.getEmail() %> hidden="true"/>   
+					</td>	 
+					<td>
+						<input type="email" id="contactEditEamil" name="contactEditEamil" placeholder="Email" value=<%= user.getEmail() %> disabled/>   
+					</td>
+				</tr>
+				<tr>	 
+					<td>
+						<select type="text" id="contactEditGender" name="contactEditGender" placeholder="Gender" value=<%= user.getGender() %> required>   
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+						<option value="Others">Others</option>
+						</select>
+					</td>
+				</tr>
+				<tr> 
+					<td>
+						<input type="text" name="contactEditPhone" id="contactEditPhone" placeholder="Phone Number" value=<%= user.getPhone() %> required/>  
+					</td> 
+				</tr>
+                <tr> 
+					<td>
+						<input type="date" name="contactEditDob" id="contactEditDob" placeholder="Date of Birth" value=<%= user.getDob() %> required/>  
+					</td> 
+				</tr>
+                <tr>	 
+					<td>
+						<input type="text" id="contactEditAddress" name="contactEditAddress" placeholder="Address" value=<%= user.getAddress() %> required/>   
+					</td>
+                    <td>
+						<input type="text" id="contactEditCity" name="contactEditCity" placeholder="City" value=<%= user.getCity().getCity() %> required/>   
+					</td>
+				</tr>
+                <tr>	 
+					<td>
+						<input type="text" id="contactEditState" name="contactEditState" placeholder="State" value=<%= user.getCity().getState() %> required/>   
+					</td>
+                    <td>
+						<input type="text" id="contactEditCountry" name="contactEditCountry" placeholder="Country" value=<%= user.getCity().getCountry() %> required/>   
+					</td>
+				</tr>
+                <tr>	 
+					<td>
+						<input type="text" id="contactEditCompany" name="contactEditCompany" placeholder="Company" value=<%= user.getCompany() %> required/>   
+					
+					</td>
+				</tr>
+                <tr>	 
+					<td>
+						<input type="file" id="profileEditPic" name="profileEditPic"/>   
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input id = "submit" type="submit" value="Submit" class="submit" />  
+					</td>
+				</tr>
+			</table> -->

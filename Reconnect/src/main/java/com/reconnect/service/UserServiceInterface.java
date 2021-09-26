@@ -51,4 +51,6 @@ public interface UserServiceInterface {
 
 	List<User> getNonFriendsList(String username);
 
+	User getUserDetailsByEmail(String contactEmail);
+
 }

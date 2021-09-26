@@ -38,7 +38,7 @@ public class DisplayUserDetailServlet extends HttpServlet {
 		//System.out.println("Imagepath "+userObj.getProfileImagePath());
 		
 		request.setAttribute("mydata", userObj);
-		RequestDispatcher rd=getServletContext().getRequestDispatcher("/UserTest.jsp");
+		RequestDispatcher rd=getServletContext().getRequestDispatcher("/UserPortal.jsp");
 		rd.forward(request, response);
 	}
 

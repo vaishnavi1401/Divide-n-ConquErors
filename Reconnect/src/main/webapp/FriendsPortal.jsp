@@ -9,7 +9,28 @@
         <link rel="stylesheet" href="user_portal.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- <script src="Friends.js"></script> -->
+		<style type="text/css">
+		
+			a .tooltip{
+				  visibility: hidden;
+				  width: 150px;
+				  background-color: black;
+				  color: #fff;
+				  text-align: center;
+				  font-size:20px;
+				  border-radius: 6px;
+				  padding: 5px 0;
+				  position: absolute;
+				  z-index: 1;
+				  margin-top: 2vh;
+				  opacity: 0.75;
+			}
+			
+			a:hover .tooltip{
+				visibility: visible;
+			}
+			
+		</style>
 	
 		<script>
 			
@@ -309,12 +330,10 @@
     	
         <div class="main_container">
             <div class="icon-bar">
-                <a class="active" href="UserPortal.jsp"><i class="fa fa-home"></i></a>
-                <a  onclick="nonfriends()" id="search"><i class="fa fa-search"></i></a> 
-                <a  onclick="viewFriends()" id="search"><i class="fa fa-ban"></i></a> 
-                <a onclick="pendingRequests()" id="my_requests"><i class="fa fa-users"></i></a>    
-                <a href="LandingPage.jsp" target="_blank" onchange="navigate_to_login()"><i class="fa fa-power-off"></i></a>
-            	
+                <a class="active" href="UserPortal.jsp"><i class="fa fa-home"></i><div class="tooltip">Home</div></a>
+                <a  onclick="nonfriends()" id="search"><i class="fa fa-search"></i><div class="tooltip">Find People</div></a> 
+                <a  onclick="viewFriends()" id="search"><i class="fa fa-handshake-o" aria-hidden="true"></i><div class="tooltip" >My Friends</div></a> 
+                <a onclick="pendingRequests()" id="my_requests"><i class="fa fa-question-circle" aria-hidden="true"></i><div class="tooltip">Pending Requests</div></a>    
             </div>
            
            

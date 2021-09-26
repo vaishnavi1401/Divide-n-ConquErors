@@ -52,8 +52,8 @@ body
 
 
 .info_div_tag {
-  width: 95%;
-  margin: auto;
+  width: 20%;
+  margin-top:2vh;
   align-items: center;
   justify-content: center;
 }
@@ -67,6 +67,9 @@ body
 
 #info_mainpage
 {
+  width: 90%;
+    margin: 10vh;
+    text-align: left;
   font-size: 2.5rem;
   color: #ffffff;
 }

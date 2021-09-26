@@ -293,18 +293,12 @@
 			position: absolute;
 		
 		}
-		* {
-		  box-sizing: border-box;
+		
+		input[type=email]{
+			width:45vh;
+			height:10vh;
 		}
-		input[type=text] {
-		  padding: 10px;
-		  font-size: 17px;
-		  border: 1px solid grey;
-		  float: left;
-		  width: 80%;
-		  background: #f1f1f1;
-		}
-				
+		
 		</style>
 <body>
 		<div class="main-container">
@@ -319,12 +313,14 @@
 		<div class="option-block">
 			
 			<div class="option-block-one">
+			<form action="ContactController/checkContactEmail">
 					<div class="contact-add-section">
-							<button class="button" onclick="location.href = 'checkEmail.jsp';"><span>Add a New Contact </span></button>
+							<input type=email name="checkemail" id="checkemail" placeholder="Enter contact email you wish to add..." required>
 					</div>
 					<div class="contact-list-section">
-							<button class="button" onclick="location.href = 'ContactController/viewContactMain';"><span>My Contacts </span></button>
+							<button type="submit" class="button" ><span>Check Email... </span></button>
 					</div>
+			</form>
 			</div>
 			<div class="option-block-two"></div>
 		</div>

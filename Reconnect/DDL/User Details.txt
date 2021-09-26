@@ -1,0 +1,21 @@
+create table user_details(
+	user_id int auto_increment,
+    first_name varchar(50) not null,
+    last_name varchar(50) not null,
+    email_id varchar(100) not null,
+    phone_no varchar(10) not null,
+    gender varchar(15) not null,
+    dob date not null,
+    company varchar(50) not null,
+    address varchar(100) not null,
+    city_id int not null,
+    profile_image_path varchar(200) not null,
+    creation_date timestamp default current_timestamp,
+    credential_id int not null,
+    primary key(user_id),
+    unique(email_id, phone_no),
+    foreign key(city_id) references city_details(city_id),
+    foreign key(credential_id) references credentials(credential_id)
+);
+
+alter table user_details auto_increment=300001;

@@ -103,10 +103,12 @@ public class BlockUserServlet extends HttpServlet
 			
 			if(b1)
 			{
-				out.println("User Unblocked");
+				RequestDispatcher rd=getServletContext().getRequestDispatcher("/blockList.jsp");
+				rd.forward(request, response);
 			}
 			else {
-				out.println("Unblock Fail");
+				RequestDispatcher rd=getServletContext().getRequestDispatcher("/blockList.jsp");
+				rd.forward(request, response);
 			}
 			
 		}

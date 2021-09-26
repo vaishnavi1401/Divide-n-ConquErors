@@ -18,7 +18,9 @@
             <div class="body_container">
                 <div class="left_container">       
                     <div class="info_div_tag">   
-                        <p id="info_mainpage"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique facere, tempore, mollitia ex non doloribus pariatur saepe est a aut recusandae omnis tempora aperiam commodi, illum molestiae excepturi! Ex, cumque!</p>
+                    	<p id="info_mainpage">Register.<br>Recognize.<br>Reconnect.</p>
+   					
+              
                     </div>           
                 </div>
                 <div class="right_container">

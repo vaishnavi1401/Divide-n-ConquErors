@@ -13,5 +13,9 @@ public interface ContactsServiceInterface {
 
 	public int editContactService(Contact c1, String userName);
 
-	public int deleteContactService(String userName, String email);
+	public int deleteContactService(String username, String email);
+	
+	public boolean ifContactExistsService(String username, String email);
+	
+	public Contact viewContact(String username , String email) ;
 }

@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.reconnect.factory.UserServiceFactory;
 import com.reconnect.model.City;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
 import com.reconnect.service.ContactsServiceInterface;
+import com.reconnect.service.UserServiceInterface;
 import com.reconnect.utility.JsonConverter;
 import com.reconnect.service.ContactServiceFactory;
 
@@ -27,10 +29,12 @@ public class ContactController extends HttpServlet {
 	PrintWriter out = null;
 	JsonConverter jConverter = null;
 	HttpSession session;
-
+	UserServiceInterface userService=null;
+	
 	public void init() throws ServletException {
 
 		contactService = ContactServiceFactory.createObject();// calling the service method to return the object
+		userService=UserServiceFactory.createObject();
 	}
 
 	@Override
@@ -42,6 +46,10 @@ public class ContactController extends HttpServlet {
 		if (req.getPathInfo() != null) {
 			String path = req.getPathInfo().substring(1);// fetching the substring from the path
 			System.out.println("paths "+path);
+			if (path.equals("checkContactEmail")) {
+				System.out.println("Check Controller");
+				checkContactEmailController(req, resp);// calling method for adding data
+			}
 			if (path.equals("addContact")) {
 				System.out.println("hello addcontact");
 				addContactController(req, resp);// calling method for adding data
@@ -61,7 +69,43 @@ public class ContactController extends HttpServlet {
 
 		}
 	}
-
+	
+	public void checkContactEmailController(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		String contactEmail = req.getParameter("checkemail");
+		String userName = (String) session.getAttribute("message");
+		System.out.println("inside controller "+contactEmail+userName);
+		if(userService.checkEmailUnique(contactEmail)==false)
+		{
+			User obj=userService.getUserDetailsByEmail(contactEmail);
+		
+			req.setAttribute("UserObj", obj);
+			req.getRequestDispatcher("/addContactEmail.jsp").forward(req, resp);
+		}
+		else if(contactService.ifContactExistsService(userName, contactEmail)) {
+			
+			viewAllContactMainController(req, resp);
+			/*
+			 * System.out.println("inside else if ");
+			 * 
+			 * Contact contactObject = contactService.viewContact(userName, contactEmail);
+			 * 
+			 * System.out.println("cobj"+contactObject);
+			 * 
+			 * req.setAttribute("Contactobj", contactObject);
+			 * 
+			 * req.getRequestDispatcher("/ContactList.jsp").forward(req, resp);
+			 */
+			
+		}
+		// creating contact object after fetching data from html page
+		else {
+			req.getRequestDispatcher("/AddContact.html").forward(req, resp);
+			/* addContactController(req, resp); */
+		}
+	}
+	
 	public void addContactController(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		out = resp.getWriter();
@@ -69,25 +113,24 @@ public class ContactController extends HttpServlet {
 		// calling username from session
 		String userName = (String) session.getAttribute("message");
 
-		String contactFname = req.getParameter("contactFname");
-		String contactLname = req.getParameter("contactLname");
-		String contactEmail = req.getParameter("contactEamil");
-		String contactPhone = req.getParameter("contactPhone");
-		String contactGender = req.getParameter("contactGender");
-		String contactDob = req.getParameter("contactDob");
-		String contactAddress = req.getParameter("contactAddress");
-		String contactCity = req.getParameter("contactCity");
-		String contactState = req.getParameter("contactState");
-		String contactCountry = req.getParameter("contactCountry");
-		String contactCompany = req.getParameter("contactCompany");
+		String contactFname = req.getParameter("contactEditFname");
+		String contactLname = req.getParameter("contactEditLname");
+		String contactEmail = req.getParameter("contactEditEamil");
+		String contactPhone = req.getParameter("contactEditPhone");
+		String contactGender = req.getParameter("contactEditGender");
+		String contactDob = req.getParameter("contactEditDob");		
+		String contactAddress = req.getParameter("contactEditAddress");
+		String contactCity = req.getParameter("contactEditCity");
+		String contactState = req.getParameter("contactEditState");
+		String contactCountry = req.getParameter("contactEditCountry");
+		String contactCompany = req.getParameter("contactEditCompany");
+		String profileImagePath = req.getParameter("profileEditPic");
 		Date date1 = Date.valueOf(contactDob);
 
 		City cityObject = new City();
 		cityObject.setCity(contactCity);
 		cityObject.setCountry(contactCountry);
 		cityObject.setState(contactState);
-		String profileImagePath = "my pics 232";
-
 		// creating contact object after fetching data from html page
 		Contact contactObject = new Contact(contactFname, contactLname, contactEmail, date1, contactAddress,
 				contactCompany, contactPhone, contactGender, cityObject , profileImagePath);
@@ -141,12 +184,13 @@ public class ContactController extends HttpServlet {
 		String contactState = req.getParameter("contactEditState");
 		String contactCountry = req.getParameter("contactEditCountry");
 		String contactCompany = req.getParameter("contactEditCompany");
+		String profileImagePath = req.getParameter("profileEditPic");
+		
 		Date date1 = Date.valueOf(contactDob);
 		City cityObject = new City();
 		cityObject.setCity(contactCity);
 		cityObject.setCountry(contactCountry);
 		cityObject.setState(contactState);
-		String profileImagePath = "my pic";
 
 		// creating contact object after fetching edited data from html page
 		Contact contactObject = new Contact(contactFname, contactLname, emailEdit, date1, contactAddress,

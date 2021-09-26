@@ -1,0 +1,6 @@
+create table disable_users(
+	disable_id int,
+    diabled_time timestamp not null,
+    reason varchar(10) default 'Admin',
+    foreign key(disable_id) references user_details(user_id)
+);

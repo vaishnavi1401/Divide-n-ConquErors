@@ -28,6 +28,6 @@ public interface ContactDaoInterface {
 
 	Contact ifContactIsUser(String username, String email);
 
-	int ifContactExists(String username, String email);  
+	boolean ifContactExists(String username, String email);  
 }
 

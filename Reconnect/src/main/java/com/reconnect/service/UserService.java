@@ -128,4 +128,10 @@ public class UserService implements UserServiceInterface {
 		return friendDao.getFriends(self);
 	}
 
+
+	public User getUserDetailsByEmail(String contactEmail) {
+		// TODO Auto-generated method stub
+		return ud.getUserDetailsByEmail(contactEmail);
+	}
+
 }

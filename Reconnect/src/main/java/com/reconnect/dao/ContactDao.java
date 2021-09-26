@@ -1,6 +1,5 @@
 package com.reconnect.dao;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -23,33 +22,36 @@ import com.reconnect.utility.DBUtils;
 
 public class ContactDao implements ContactDaoInterface {
 	
+	Connection conn = null;
 	public CityDaoInterface cd;
 	public UserDaoInterface ud;
 	
-	Connection conn = null;
 	public ContactDao()
 	{
 		conn = DBUtils.getConnection();
-		
-		 cd =  CityDAOFactory.createCityDaoObject();
-		 ud = UserDAOFactory.createUserDaoObject();
-
+		cd =  CityDAOFactory.createCityDaoObject();
+		ud = UserDAOFactory.createUserDaoObject();
 	}
+	
+	
 
 	
+	//adding contact info by fetching contact obj from servlet for user in session identified by username
 	public int addContact(Contact c1, String username) throws FileNotFoundException {
-		System.out.println(c1.toString());
 		
 		String sql = "insert into contact_details (user_id , first_name , last_name , email_id , phone_no , gender , dob , address , city_id , profile_image_path , creation_date , company) values (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ?)";
 		PreparedStatement pstmt = null;
 		int i1 = 0;
+		
+		//fetching userId of current user in session by username 
 		User u1 = ud.getUserDetailsByUsername(username);
+		String em = u1.getEmail();
+		
 		try
 		{
-			String em = u1.getEmail();
+			
 			Date d1 = (Date) c1.getDob();
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());	
-			//FileInputStream picture=new FileInputStream(u1.getProfileImage().getAbsolutePath());
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());	//saving current timestamp in variable
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, getUserId(em));
@@ -61,15 +63,14 @@ public class ContactDao implements ContactDaoInterface {
 			pstmt.setDate(7, d1);
 			pstmt.setString(8, c1.getAddress());
 			pstmt.setInt(9, cd.getCityId(c1.getCity1()));
-			pstmt.setString(10,c1.getProfileImagePath());
-			//pstmt.setBinaryStream(10,picture,(int)u1.getProfileImage().length());
+			pstmt.setString(10, c1.getProfileImagePath());
 			pstmt.setTimestamp(11, timestamp);
 			pstmt.setString(12, c1.getCompany());
 			
 			int rs = pstmt.executeUpdate();
 			if (rs > 0) 
 			{
-				i1 = 1;
+				i1 = 1; //insert executed
 			}
 		} 
 		catch (SQLException e) 
@@ -91,10 +92,14 @@ public class ContactDao implements ContactDaoInterface {
 		
 	}
 	
-	public int getUserId(String email) {
+	
+	//function to fetch userId by email
+	public int getUserId(String email) 
+	{
 		String sql = "select user_id from user_details where email_id = ?";
 		PreparedStatement pstmt = null;
-		try {
+		try 
+		{
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
@@ -122,14 +127,16 @@ public class ContactDao implements ContactDaoInterface {
 	}
 	
 
+	
+	//function to return a list of all contacts of particular user, fetching by username
 	public List<Contact> viewAllContacts(String username) {
 		
 		List<Contact> ll = new ArrayList<Contact>();
 		String sql = "select * from contact_details where user_id = ?";
 		PreparedStatement pstmt = null;
-		System.out.println("*****************usernm view all************"+username);
-		User u1 = ud.getUserDetailsByUsername(username);
 		
+		//fetching userId of current user in session by username 
+		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 
 		try
@@ -147,11 +154,10 @@ public class ContactDao implements ContactDaoInterface {
 				String gender = rs.getString(7);
 				String company = rs.getString(8);
 				Date dob = rs.getDate(9);
-				//String d = dateFormat.format(dob);
 				
 				String address = rs.getString(10);
 				int cid = rs.getInt(11);
-				//for image 12
+				String profileImagePath = rs.getString(12);
 				//Timestamp ts = rs.getTimestamp(13);
 				
 				
@@ -166,7 +172,7 @@ public class ContactDao implements ContactDaoInterface {
 				c1.setDob(dob);
 				c1.setAddress(address);
 				c1.setCity1(c);
-				// for image
+				c1.setProfileImagePath(profileImagePath);
 				c1.setCompany(company);
 				
 				
@@ -182,6 +188,8 @@ public class ContactDao implements ContactDaoInterface {
 		return ll;
 	}
 	
+	
+	//function to fetch city object by city id. City id is unique
 	public City fetchCityObj(int cid)
 	{
 		PreparedStatement pstmt = null;
@@ -219,15 +227,21 @@ public class ContactDao implements ContactDaoInterface {
 		return null;
 	}
 
+	
+	//function to edit contact by accepting edited contact values for particular user identified by username
 	public int editContact(Contact c1 , String username) {
 		
+		//fetching userId of current user in session by username 
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
+		
+		//fetching contactId by email and username
 		String email = c1.getEmail();
 		int contId = getContactId(username , email);
+		
 		int r = 0;
-		String sql = "update contact_details set first_name = ? , last_name = ? , email_id = ? , phone_no = ? ,  gender = ? , dob = ? , address = ? , city_id = ? , profile_image = ? , company = ? where user_id = ? and contact_id = ?";
+		String sql = "update contact_details set first_name = ? , last_name = ? , email_id = ? , phone_no = ? ,  gender = ? , dob = ? , address = ? , city_id = ? , profile_image_path = ? , company = ? where user_id = ? and contact_id = ?";
 		PreparedStatement pstmt = null;
 
 		try
@@ -242,7 +256,7 @@ public class ContactDao implements ContactDaoInterface {
 			pstmt.setDate(6, (Date) c1.getDob());
 			pstmt.setString(7, c1.getAddress());
 			pstmt.setInt(8, cd.getCityId(c1.getCity1()));
-			//for image
+			pstmt.setString(9, c1.getProfileImagePath());
 			pstmt.setString(10, c1.getCompany());
 			pstmt.setInt(11, uid);
 			pstmt.setInt(12, contId);
@@ -269,9 +283,13 @@ public class ContactDao implements ContactDaoInterface {
 
 	public int deleteContact(String username , String email) {
 		
+		//fetching userId by username
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
+		
+		
+		//fetching contactId by email and username
 		int contId = getContactId(username , email);
 		
 		
@@ -305,14 +323,18 @@ public class ContactDao implements ContactDaoInterface {
 		}
 		return r;
 	}
-
+	
+	///function to fetch contactId by username and email
 	public int getContactId(String username , String email) {
 		String sqlToFetchContactId = "select contact_id from contact_details where email_id = ? and user_id = ?";
 		PreparedStatement pstmt = null;		
 		int contId = 0;
+		
+		//fetching userId of current user in session by username 
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
+		
 		try 
 		{
 			pstmt = conn.prepareStatement(sqlToFetchContactId);
@@ -343,14 +365,20 @@ public class ContactDao implements ContactDaoInterface {
 		return contId;
 	}
 
+	
+	//function to view single contact with particular email for particular user identified by username
 	public Contact viewContact(String username , String email) {
 
 		Contact c2 = new Contact();
 		String sql = "select * from contact_details where user_id = ? and contact_id = ?";
 		PreparedStatement pstmt = null;
+		
+		//fetching userId of current user in session by username 
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
+		
+		//fetching contact Id of contact who user is referring to by email
 		int contId = getContactId(username , email);
 		
 		
@@ -372,7 +400,7 @@ public class ContactDao implements ContactDaoInterface {
 				Date dob = rs.getDate(9);
 				String address = rs.getString(10);
 				int cid = rs.getInt(11);
-				//for image 12
+				String profileImagePath = rs.getString(12);
 				
 				City c = fetchCityObj(cid);
 				
@@ -384,7 +412,7 @@ public class ContactDao implements ContactDaoInterface {
 				c2.setDob(dob);
 				c2.setAddress(address);
 				c2.setCity1(c);
-				// for image
+				c2.setProfileImagePath(profileImagePath);
 				c2.setCompany(company);
 				
 				return c2;
@@ -397,9 +425,8 @@ public class ContactDao implements ContactDaoInterface {
 		return null;
 	}
 
-	public int ifContactExists(String username, String email) {
-		
-		int i1 = 0;
+	//function to check if contact already exists in user's phonebook
+	public boolean ifContactExists(String username, String email) {
 		User u1 = ud.getUserDetailsByUsername(username);
 		String em = u1.getEmail();
 		int uid = getUserId(em);
@@ -415,7 +442,7 @@ public class ContactDao implements ContactDaoInterface {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())
 			{
-				i1 = 1;
+				return true;
 			}
 		}
 		catch (SQLException e) 
@@ -434,21 +461,29 @@ public class ContactDao implements ContactDaoInterface {
 			}
 		}
 		
-		return i1;
+		return false;
 	}
 
+	
+	//function to check if contact is a user of the system. returns null if Contact is not user. Other wise returns Contact obj
+	
 	public Contact ifContactIsUser(String username, String email) {
 
 		
 		
 		PreparedStatement pstmt = null;
 		String sql = "select 1 from  user_details where user_id = ?";
-		User u1 = ud.getUserDetailsByEmail(email);
-		String em = u1.getEmail();
-		int uid = getUserId(em);
+		
+		
+		
 		
 		try
 		{
+			//fetching contact details on basis of email
+			User u1 = ud.getUserDetailsByEmail(email);
+			String em = u1.getEmail();
+			int uid = getUserId(em);
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, uid);
 			ResultSet rs = pstmt.executeQuery();

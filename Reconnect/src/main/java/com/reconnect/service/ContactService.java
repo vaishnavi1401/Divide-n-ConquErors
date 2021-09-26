@@ -1,30 +1,28 @@
 package com.reconnect.service;
 
-import java.io.FileNotFoundException;
+import java.io.FileNotFoundException; 
 import java.util.List;
 
-import com.reconnect.controller.JsonConverter;
+import com.reconnect.utility.JsonConverter;
 import com.reconnect.dao.util.ContactDaoInterface;
-import com.reconnect.factory.ContactDAOFactory;
 import com.reconnect.model.Contact;
 import com.reconnect.model.User;
+import com.reconnect.factory.ContactDAOFactory;
 
+public class ContactService implements ContactsServiceInterface {
+	ContactDaoInterface contactDaoObj = null;
 
-public class ContactService implements ContactsServiceInterface{
-	ContactDaoInterface contactDaoObj=null;
-	
-	
-	public ContactService()
-	{
-		contactDaoObj=ContactDAOFactory.createObject();
-		
+	public ContactService() {
+		// Object for ContactDao
+		contactDaoObj = ContactDAOFactory.createObject();
+
 	}
 
-	public int addContactService(Contact contact1,String userName) {
-		int value=0;
-		//System.out.println("Inside service");
+	public int addContactService(Contact contact1, String userName) {
+		// Function calling add method of ContactDao class
+		int value = 0;
 		try {
-			value= contactDaoObj.addContact(contact1, userName);
+			value = contactDaoObj.addContact(contact1, userName);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -32,19 +30,29 @@ public class ContactService implements ContactsServiceInterface{
 	}
 
 	public List<Contact> viewAllContactService(String userName) {
+		// Function calling view method of ContactDao class
 		return contactDaoObj.viewAllContacts(userName);
 	}
 
-
 	public int editContactService(Contact c1, String userName) {
+		// Function calling edit method of ContactDao class
 		return contactDaoObj.editContact(c1, userName);
-		
+
 	}
 
 	public int deleteContactService(String username, String email) {
 		// Function calling delete method of ContactDao class
 		return contactDaoObj.deleteContact(username, email);
 
+	}
+	
+	public boolean ifContactExistsService(String username, String email) {
+		return contactDaoObj.ifContactExists(username, email);
+	}
+
+	public Contact viewContact(String username, String email) {
+		// TODO Auto-generated method stub
+		return contactDaoObj.viewContact(username, email);
 	}
 
 }

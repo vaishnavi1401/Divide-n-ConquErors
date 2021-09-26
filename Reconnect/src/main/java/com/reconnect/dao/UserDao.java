@@ -339,10 +339,9 @@ public class UserDao implements UserDaoInterface {
 
 	public User getUserDetailsByEmail(String email) {
 
-		User u1 = null;
+		User user = null;
 		PreparedStatement pstmt = null;
-		String sql = "select fist_name , last_name , email_id , phone_no , gender , company , dob , address , cityid , profile_image from user_details where email_id = ?";
-		
+		String sql = "select * from user_details ud, credentials c, city_details ct where ud.email_id=? and c.credential_id=ud.credential_id and ct.city_id=ud.city_id";
 		try
 		{
 			pstmt = conn.prepareStatement(sql);
@@ -350,23 +349,7 @@ public class UserDao implements UserDaoInterface {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) 
 			{
-				u1.setFname(rs.getString(1));
-				u1.setLname(rs.getString(2));
-				u1.setEmail(rs.getString(3));
-				u1.setPhone(rs.getString(4));
-				u1.setGender(rs.getString(5));
-				u1.setCompany(rs.getString(6));
-				u1.setDob(rs.getDate(7));
-				u1.setAddress(rs.getString(8));
-				
-				int cid = rs.getInt(9);
-				City city = contactDao.fetchCityObj(cid);
-				
-				u1.setCity(city);
-				u1.setProfileImagePath(rs.getString(10));
-				
-				return u1;
-				
+				user = new User(rs.getString("first_name"), rs.getString("last_name"), rs.getString("email_id"),rs.getString("phone_no"), rs.getString("gender"),rs.getDate("dob"),rs.getString("address"), rs.getString("company"), rs.getString("profile_image_path"), new City(rs.getString("city"), rs.getString("state"), rs.getString("country")));
 			}
 		}
 		catch (SQLException e) 
@@ -384,7 +367,7 @@ public class UserDao implements UserDaoInterface {
 				e.printStackTrace();
 			}
 		}
-		return u1;
+		return user;
 		
 	}
 }
