@@ -9,7 +9,7 @@ befriend other registered users . The application supports unlimited
 users and provides several features for socializing and staying
 connected.
 
-### The system supports two types of users:
+### The system supports two types of users
 
 -   System administrator : Can monitor activities of the users, they do
      not have access to the users and contacts database information.
@@ -58,7 +58,7 @@ connected.
 -   System administrators cannot view or modify the user's database;
      They can disable or delete users .
 
-## Built with:
+## Built with
 
 Ide Used : Eclipse\[Enterprise Edition\]
 
